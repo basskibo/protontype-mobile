@@ -1,0 +1,35 @@
+<ion-modal-view>
+  <ion-content>
+    <div class="row ">
+      <img src="https://cdn0.iconfinder.com/data/icons/school-and-education-3/80/School_education-03-512.png" class="block-center" style="width:150px;height:150px;margin-left: 30%;"/>
+    </div>
+    <p ng-show="!isOnline" class="text-center"> You are offline. Please connect to the Internet.</p>
+    <button class="button button-block button-positive" ng-click="reload();" ng-show="!isOnline"><span class="ion-ios-loop-strong"></span> Reload</button>
+    <p ng-show="isOnline" class="text-center"> You are online,nice.</p>
+    <h1 class="title text-center">Login</h1>
+    <p ng-show="error" class="text-center" style="boder: 1px solid red;">{{error}}</p>
+    <form ng-submit="doLogin()">
+      <ion-list>
+
+        <form name="loginForm">
+
+          <label class="item item-input item-floating-label">
+            <span class="input-label">Email</span>
+            <input type="email" placeholder="Email" ng-model="user.email">
+          </label>
+          <label class="item item-input item-floating-label">
+            <span class="input-label">Password</span>
+            <input type="password" placeholder="Password" ng-model="user.password">
+          </label>
+
+          <button class="button button-block button-positive" type="submit()" ng-click="login(user)">
+            Login
+          </button>
+        </form>
+
+      </ion-list>
+    </form>
+  </ion-content>
+
+
+</ion-modal-view>

@@ -1,0 +1,12 @@
+<ion-view view-title="Products">
+  <ion-floating-menu menu-color="#CF061C" menu-open-color="#CF061C" backdrop="true">
+    <ion-floating-item icon="ion-ios-paper" click="goToOrders()" button-color="#262626" href="/app/playlists" text="New Invoice"></ion-floating-item>
+    <ion-floating-item icon="ion-ios-person" click="goToCustomers()" button-color="#262626" text="New Customer"> </ion-floating-item>
+    <ion-floating-item icon="ion-ios-pricetags" click="goToProducts()" button-color="#262626" text="New Product"></ion-floating-item>
+  </ion-floating-menu>
+  <ion-content>
+    <ion-list ng-repeat="c in products">
+      <ion-item> {{c.name}}</ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

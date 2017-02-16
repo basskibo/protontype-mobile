@@ -1,0 +1,14 @@
+{
+  "name": "protonBiz",
+  "app_id": "",
+  "proxies": [
+    {
+      "path": "/login",
+      "proxyUrl": "https://protonbiz.herokuapp.com"
+    }
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
+}
