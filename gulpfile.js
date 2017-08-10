@@ -55,12 +55,12 @@ gulp.task('git-check', function(done) {
 gulp.task('add-proxy', function() {
   return replace({
     regex: "https://protonbiz.herokuapp.com/",
-    replacement: "http://192.168.1.16:8100/",
+    replacement: "http://192.168.0.25:8100/",
     paths: replaceFiles,
     recursive: false,
     silent: false,
   });
-})
+});
 
 gulp.task('remove-proxy', function() {
   return replace({
@@ -70,4 +70,4 @@ gulp.task('remove-proxy', function() {
     recursive: false,
     silent: false,
   });
-})
+});

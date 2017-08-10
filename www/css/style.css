@@ -1,1 +1,5 @@
 /* Empty. Add your own CSS if you like */
+
+[nav-bar-transition="android"] [nav-bar="active"] .bar,
+[nav-bar-transition="android"] [nav-bar="entering"] .bar {
+  background: transparent; }

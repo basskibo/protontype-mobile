@@ -1,11 +1,11 @@
 
 {
-  "name": "My Ionic App",
-  "short_name": "My Ionic App",
+  "name": "Proton Biz",
+  "short_name": "ProtonBiz",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{
-    "src": "icon.png",
+    "src": "logo.png",
     "sizes": "512x512",
     "type": "image/png"
   }]
