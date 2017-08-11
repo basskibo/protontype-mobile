@@ -69,7 +69,7 @@ angular.module('starter', ['ionic', 'ngCordova','starter.controllers','loginModu
     url: '/search',
     views: {
       'menuContent': {
-        templateUrl: 'templates/search.html',
+        templateUrl: 'templates/users.html',
         controller:'UsersCtrl'
       }
     }
@@ -85,6 +85,15 @@ angular.module('starter', ['ionic', 'ngCordova','starter.controllers','loginModu
       },
       params:{
         user:  ['user','companyId']
+      }
+    })
+    .state('app.order', {
+      url: '/orders/:orderId',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/order.html',
+          controller: 'OrderCtrl'
+        }
       }
     })
     .state('app.playlists', {

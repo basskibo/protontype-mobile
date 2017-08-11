@@ -1,11 +1,14 @@
+/**
+ * Created by basskibo on 11.8.17..
+ */
 angular.module('loginModule', [])
-  .controller('LoginCtrl', function ($rootScope, $scope, $stateParams, $http, $timeout, $ionicPopup, $state, $ionicLoading, $ionicHistory, $location, $ionicNavBarDelegate, $ionicPlatform, $cordovaNetwork) {
+  .controller('orderCtrl', function ($rootScope, $scope, $stateParams, $http, $timeout, $ionicPopup, $state, $ionicLoading, $ionicHistory, $location, $ionicNavBarDelegate, $ionicPlatform, $cordovaNetwork) {
 // Perform the login action when the user submits the login form
     // Form data for the login modal
     $scope.isOnline = true;
     document.addEventListener("deviceready", function () {
 
-    $scope.isOnline = $cordovaNetwork.isOnline();
+      $scope.isOnline = $cordovaNetwork.isOnline();
 
     }, false);
 
@@ -16,12 +19,12 @@ angular.module('loginModule', [])
     }, 100);
 
     $scope.reload = function () {
-        $ionicLoading.show({
-          template: "<ion-spinner icon=\'spiral\'></ion-spinner>\n",
-          duration: 3000
-        }).then(function(){
-          console.log("The loading indicator is now displayed");
-        });
+      $ionicLoading.show({
+        template: "<ion-spinner icon=\'spiral\'></ion-spinner>\n",
+        duration: 3000
+      }).then(function(){
+        console.log("The loading indicator is now displayed");
+      });
 
 
     };
@@ -70,11 +73,7 @@ angular.module('loginModule', [])
           name:'ios'
         }).then(function(){
           console.log('doneeeee');
-          setToLocaleStorage(token, user);
-          $rootScope.currentUser = user;
-          $rootScope.userName = localStorage.getItem("user_name");
-          $rootScope.company = localStorage.getItem("companyId");
-          $rootScope.$broadcast('fetch_orders', $rootScope.company);
+          setToLocaleStorage(token, user)
           $timeout(changeState,4000);
         });
 

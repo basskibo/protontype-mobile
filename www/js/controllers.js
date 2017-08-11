@@ -52,6 +52,11 @@ angular.module('starter.controllers', [])
     window.localStorage.setItem("user_name", "");
     window.localStorage.setItem("companyId", "");
     window.localStorage.setItem("user", "");
+
+    $rootScope.currentUser = null;
+    $rootScope.userName = null;
+    $rootScope.company = null;
+
     $location.path('/login');
   };
   // With the new view caching in Ionic, Controllers are only called
@@ -97,15 +102,31 @@ angular.module('starter.controllers', [])
 
 
 .controller('OrderCtrl', function($scope, $stateParams, $http, $rootScope) {
-  var config = {headers:  {
-    'Authorization': 'Bearer ' + localStorage.getItem("token"),
-    'Accept': 'application/json;odata=verbose'
+
+  fetchOrders($rootScope.company);
+
+  function fetchOrders(companyId) {
+    var config = {headers:  {
+      'Authorization': 'Bearer ' + localStorage.getItem("token"),
+      'Accept': 'application/json;odata=verbose'
+    }
+    };
+    $http.get("https://protonbiz.herokuapp.com/orders?ownerId=" +companyId, config).then(function (res) {
+      console.log(res);
+      $scope.orders = res.data;
+    });
+
+
+    $rootScope.$on('fetch_orders',function (args,companyId) {
+      fetchOrders(companyId);
+    });
+    $scope.$watch('orders', function (args,vs) {
+      $scope.orders = args ;
+    })
   }
-  };
-  $http.get("https://protonbiz.herokuapp.com/orders?ownerId=" +$rootScope.company, config).then(function (res) {
-    console.log(res);
-    $scope.orders = res.data;
-  });
+
+
+
 
   // $http({ method  : 'GET',
   //   withCredentials: false,
