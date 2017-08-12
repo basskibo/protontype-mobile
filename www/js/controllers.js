@@ -1,153 +1,300 @@
+angular.module('protonbiz_mobile.controllers', [])
 
-angular.module('starter.controllers', [])
-
-.controller('AppCtrl', function($scope, $location, $ionicModal, $cordovaNetwork, $rootScope, $ionicPopup, $state, $ionicPlatform ) {
-
-
-  document.addEventListener("deviceready", function () {
-
-    $scope.network = $cordovaNetwork.getNetwork();
-    $scope.isOnline = $cordovaNetwork.isOnline();
-    // $scope.$apply();
+  .controller('AppCtrl', function ($scope, $location, $ionicModal, $cordovaNetwork,$ionicSideMenuDelegate,  $rootScope, $ionicPopup, $state, $ionicPlatform, $http) {
 
 
+    document.addEventListener("deviceready", function () {
 
-    // listen for Online event
-    $rootScope.$on('$cordovaNetwork:online', function(event, networkState){
-      $scope.isOnline = true;
       $scope.network = $cordovaNetwork.getNetwork();
-
+      $scope.isOnline = $cordovaNetwork.isOnline();
       // $scope.$apply();
-    })
 
-    // listen for Offline event
-    $rootScope.$on('$cordovaNetwork:offline', function(event, networkState){
-      console.log("got offline");
-      $scope.isOnline = false;
-      $scope.network = $cordovaNetwork.getNetwork();
 
-      // $scope.$apply();
-    })
+      // listen for Online event
+      $rootScope.$on('$cordovaNetwork:online', function (event, networkState) {
+        $scope.isOnline = true;
+        $scope.network = $cordovaNetwork.getNetwork();
 
-  }, false);
+        // $scope.$apply();
+      })
 
-  var userParsed = JSON.parse(localStorage.getItem("user"));
-  $rootScope.currentUser = userParsed;
+      // listen for Offline event
+      $rootScope.$on('$cordovaNetwork:offline', function (event, networkState) {
+        console.log("got offline");
+        $scope.isOnline = false;
+        $scope.network = $cordovaNetwork.getNetwork();
 
-  $rootScope.userName = localStorage.getItem("user_name");
-  $rootScope.company = localStorage.getItem("companyId");
-  $scope.goToProducts = function () {
-    $location.path('/app/products');
-  };
-  $scope.goToCustomers = function () {
-    $location.path('/app/playlists');
-  };
-  $scope.goToOrders = function () {
-    $location.path('/app/orders');
-  };
+        // $scope.$apply();
+      })
 
-  $scope.logout = function () {
-    console.log('log out bitch');
-    window.localStorage.setItem("token", "");
-    window.localStorage.setItem("user_name", "");
-    window.localStorage.setItem("companyId", "");
-    window.localStorage.setItem("user", "");
+    }, false);
 
-    $rootScope.currentUser = null;
-    $rootScope.userName = null;
-    $rootScope.company = null;
 
-    $location.path('/login');
-  };
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  $scope.$on('$ionicView.enter', function(e) {
+    $scope.goToProfile =  function () {
+      $state.go('app.profile');
+      $ionicSideMenuDelegate.toggleLeft();
+
+    };
+
+    function fetchCompany(id) {
+      var config = {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem("token"),
+          'Accept': 'application/json;odata=verbose'
+        }
+      };
+      $http.get("https://protonbiz.herokuapp.com/company/" + id, config).then(function (res) {
+        console.log(res);
+        $rootScope.companyObj = res.data;
+        window.localStorage.setItem("company", JSON.stringify(res.data));
+
+      });
+    }
+
+    var userParsed = JSON.parse(localStorage.getItem("user"));
+    $rootScope.currentUser = userParsed;
+
+    $rootScope.userName = localStorage.getItem("user_name");
+    $rootScope.company = localStorage.getItem("companyId");
+
+    fetchCompany($rootScope.company);
+    $scope.goToProducts = function () {
+      $location.path('/app/products');
+    };
+    $scope.goToCustomers = function () {
+      $location.path('/app/playlists');
+    };
+    $scope.goToOrders = function () {
+      $location.path('/app/orders');
+    };
+
+    $scope.logout = function () {
+      console.log('log out bitch');
+      window.localStorage.setItem("token", "");
+      window.localStorage.setItem("user_name", "");
+      window.localStorage.setItem("companyId", "");
+      window.localStorage.setItem("user", "");
+
+      $rootScope.currentUser = null;
+      $rootScope.userName = null;
+      $rootScope.company = null;
+
+      $location.path('/login');
+    };
+    // With the new view caching in Ionic, Controllers are only called
+    // when they are recreated or on app start, instead of every page change.
+    // To listen for when this page is active (for example, to refresh data),
+    // listen for the $ionicView.enter event:
+    $scope.$on('$ionicView.enter', function (e) {
 //    console.log('current user: ' + $scope.currentUser.firstName);
-  });
+    });
 
 //  $scope.currentUser = user;
 
-})
+  })
 
-.controller('PlaylistsCtrl', function($scope, $http, $rootScope) {
-  var config = {headers:  {
-    'Authorization': 'Bearer ' + localStorage.getItem("token"),
-    'Accept': 'application/json;odata=verbose'
-  }
-  };
-  $http.get("https://protonbiz.herokuapp.com/customer?ownerId=" +$rootScope.company, config).then(function (res) {
-    console.log(res);
-    $scope.customers = res.data;
-  });
-})
-
-.controller('PlaylistCtrl', function($scope, $stateParams, $http) {
-
-
-})
-
-  .controller('ProductsCtrl', function($scope, $stateParams, $http, $rootScope) {
-    var config = {headers:  {
-      'Authorization': 'Bearer ' + localStorage.getItem("token"),
-      'Accept': 'application/json;odata=verbose'
-    }
+  .controller('PlaylistsCtrl', function ($scope, $http, $rootScope) {
+    var config = {
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("token"),
+        'Accept': 'application/json;odata=verbose'
+      }
     };
-    $http.get("https://protonbiz.herokuapp.com/product?ownerId=" +$rootScope.company, config).then(function (res) {
+    $http.get("https://protonbiz.herokuapp.com/customer?ownerId=" + $rootScope.company, config).then(function (res) {
+      console.log(res);
+      $scope.customers = res.data;
+    });
+  })
+
+  .controller('PlaylistCtrl', function ($scope, $stateParams, $http) {
+
+
+  })
+
+  .controller('ProductsCtrl', function ($scope, $stateParams, $http, $rootScope) {
+    var config = {
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("token"),
+        'Accept': 'application/json;odata=verbose'
+      }
+    };
+    $http.get("https://protonbiz.herokuapp.com/product?ownerId=" + $rootScope.company, config).then(function (res) {
       console.log(res);
       $scope.products = res.data;
     });
-})
+  })
 
 
-.controller('OrderCtrl', function($scope, $stateParams, $http, $rootScope) {
+  .controller('OrdersCtrl', function ($scope, $stateParams, $http, $rootScope, $state, $ionicActionSheet) {
 
-  fetchOrders($rootScope.company);
+    fetchOrders($rootScope.company);
 
-  function fetchOrders(companyId) {
-    var config = {headers:  {
-      'Authorization': 'Bearer ' + localStorage.getItem("token"),
-      'Accept': 'application/json;odata=verbose'
-    }
+    $scope.goToOrder = function (id) {
+      $state.go('app.order', {orderId: id});
+
     };
-    $http.get("https://protonbiz.herokuapp.com/orders?ownerId=" +companyId, config).then(function (res) {
+
+    $scope.doRefresh = function () {
+      var config = {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem("token"),
+          'Accept': 'application/json;odata=verbose'
+        }
+      };
+      $http.get("https://protonbiz.herokuapp.com/orders?ownerId=" + $rootScope.company, config).then(function (res) {
+        console.log(res);
+        $scope.orders = res.data;
+      })
+    .finally(function() {
+        // Stop the ion-refresher from spinning
+        $scope.$broadcast('scroll.refreshComplete');
+      });
+    };
+
+    $scope.onHold = function () {
+      console.log('holding....')
+        // Show the action sheet
+        var hideSheet = $ionicActionSheet.show({
+          buttons: [
+            {text: 'Edit'}
+          ],
+          destructiveText: 'Remove',
+          titleText: 'Invoice action',
+          cancelText: 'Cancel',
+          cancel: function () {
+            // add cancel code..
+          },
+          buttonClicked: function (index) {
+            return true;
+          }
+        });
+
+
+    };
+
+    function fetchOrders(companyId) {
+      var config = {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem("token"),
+          'Accept': 'application/json;odata=verbose'
+        }
+      };
+      $http.get("https://protonbiz.herokuapp.com/orders?ownerId=" + companyId, config).then(function (res) {
+        console.log(res);
+        $scope.orders = res.data;
+      });
+
+
+      $rootScope.$on('fetch_orders', function (args, companyId) {
+        fetchOrders(companyId);
+      });
+      $scope.$watch('orders', function (args, vs) {
+        $scope.orders = args;
+      })
+    }
+  })
+
+
+
+
+
+
+
+
+
+
+
+  .controller('OrderCtrl', function ($scope, $stateParams, $http, $ionicActionSheet, $timeout) {
+    var sv = $stateParams.orderId;
+    var config = {
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("token"),
+        'Accept': 'application/json;odata=verbose'
+      }
+    };
+    $http.get("https://protonbiz.herokuapp.com/orders/" + sv, config).then(function (res) {
       console.log(res);
-      $scope.orders = res.data;
+      $scope.order = res.data;
     });
 
+    $scope.show = function () {
+      // Show the action sheet
+      var hideSheet = $ionicActionSheet.show({
+        buttons: [
+          {text: 'See clients profile'},
+          {text: 'Remind client'},
+          {text: 'Edit'}
+        ],
+        destructiveText: 'Remove',
+        titleText: 'Invoice action',
+        cancelText: 'Cancel',
+        cancel: function () {
+          // add cancel code..
+        },
+        buttonClicked: function (index) {
+          return true;
+        }
+      });
 
-    $rootScope.$on('fetch_orders',function (args,companyId) {
-      fetchOrders(companyId);
-    });
-    $scope.$watch('orders', function (args,vs) {
-      $scope.orders = args ;
+      // For example's sake, hide the sheet after two seconds
+      $timeout(function () {
+        hideSheet();
+      }, 20000);
+
+    };
     })
-  }
 
 
 
 
-  // $http({ method  : 'GET',
-  //   withCredentials: false,
-  //   url     : 'https://protonbiz.herokuapp.com/orders?ownerId='+$rootScope.company,
-  // },config)
-  //   .success(function(data) {
-  //     $scope.orders = data;
-  //   });
-})
 
 
-.controller('UsersCtrl', function($scope, $stateParams, $http) {
 
-  var config = {headers:  {
-    'Authorization': 'Bearer ' + localStorage.getItem("token"),
-    'Accept': 'application/json;odata=verbose'
-  }
-  };
-  $http.get("https://protonbiz.herokuapp.com/user", config).then(function (res) {
-    console.log(res);
-    $scope.users = res.data;
-  });
 
-});
+
+    .controller('SettingsCtrl', function ($scope, $stateParams, $ionicPopup, $translate) {
+      $scope.changeLanguage = function (langKey, $translateProvider) {
+
+        $translate.use(langKey);
+        if (langKey == 'rs') {
+          text = 'Jezik promenjen na srpski';
+        }
+
+
+        var lng = $translate.use();
+        var title;
+        console.log(lng);
+        console.log($scope.user);
+
+        if (lng == 'rs') {
+          lng = "Jezik promenjen na Srpski";
+          title = "Jezik";
+        } else if (lng == 'en') {
+          lng = "Language changed to English";
+          title = 'Language';
+        } else {
+          lng = "تغيير اللغة إلى العربية";
+          title = 'لغة';
+        }
+        var alertPopup = $ionicPopup.alert({
+          title: title,
+          template: lng
+        });
+      };
+
+    })
+
+    .controller('UsersCtrl', function ($scope, $stateParams, $http) {
+
+      var config = {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem("token"),
+          'Accept': 'application/json;odata=verbose'
+        }
+      };
+      $http.get("https://protonbiz.herokuapp.com/user", config).then(function (res) {
+        console.log(res);
+        $scope.users = res.data;
+      });
+
+    });

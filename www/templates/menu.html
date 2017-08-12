@@ -18,16 +18,16 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item class="user row ">
-          <div class="col">
-            <img ng-src="{{currentUser.avatarImg}}" style="width: 50px;height: 50px;"/>
+        <ion-item class="user row " >
+          <div class="col" >
+            <img ng-src="{{currentUser.avatarImg}}" ng-click="goToProfile()" style="width: 60px;height: 60px;"/>
           </div>
-          <div class="col">
-            <span style="margin-top:10px;"> {{userName}}</span>
-
-
+          <div class="col" ng-click="goToProfile()">
+            <span style="margin-top:10px;" > <i class="ion-ios-person-outline"></i> {{userName}}</span>
             <br/>
-            <span style="font-style: italic; font-size: 15px;">{{currentUser.email}}</span>
+            <span style="margin-top:10px;" ><i class="ion-ios-briefcase-outline"></i>  {{companyObj.name}}</span>
+            <br/>
+            <span style="font-style: italic; font-size: 15px;" ><i class="ion-ios-paperplane-outline"></i>  {{currentUser.email}}</span>
           </div>
           <div class="col">
           </div>
@@ -45,6 +45,9 @@
         </ion-item>
         <ion-item menu-close href="#/app/products">
           Products
+        </ion-item>
+        <ion-item menu-close href="#/app/settings">
+          Settings
         </ion-item>
         <ion-item menu-close ng-click="logout()">
           Logout

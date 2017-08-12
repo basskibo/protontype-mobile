@@ -1,10 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 
-</body>
-</html>
+<ion-view view-title="Invoice Details"  hide-back-button="false" >
+
+  <ion-nav-title>
+    <p >Invoice Details </p>
+  </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <a class="button button-icon icon ion-ios-settings" style="color:#fff;" ng-click="show()"></a>
+
+  </ion-nav-buttons>
+  <ion-content class="pregled" style="padding: 10px; margin:10px;">
+    <div class="operacija"><h5 ><b>Id : </b>{{order.id}}</h5></div>
+    <div class="operacija"><h5 ><b>Created by : </b>{{order.createdBy}}</h5></div>
+    <div class="operacija"><h5 ><b>Customer name : </b> {{order.customerName}}</h5></div>
+    <div class="operacija"><h5><b>Customer telephone : </b>{{order.customerName}}</h5></div>
+    <div class="operacija"><h5><b>Customer address : </b>{{order.deliveryAddress}}</h5></div>
+    <div class="operacija"><h5 ><b>Description : </b> {{order.description}}</h5></div>
+    <div class="operacija"><h5 ><b>Created at : </b> {{order.createdAt}}</h5></div>
+    <div class="operacija"><h5 ><b>Deadline : </b> {{order.deadline}}</h5></div>
+    <!-- radno vreme -->
+    <h5 ><b>Products in invoice : </b></h5>
+
+    <div class="operacija" ng-repeat="product in order.products">
+      <p style="padding-left: 20px;">* {{product.name}} x {{product.quantityInstance}} {{product.unit}}</p>
+    </div>
+    <div class="operacija"><h5 ><b>Price: </b> {{order.price| number:2}} {{companyObj.currencySymbol}}</h5></div>
+
+    <!-- Datumi -->
+    <div class="operacija"><h5 ><b>With tax : </b> {{order.withTax}}</h5></div>
+    <div class="operacija" ng-show="order.withTax"><h5 ><b>Tax rate : </b> {{order.taxRate}}%</h5></div>
+    <div class="operacija"><h5 ><b>Total price : </b> {{order.totalPrice | number:2}}{{companyObj.currencySymbol}}</h5></div>
+
+
+
+  </ion-content>
+</ion-view>

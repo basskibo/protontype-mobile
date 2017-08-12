@@ -6,12 +6,27 @@
     <ion-floating-item icon="ion-ios-pricetags" click="goToProducts()" button-color="#262626" text="New Product"></ion-floating-item>
   </ion-floating-menu>
   <ion-content>
+    <ion-refresher
+      pulling-text="Pull to refresh..."
+      on-refresh="doRefresh()">
+    </ion-refresher>
+    <div class="bar bar-header item-input-inset">
+      <label class="item-input-wrapper">
+        <i class="icon ion-ios-search placeholder-icon"></i>
+        <input type="search" placeholder="Search">
+      </label>
+      <button class="button button-clear button-positive">
+        Clear
+      </button>
 
+    </div>
     <ion-list ng-repeat="c in orders">
-
-      <ion-item> name: {{c.createdAt}} <br/>
-        status: {{c.status}} <br/>
-        deadline : {{c.deadline | date}}
+      <ion-item  href="#/app/orders/{{c.id}}" on-hold="onHold()">
+        <p>Customer: {{c.customerName}} </p>
+        <p>Status: {{c.status}} <i class="ion-ios-checkmark-empty" style="color:green; font-size: 20px;"></i> </p>
+        <p>Total Price : {{c.totalPrice}} {{companyObj.currencySymbol}} </p>
+        <p>Created at: {{c.createdAt | date:'dd/MM/yyyy'}} </p>
+        <p>Deadline : {{c.deadline | date:'dd/MM/yyyy'}}</p>
       </ion-item>
 
     </ion-list>

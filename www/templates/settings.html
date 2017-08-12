@@ -1,0 +1,32 @@
+<ion-view view-title="{{'settingsLabel' | translate}}">
+  <ion-content>
+    <ion-list>
+      <div class="list">
+
+        <ion-item class="item-divider">{{'lang' | translate}}</ion-item>
+        <ion-list>
+          <ion-radio ng-model="choice" ng-value="'en'" ng-click="changeLanguage('en')">{{'en' | translate}}</ion-radio>
+          <ion-radio ng-model="choice" ng-value="'rs'" ng-click="changeLanguage('rs')">{{'rs' | translate}}</ion-radio>
+          <ion-radio ng-model="choice" ng-value="'ar'" ng-click="changeLanguage('ar')">{{'ar' | translate}}</ion-radio>
+        </ion-list>
+      </div>
+
+      <ion-list>
+        <ion-item class="item-toggle" ng-click="notificationOff()">
+
+          <i class="icon ion-earth"></i>
+          {{'notificationsLabel' | translate }}
+          <label class="toggle toggle-balanced">
+            <input type="checkbox" ng-click="notificationOn()">
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
+        </ion-item>
+
+
+
+
+      </ion-list>
+  </ion-content>
+</ion-view>

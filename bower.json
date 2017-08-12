@@ -1,8 +1,10 @@
 {
-  "name": "HelloIonic",
+  "name": "protonbiz_mobile",
   "private": "true",
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#1.3.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "angular-translate": "^2.15.2"
+  }
 }

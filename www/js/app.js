@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ngCordova','starter.controllers','loginModule', 'ion-floating-menu'])
+angular.module('protonbiz_mobile', ['ionic', 'ngCordova','protonbiz_mobile.controllers','loginModule', 'ion-floating-menu', 'pascalprecht.translate'])
 
 .run(function($ionicPlatform, $location) {
 
@@ -34,7 +34,7 @@ angular.module('starter', ['ionic', 'ngCordova','starter.controllers','loginModu
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $translateProvider) {
   $stateProvider
 
 
@@ -80,7 +80,7 @@ angular.module('starter', ['ionic', 'ngCordova','starter.controllers','loginModu
       views: {
         'menuContent': {
           templateUrl: 'templates/orders.html',
-          controller:'OrderCtrl'
+          controller:'OrdersCtrl'
         }
       },
       params:{
@@ -94,6 +94,9 @@ angular.module('starter', ['ionic', 'ngCordova','starter.controllers','loginModu
           templateUrl: 'templates/order.html',
           controller: 'OrderCtrl'
         }
+      },
+      params:{
+        user:  ['order','companyId']
       }
     })
     .state('app.playlists', {
@@ -116,12 +119,21 @@ angular.module('starter', ['ionic', 'ngCordova','starter.controllers','loginModu
       }
     })
 
-  .state('app.single', {
-    url: '/playlists/:playlistId',
+  .state('app.settings', {
+    url: '/settings',
     views: {
       'menuContent': {
-        templateUrl: 'templates/playlist.html',
-        controller: 'PlaylistCtrl'
+        templateUrl: 'templates/settings.html',
+        controller: 'SettingsCtrl'
+      }
+    }
+  })
+    .state('app.profile', {
+    url: '/profile',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/profile.html',
+        controller: 'SettingsCtrl'
       }
     }
   })
@@ -132,4 +144,195 @@ angular.module('starter', ['ionic', 'ngCordova','starter.controllers','loginModu
     );
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');
+
+
+  $translateProvider.translations('en',{
+    loginTitle : 'Login',
+    usernameLabel : 'Username',
+    organisationLabel:'Organisation',
+    passwordLabel: 'Password',
+    loginBtn : 'Login',
+    forgotpasswordLabel: 'Forgot your password?',
+    operationLabel: 'Operation',
+    inputLabel: 'Input',
+    cultureLabel: 'Culture',
+    priceLabel: 'Price',
+    dateLabel: 'Date',
+    datePocetkaLabel: 'Date ',
+    datePlaniranLabel: 'Date',
+    dateZavrsetkaLabel: 'Date',
+    tableLabel : 'Table',
+    prikljucnaLabel: 'Priključne mašine',
+    radniciLabel: 'Radnici',
+    saveLabel: 'Save',
+    orderLabel: 'Working orders',
+    orderAll: 'All Orders',
+    newOrderLabel: 'New work order',
+    settingsLabel: 'Settings',
+    settingsChangeLabel: 'Change settings',
+
+    logOutLabel: 'Log out',
+    listOfOrdersLabel: 'List of work orders',
+    searchOrdersLabel: 'Search orders',
+    searchOrders1Label: 'Search reports',
+    chooseLabel: 'Choose',
+
+    newReport: 'New field report',
+    regionLabel : 'Region',
+    plotLabel:'Plot',
+    activityLabel: 'Type of Activity',
+
+    timeLabel: 'Time',
+    notificationsLabel: 'Notifications',
+    showOnMapLabel:'Show on map',
+    nameLabel: 'Name',
+    enterNameLabel: 'Enter name',
+    descriptionLabel: 'Description',
+    enterDescriptionLabel: 'Enter description',
+    createLabel: 'Create',
+    cancelLabel:'Cancel',
+    needHelpLabel: 'Need help?',
+    addItemLabel: 'Add Item',
+    createItemLabel:'Create Item',
+    editingLabel: 'Editing',
+    newOrder:'New working order',
+    newReportLabel:'New report',
+    reportLabel: 'Reports',
+    reportAll: 'All Reports',
+    prognoza: "Weather forecast",
+
+    katOpst: "Cadastral region",
+    vrstaAktivnosti : "Type of activity",
+    parcela : "Parcel",
+    "opis" : "Description",
+    "listaR" : "Field report List",
+    "sortby" : "Sort by",
+    "vreme" : "Time",
+    "naziv" : "Name",
+    "menu" : "AgroLife",
+    "tipAktivnosti" : "Type of activity",
+    "datumPosete" : "Date of visit",
+    "en" : "English",
+    "rs" : "Serbian",
+    "lang" : "Choose language",
+    "mera" : "Unit",
+    "cel" : "Metric (Celsius)",
+    "far" : "Imperial (Fahrenheit)",
+    "favorit" : "Favorites",
+    "podesavanja":"Settings",
+    "editOrder" : "Edit Working Order",
+    ar: 'Arab'
+
+
+  });
+  $translateProvider.translations('rs',{
+    loginTitle:'Prijavi se',
+    usernameLabel:'Korisnicko ime',
+    organisationLabel: 'Organizacija',
+    passwordLabel:'Lozinka',
+    loginBtn: 'Prijavi se',
+    forgotpasswordLabel: 'Zaboravili ste sifru?',
+    operationLabel: 'Operacija',
+    inputLabel: 'Input',
+    kulturaLabel: 'Kultura',
+    operationILabel: 'Izabrana operacija',
+    inputILabel: 'Izabran input',
+    cultureILabel: 'Izabrana kultura',
+    priceLabel: 'Ukupan trošak',
+    priceLabel2: 'Ukupan prihod',
+    dateLabel: 'Datum',
+    pogonskeLabel: 'Pogonske mašine',
+    pogonskeILabel: 'Izabrane pogonske mašine',
+    datePocetkaLabel: 'Datum početka ',
+    datePlaniranLabel: 'Datum planiran',
+    dateZavrsetkaLabel: 'Datum završetka',
+    tableLabel : 'Table',
+    prikljucnaLabel: 'Priključne mašine',
+    radniciLabel: 'Radnici',
+    podaciRNLabel : 'Podaci o radnom nalogu',
+
+
+
+    saveLabel: 'Sačuvaj',
+    orderLabel: 'Radni Nalozi',
+    orderAll: 'Svi nalozi',
+    chooseLabel: 'Izaberi',
+    materijalLabel : 'Izabrani materijal',
+    newOrderLabel: 'Novi radni nalog',
+    settingsLabel: 'Podešavanja',
+    logOutLabel:'Odjavi se',
+    listOfOrdersLabel:'Lista radnih naloga',
+    searchOrdersLabel: 'Pretraži naloge',
+    searchOrders1Label: 'Pretraži beleške',
+    settingsChangeLabel: 'Promena podešavanja',
+    timeLabel:'Vreme',
+    notificationsLabel: 'Obaveštenja',
+    showOnMapLabel:'Prikaži na mapi',
+    nameLabel:'Naziv',
+    enterNameLabel: 'Unesi naziv',
+    descriptionLabel: 'Opis',
+    enterDescriptionLabel: 'Unesi opis',
+    createLabel: 'Dodaj',
+    cancelLabel: 'Odustani',
+    needHelpLabel: 'Pomoc?',
+    addItemLabel: 'Dodaj stavku',
+    createItemLabel:'Kreiraj stavku',
+    editingLabel: 'Izmena',
+    newOrder: 'Novi radni nalog',
+    newReportLabel:'Nova beleška',
+    reportLabel: 'Beleška',
+    reportAll: 'Sve beleške',
+    prognoza: "Vremenska Prognoza",
+    katOpst : "Katastarska opstina",
+    vrstaAktivnosti: "Vrsta aktivnosti",
+    parcela : "Parcela",
+    opis : "Opis",
+    listaR : "Lista terenskih beleški",
+    sortby : "Sortiraj po",
+    vreme : "Vremenu",
+    naziv : "Nazivu",
+    menu : "AgroLife",
+    tipAktivnosti : "Tip aktivnosti",
+    datumPosete : "Datum posete",
+    en : "Engleski",
+    rs : "Srpski",
+    lang : "Izaberite jezik",
+    "mera" : "Jedinična mera",
+    "cel" : "Celzijus",
+    "far" : "Farenhajt",
+    "favorit" : "Favorit",
+    "podesavanja" : "Podešavanja",
+    "editOrder" : "Izmena radnog naloga",
+    ar: 'Arapski'
+
+
+
+
+
+  });
+
+  $translateProvider.translations('ar',{
+
+    loginTitle:'تسجيل الدخول',
+    usernameLabel:'اسم المستخدم',
+    organisationLabel: 'منظمة',
+    passwordLabel:'كلمه السر',
+    loginBtn: 'تسجيل الدخول',
+    en : "الإنجليزية",
+    rs : "صربي",
+    ar: 'صربي',
+    settingsLabel: 'إعدادات',
+    logOutLabel:'خروج',
+    notificationsLabel: 'الإشعارات',
+    lang: 'تسجيل الدخول'
+
+
+
+
+
+
+  });
+  $translateProvider.preferredLanguage('en');
+  $translateProvider.fallbackLanguage('en');
+
 });
