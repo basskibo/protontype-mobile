@@ -1,4 +1,4 @@
-<ion-view view-title="Invoices">
+<ion-view view-title="Customers">
 
   <ion-floating-menu menu-color="#CF061C" menu-open-color="#CF061C" backdrop="true">
     <ion-floating-item icon="ion-ios-paper" click="goToOrders()" button-color="#262626" href="/app/playlists"
@@ -21,9 +21,10 @@
     </div>
     <div class="row" style="margin:10px;" ng-show="!dataLoaded">
       <div class="col"></div>
-      <h4 class="">Loading invoices...</h4>
+      <h4 class="">Loading customers...</h4>
       <div class="col"></div>
     </div>
+
 
     <div ng-show="dataLoaded">
       <div class="bar bar-header item-input-inset">
@@ -34,20 +35,20 @@
         <button class="button button-clear button-positive">
           Clear
         </button>
-      </div>
 
-      <ion-list ng-repeat="c in orders">
-        <ion-item href="#/app/orders/{{c.id}}" on-hold="onHold()">
-          <p>Customer: {{c.customerName}} </p>
-          <p>Status: {{c.status}}</p>
-          <p>Total Price : {{c.totalPrice}} {{companyObj.currencySymbol}} </p>
-          <p>Created at: {{c.createdAt | date:'dd/MM/yyyy'}} </p>
-          <p>Deadline : {{c.deadline | date:'dd/MM/yyyy'}}</p>
+      </div>
+      <ion-list ng-repeat="c in customers">
+        <ion-item href="#/app/customers/{{c.id}}" on-hold="onHold()">
+          <p>Customer name: {{c.firstName}} {{c.lastName}} </p>
+          <p>Have debt:
+            <span ng-show="c.hasDebt"><i class="ion-checkmark-round" style="color:green; font-size: 15px;"></i> </span>
+            <span ng-show="!c.hasDebt"><i class="ion-close-round" style="color:red; font-size: 15px;"></i> </span>
+          </p>
+          <p ng-show="c.hasDebt">Total debt: {{c.debtAmount}} {{companyObj.currencySymbol}}</p>
         </ion-item>
 
       </ion-list>
     </div>
-
 
   </ion-content>
 </ion-view>

@@ -103,8 +103,17 @@ angular.module('protonbiz_mobile', ['ionic', 'ngCordova','protonbiz_mobile.contr
       url: '/playlists',
       views: {
         'menuContent': {
-          templateUrl: 'templates/playlists.html',
+          templateUrl: 'templates/customers.html',
           controller: 'PlaylistsCtrl'
+        }
+      }
+    })
+    .state('app.customer', {
+      url: '/customers/:customerId',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/customer.html',
+          controller: 'CustomerCtrl'
         }
       }
     })

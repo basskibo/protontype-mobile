@@ -1,0 +1,35 @@
+
+<ion-view view-title="Customer Details"  hide-back-button="false" >
+
+  <ion-nav-title>
+    <p >Customer Details </p>
+  </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <a class="button button-icon icon ion-ios-settings" style="color:#fff;" ng-click="show()"></a>
+
+  </ion-nav-buttons>
+  <ion-content class="pregled" style="padding: 10px; margin:10px;">
+    <div class="row" style="margin:10px;" ng-show="!dataLoaded">
+      <div class="col"></div>
+      <ion-spinner name="dots"></ion-spinner>
+      <div class="col"></div>
+    </div>
+    <div class="row" style="margin:10px;" ng-show="!dataLoaded">
+      <div class="col"></div>
+      <h4 class="">Loading customers...</h4>
+      <div class="col"></div>
+    </div>
+    <div ng-show="dataLoaded">
+    <div class="operacija"><h5 ><b>Id : </b>{{order.id}}</h5></div>
+    <div class="operacija"><h5 ><b>Full name : </b> {{order.firstName}} {{order.lastName}}</h5></div>
+    <div class="operacija"><h5><b>Email : </b>{{order.email}}</h5></div>
+    <div class="operacija"><h5><b>Address : </b>{{order.address}} {{order.addressStreetNumber}}</h5></div>
+    <div class="operacija"><h5><b>Have debt : </b>
+      <span ng-show="order.hasDebt"><i class="ion-checkmark-round" style="color:green; font-size: 15px;"></i> </span>
+      <span ng-show="!order.hasDebt"><i class="ion-close-round" style="color:red; font-size: 15px;"></i> </span></h5></div>
+    <div class="operacija"><h5 ><b>Total debt: </b>  {{order.debtAmount | number:2}} {{companyObj.currencySymbol}}</h5></div>
+    <div class="operacija"><h5 ><b>Created at : </b> {{order.createdAt  | date:'dd/MM/yyyy'}}</h5></div>
+    </div>
+
+  </ion-content>
+</ion-view>

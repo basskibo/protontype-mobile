@@ -5,7 +5,7 @@
     <div class="bar bar-header bar-stable">
       <h1 class="title">Welcome to Proton Biz</h1>
     </div>
-    <img src="../img/logo.png" class="block-center" style="width:130px;height:130px;margin-top: 20%;margin-left:30%;" ng-click="checkConnection()"/>
+    <img src="img/logo.png" class="block-center" style="width:130px;height:130px;margin-top: 20%;margin-left:30%;" ng-click="checkConnection()"/>
     <div class=" ">
       <p ng-show="!isOnline" class="text-center"> You are offline..Please come online and try again.</p>
       <a class="button icon-right ion-ios-loop-strong button-calm block-center" ng-click="checkConnection();" ng-show="!isOnline">Reconnect</a>
@@ -30,7 +30,7 @@
           </label>
 
           <div  class="row" >
-            <button style="width: 100%;" class="button button-outline button-positive" type="submit()" ng-click="login(user)">
+            <button style="width: 100%; margin: 15px 0px;" class="button button-outline button-positive" type="submit()" ng-click="login(user)">
               Login <i class="ion-log-in"></i>
             </button>
           </div>

@@ -93,7 +93,9 @@ angular.module('protonbiz_mobile.controllers', [])
 
   })
 
-  .controller('PlaylistsCtrl', function ($scope, $http, $rootScope) {
+  .controller('PlaylistsCtrl', function ($scope, $http, $rootScope, $ionicActionSheet) {
+    $scope.dataLoaded = false;
+
     var config = {
       headers: {
         'Authorization': 'Bearer ' + localStorage.getItem("token"),
@@ -103,11 +105,53 @@ angular.module('protonbiz_mobile.controllers', [])
     $http.get("https://protonbiz.herokuapp.com/customer?ownerId=" + $rootScope.company, config).then(function (res) {
       console.log(res);
       $scope.customers = res.data;
+      $scope.dataLoaded = true;
+
     });
   })
 
-  .controller('PlaylistCtrl', function ($scope, $stateParams, $http) {
+  .controller('CustomerCtrl', function ($scope, $stateParams,$ionicActionSheet, $http) {
+    $scope.dataLoaded = false;
 
+    var sv = $stateParams.customerId;
+    var config = {
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("token"),
+        'Accept': 'application/json;odata=verbose'
+      }
+    };
+    $http.get("https://protonbiz.herokuapp.com/customer/" + sv, config).then(function (res) {
+      console.log(res);
+      $scope.order = res.data;
+      $scope.dataLoaded = true;
+
+    });
+
+    $scope.show = function () {
+      // Show the action sheet
+      var hideSheet = $ionicActionSheet.show({
+        buttons: [
+          {text: 'See clients profile'},
+          {text: 'Remind client'},
+          {text: 'Edit'}
+        ],
+        destructiveText: 'Remove',
+        titleText: 'Invoice action',
+        cancelText: 'Cancel',
+        cancel: function () {
+          // add cancel code..
+        },
+        buttonClicked: function (index) {
+          return true;
+        }
+      });
+
+      // For example's sake, hide the sheet after two seconds
+      $timeout(function () {
+        hideSheet();
+      }, 20000);
+
+    };
 
   })
 
@@ -127,6 +171,8 @@ angular.module('protonbiz_mobile.controllers', [])
 
   .controller('OrdersCtrl', function ($scope, $stateParams, $http, $rootScope, $state, $ionicActionSheet) {
 
+    $scope.dataLoaded = false;
+
     fetchOrders($rootScope.company);
 
     $scope.goToOrder = function (id) {
@@ -144,6 +190,7 @@ angular.module('protonbiz_mobile.controllers', [])
       $http.get("https://protonbiz.herokuapp.com/orders?ownerId=" + $rootScope.company, config).then(function (res) {
         console.log(res);
         $scope.orders = res.data;
+        $scope.dataLoaded = true;
       })
     .finally(function() {
         // Stop the ion-refresher from spinning
@@ -182,6 +229,8 @@ angular.module('protonbiz_mobile.controllers', [])
       $http.get("https://protonbiz.herokuapp.com/orders?ownerId=" + companyId, config).then(function (res) {
         console.log(res);
         $scope.orders = res.data;
+        $scope.dataLoaded = true;
+
       });
 
 
@@ -196,16 +245,10 @@ angular.module('protonbiz_mobile.controllers', [])
 
 
 
-
-
-
-
-
-
-
-
   .controller('OrderCtrl', function ($scope, $stateParams, $http, $ionicActionSheet, $timeout) {
     var sv = $stateParams.orderId;
+    $scope.dataLoaded = false;
+
     var config = {
       headers: {
         'Authorization': 'Bearer ' + localStorage.getItem("token"),
@@ -215,6 +258,8 @@ angular.module('protonbiz_mobile.controllers', [])
     $http.get("https://protonbiz.herokuapp.com/orders/" + sv, config).then(function (res) {
       console.log(res);
       $scope.order = res.data;
+      $scope.dataLoaded = true;
+
     });
 
     $scope.show = function () {
