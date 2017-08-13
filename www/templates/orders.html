@@ -1,12 +1,11 @@
 <ion-view view-title="Invoices">
 
-  <ion-floating-menu menu-color="#CF061C" menu-open-color="#CF061C" backdrop="true">
-    <ion-floating-item icon="ion-ios-paper" click="goToOrders()" button-color="#262626" href="/app/playlists"
-                       text="New Invoice"></ion-floating-item>
-    <ion-floating-item icon="ion-ios-person" click="goToCustomers()" button-color="#262626"
-                       text="New Customer"></ion-floating-item>
-    <ion-floating-item icon="ion-ios-pricetags" click="goToProducts()" button-color="#262626"
-                       text="New Product"></ion-floating-item>
+  <ion-floating-menu menu-color="#CF061C" menu-open-color="#CF061C"  backdrop="true">
+    <ion-floating-item icon="ion-ios-paper"  button-color="#262626" ng-click="createNewOrder()"
+                       text="Create Invoice"></ion-floating-item>
+    <ion-floating-item icon="ion-ios-infinite"  button-color="#262626" ng-click="createNewOrder()"
+                       text="Create Recurring Invoice"></ion-floating-item>
+
   </ion-floating-menu>
   <ion-content>
     <ion-refresher

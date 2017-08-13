@@ -1,6 +1,12 @@
 
 <ion-view view-title="Customer Details"  hide-back-button="false" >
+  <ion-floating-menu menu-color="#CF061C" menu-open-color="#CF061C"  backdrop="true">
+    <ion-floating-item icon="ion-ios-personadd"  button-color="#262626" ng-click="createNewCustomer()"
+                       text="Create Customer"></ion-floating-item>
+    <ion-floating-item icon="ion-ios-infinite"  button-color="#262626" ng-click="createNewCustomer()"
+                       text="Customer Statement"></ion-floating-item>
 
+  </ion-floating-menu>
   <ion-nav-title>
     <p >Customer Details </p>
   </ion-nav-title>
@@ -16,7 +22,7 @@
     </div>
     <div class="row" style="margin:10px;" ng-show="!dataLoaded">
       <div class="col"></div>
-      <h4 class="">Loading customers...</h4>
+      <h4 class="">Loading customer's details...</h4>
       <div class="col"></div>
     </div>
     <div ng-show="dataLoaded">

@@ -1,13 +1,21 @@
-<ion-view view-title="Invoice Details" hide-back-button="false">
+<ion-view view-title="Invoice Details">
 
+  <ion-floating-menu menu-color="#CF061C" menu-open-color="#CF061C"  backdrop="true">
+    <ion-floating-item icon="ion-ios-paper"  button-color="#262626" ng-click="createNewOrder()"
+                       text="Create Invoice"></ion-floating-item>
+    <ion-floating-item icon="ion-ios-infinite"  button-color="#262626" ng-click="createNewOrder()"
+                       text="Create Recurring Invoice"></ion-floating-item>
+
+  </ion-floating-menu>
   <ion-nav-title>
     <p>Invoice Details </p>
   </ion-nav-title>
   <ion-nav-buttons side="right">
     <a class="button button-icon icon ion-ios-settings" style="color:#fff;" ng-click="show()"></a>
-
   </ion-nav-buttons>
+
   <ion-content class="pregled" style="padding: 10px; margin:10px;">
+
     <div class="row" style="margin:10px;" ng-show="!dataLoaded">
       <div class="col"></div>
       <ion-spinner name="dots"></ion-spinner>

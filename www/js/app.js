@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('protonbiz_mobile', ['ionic', 'ngCordova','protonbiz_mobile.controllers','loginModule', 'ion-floating-menu', 'pascalprecht.translate'])
+angular.module('protonbiz_mobile', ['ionic', 'ngCordova','protonbiz_mobile.controllers','protonbiz_mobile.create_controllers','loginModule', 'ion-floating-menu', 'pascalprecht.translate'])
 
 .run(function($ionicPlatform, $location) {
 
@@ -85,6 +85,25 @@ angular.module('protonbiz_mobile', ['ionic', 'ngCordova','protonbiz_mobile.contr
       },
       params:{
         user:  ['user','companyId']
+      }
+    })
+    .state('app.order_new', {
+      url: '/orders/new',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/order_create.html',
+          controller:'OrderCreateCtrl'
+        }
+      }
+    })
+
+    .state('app.customer_new', {
+      url: '/customers/new',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/customer_create.html',
+          controller:'CustomerCreateCtrl'
+        }
       }
     })
     .state('app.order', {

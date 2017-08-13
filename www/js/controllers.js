@@ -29,6 +29,18 @@ angular.module('protonbiz_mobile.controllers', [])
 
     }, false);
 
+
+
+    $rootScope.createNewOrder = function () {
+      console.log('global go');
+      $state.go('app.order_new');
+    };
+
+    $rootScope.createNewCustomer = function () {
+      console.log('global go');
+      $state.go('app.customer_new');
+    };
+
     $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
       viewData.enableBack = true;
     });
@@ -225,6 +237,9 @@ angular.module('protonbiz_mobile.controllers', [])
     $scope.dataLoaded = false;
 
     fetchOrders($rootScope.company);
+
+
+
 
     $scope.goToOrder = function (id) {
       $state.go('app.order', {orderId: id});
