@@ -29,6 +29,9 @@ angular.module('protonbiz_mobile.controllers', [])
 
     }, false);
 
+    $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
+      viewData.enableBack = true;
+    });
 
     $scope.goToProfile =  function () {
       $state.go('app.profile');
@@ -93,21 +96,52 @@ angular.module('protonbiz_mobile.controllers', [])
 
   })
 
-  .controller('PlaylistsCtrl', function ($scope, $http, $rootScope, $ionicActionSheet) {
+  .controller('CustomersCtrl', function ($scope, $http, $rootScope, $ionicActionSheet) {
     $scope.dataLoaded = false;
 
-    var config = {
-      headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem("token"),
-        'Accept': 'application/json;odata=verbose'
-      }
-    };
-    $http.get("https://protonbiz.herokuapp.com/customer?ownerId=" + $rootScope.company, config).then(function (res) {
-      console.log(res);
-      $scope.customers = res.data;
-      $scope.dataLoaded = true;
+    fetchCustomers();
 
-    });
+    $scope.doRefresh = function () {
+      fetchCustomers();
+    };
+
+    function fetchCustomers() {
+      var config = {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem("token"),
+          'Accept': 'application/json;odata=verbose'
+        }
+      };
+      $http.get("https://protonbiz.herokuapp.com/customer?ownerId=" + $rootScope.company, config).then(function (res) {
+        console.log(res);
+        $scope.customers = res.data;
+        $scope.dataLoaded = true;
+
+      }).finally(function() {
+        // Stop the ion-refresher from spinning
+        $scope.$broadcast('scroll.refreshComplete');
+      });
+    }
+
+    $scope.onHold = function () {
+      console.log('holding....')
+      // Show the action sheet
+      var hideSheet = $ionicActionSheet.show({
+        buttons: [
+          {text: 'Edit'}
+        ],
+        destructiveText: 'Remove',
+        titleText: 'Customers action',
+        cancelText: 'Cancel',
+        cancel: function () {
+          // add cancel code..
+        },
+        buttonClicked: function (index) {
+          return true;
+        }
+      });
+    };
+
   })
 
   .controller('CustomerCtrl', function ($scope, $stateParams,$ionicActionSheet, $http) {
@@ -156,16 +190,33 @@ angular.module('protonbiz_mobile.controllers', [])
   })
 
   .controller('ProductsCtrl', function ($scope, $stateParams, $http, $rootScope) {
-    var config = {
-      headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem("token"),
-        'Accept': 'application/json;odata=verbose'
-      }
+    $scope.dataLoaded = false;
+
+    fetchProducts();
+
+    $scope.doRefresh = function () {
+      fetchProducts();
     };
-    $http.get("https://protonbiz.herokuapp.com/product?ownerId=" + $rootScope.company, config).then(function (res) {
-      console.log(res);
-      $scope.products = res.data;
-    });
+
+    function fetchProducts() {
+      var config = {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem("token"),
+          'Accept': 'application/json;odata=verbose'
+        }
+      };
+      $http.get("https://protonbiz.herokuapp.com/product?ownerId=" + $rootScope.company, config).then(function (res) {
+        console.log(res);
+        $scope.products = res.data;
+        $scope.dataLoaded = true;
+      }).finally(function() {
+        // Stop the ion-refresher from spinning
+        $scope.$broadcast('scroll.refreshComplete');
+      });
+    }
+
+
+
   })
 
 
@@ -215,8 +266,6 @@ angular.module('protonbiz_mobile.controllers', [])
             return true;
           }
         });
-
-
     };
 
     function fetchOrders(companyId) {
@@ -272,6 +321,48 @@ angular.module('protonbiz_mobile.controllers', [])
         ],
         destructiveText: 'Remove',
         titleText: 'Invoice action',
+        cancelText: 'Cancel',
+        cancel: function () {
+          // add cancel code..
+        },
+        buttonClicked: function (index) {
+          return true;
+        }
+      });
+
+      // For example's sake, hide the sheet after two seconds
+      $timeout(function () {
+        hideSheet();
+      }, 20000);
+
+    };
+    })
+
+  .controller('ProductCtrl', function ($scope, $stateParams, $http, $ionicActionSheet, $timeout) {
+    var sv = $stateParams.productId;
+    $scope.dataLoaded = false;
+
+    var config = {
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("token"),
+        'Accept': 'application/json;odata=verbose'
+      }
+    };
+    $http.get("https://protonbiz.herokuapp.com/product/" + sv, config).then(function (res) {
+      console.log(res);
+      $scope.order = res.data;
+      $scope.dataLoaded = true;
+
+    });
+
+    $scope.show = function () {
+      // Show the action sheet
+      var hideSheet = $ionicActionSheet.show({
+        buttons: [
+          {text: 'Edit'}
+        ],
+        destructiveText: 'Remove',
+        titleText: 'Product action',
         cancelText: 'Cancel',
         cancel: function () {
           // add cancel code..

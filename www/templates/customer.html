@@ -26,7 +26,8 @@
     <div class="operacija"><h5><b>Address : </b>{{order.address}} {{order.addressStreetNumber}}</h5></div>
     <div class="operacija"><h5><b>Have debt : </b>
       <span ng-show="order.hasDebt"><i class="ion-checkmark-round" style="color:green; font-size: 15px;"></i> </span>
-      <span ng-show="!order.hasDebt"><i class="ion-close-round" style="color:red; font-size: 15px;"></i> </span></h5></div>
+      <span ng-show="!order.hasDebt"><i class="ion-close-round" style="color:red; font-size: 15px;"></i> </span></h5>
+    </div>
     <div class="operacija"><h5 ><b>Total debt: </b>  {{order.debtAmount | number:2}} {{companyObj.currencySymbol}}</h5></div>
     <div class="operacija"><h5 ><b>Created at : </b> {{order.createdAt  | date:'dd/MM/yyyy'}}</h5></div>
     </div>

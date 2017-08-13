@@ -1,0 +1,44 @@
+
+<ion-view view-title="Product Details"  hide-back-button="false" >
+
+  <ion-nav-title>
+    <p >Product Details </p>
+  </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <a class="button button-icon icon ion-ios-settings" style="color:#fff;" ng-click="show()"></a>
+
+  </ion-nav-buttons>
+  <ion-content class="pregled" style="padding: 10px; margin:10px;">
+    <div class="row" style="margin:10px;" ng-show="!dataLoaded">
+      <div class="col"></div>
+      <ion-spinner name="dots"></ion-spinner>
+      <div class="col"></div>
+    </div>
+    <div class="row" style="margin:10px;" ng-show="!dataLoaded">
+      <div class="col"></div>
+      <h4 class="">Loading product...</h4>
+      <div class="col"></div>
+    </div>
+    <div ng-show="dataLoaded">
+      <div class="row">
+        <div class="col" style="margin:10px;" ></div>
+        <img ng-src="{{order.productImg}}" ng-click="goToProfile()" style="width: 200px;height: 200px;  border-radius: 50%; border: 1px solid #d0cccc;"/>
+        <div class="col"></div>
+      </div>
+
+      <div class="operacija"><h5 ><b>Id : </b>{{order.id}}</h5></div>
+      <div class="operacija"><h5 ><b>Name : </b> {{order.name}}</h5></div>
+      <div class="operacija"><h5><b>Type of product : </b>{{order.typeOfProduct}}</h5></div>
+      <div class="operacija"><h5><b>Category : </b>{{order.category}}</h5></div>
+
+      <div class="operacija"><h5 ><b>Price per unit: </b>  {{order.pricePerUnit | number:2}} {{companyObj.currencySymbol}}</h5></div>
+      <div class="operacija"><h5 ><b>Stock size: </b> {{order.stockSize}}</h5></div>
+      <div class="operacija"><h5 ><b>Unit: </b> {{order.unit}}</h5></div>
+      <div class="operacija"><h5><b>Is public : </b>
+        <span ng-show="order.isPublic"><i class="ion-checkmark-round" style="color:green; font-size: 15px;"></i> </span>
+        <span ng-show="!order.isPublic"><i class="ion-close-round" style="color:red; font-size: 15px;"></i> </span></h5>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>

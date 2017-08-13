@@ -5,8 +5,29 @@
     <ion-floating-item icon="ion-ios-pricetags" click="goToProducts()" button-color="#262626" text="New Product"></ion-floating-item>
   </ion-floating-menu>
   <ion-content>
-    <ion-list ng-repeat="c in products">
-      <ion-item> {{c.name}}</ion-item>
+    <ion-refresher
+      pulling-text="Pull to refresh..."
+      on-refresh="doRefresh()">
+    </ion-refresher>
+
+    <div class="bar bar-header item-input-inset" ng-show="dataLoaded">
+      <label class="item-input-wrapper">
+        <i class="icon ion-ios-search placeholder-icon"></i>
+        <input type="search" placeholder="Search">
+      </label>
+      <button class="button button-clear button-positive">
+        Clear
+      </button>
+    </div>
+    <ion-list ng-repeat="c in products" ng-show="dataLoaded">
+      <div class="list">
+        <a class="item item-thumbnail-left" href="#/app/products/{{c.id}}">
+          <img ng-src="{{c.productImg}}">
+          <h2>{{c.name}}</h2>
+          <p>{{c.category}}</p>
+        </a>
+
+      </div>
     </ion-list>
   </ion-content>
 </ion-view>

@@ -33,23 +33,29 @@
           </div>
         </ion-item>
 
-        <ion-item menu-close href="#/app/orders">
+        <ion-item class="menuItem" menu-close href="#/app/orders">
           Invoices
         </ion-item>
-        <ion-item menu-close href="#/app/search">
-          Users
+        <ion-item class="menuItem"  menu-close href="#/app/search">
+          User Menagment
+          <span class="badge badge-positive">Admin</span>
         </ion-item>
 
-        <ion-item menu-close href="#/app/playlists">
+        <ion-item menu-close href="#/app/customers" class="menuItem">
           Customers
         </ion-item>
-        <ion-item menu-close href="#/app/products">
+        <ion-item menu-close href="#/app/products" class="menuItem">
           Products
         </ion-item>
-        <ion-item menu-close href="#/app/settings">
+        <ion-item menu-close href="#/app/search" class="menuItem">
+          Graphs     <span class="badge badge-positive">Admin</span>
+
+        </ion-item>
+        <ion-item menu-close href="#/app/settings" class="menuItem">
           Settings
         </ion-item>
-        <ion-item menu-close ng-click="logout()">
+
+        <ion-item menu-close ng-click="logout()" class="menuItem">
           Logout
         </ion-item>
       </ion-list>

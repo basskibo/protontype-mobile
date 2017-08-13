@@ -99,12 +99,12 @@ angular.module('protonbiz_mobile', ['ionic', 'ngCordova','protonbiz_mobile.contr
         user:  ['order','companyId']
       }
     })
-    .state('app.playlists', {
-      url: '/playlists',
+    .state('app.customers', {
+      url: '/customers',
       views: {
         'menuContent': {
           templateUrl: 'templates/customers.html',
-          controller: 'PlaylistsCtrl'
+          controller: 'CustomersCtrl'
         }
       }
     })
@@ -124,6 +124,16 @@ angular.module('protonbiz_mobile', ['ionic', 'ngCordova','protonbiz_mobile.contr
         'menuContent': {
           templateUrl: 'templates/products.html',
           controller: 'ProductsCtrl'
+        }
+      }
+    })
+
+    .state('app.product', {
+      url: '/products/:productId',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/product.html',
+          controller: 'ProductCtrl'
         }
       }
     })
