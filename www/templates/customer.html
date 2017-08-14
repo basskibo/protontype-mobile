@@ -29,6 +29,7 @@
     <div class="operacija"><h5 ><b>Id : </b>{{order.id}}</h5></div>
     <div class="operacija"><h5 ><b>Full name : </b> {{order.firstName}} {{order.lastName}}</h5></div>
     <div class="operacija"><h5><b>Email : </b>{{order.email}}</h5></div>
+    <div class="operacija" ng-href="tel:+{{companyObj.callingCodes}}{{order.telephone}}"><h5><b>Telephone : </b>{{order.telephone}}</h5></div>
     <div class="operacija"><h5><b>Address : </b>{{order.address}} {{order.addressStreetNumber}}</h5></div>
     <div class="operacija"><h5><b>Have debt : </b>
       <span ng-show="order.hasDebt"><i class="ion-checkmark-round" style="color:green; font-size: 15px;"></i> </span>
@@ -36,6 +37,11 @@
     </div>
     <div class="operacija"><h5 ><b>Total debt: </b>  {{order.debtAmount | number:2}} {{companyObj.currencySymbol}}</h5></div>
     <div class="operacija"><h5 ><b>Created at : </b> {{order.createdAt  | date:'dd/MM/yyyy'}}</h5></div>
+    </div>
+    <div ng-show="dataLoaded">
+      <a class="button icon-right ion-ios-telephone button-calm">Call</a>
+      <a class="button icon-right ion-ios-email button-calm">Send SMS</a>
+
     </div>
 
   </ion-content>

@@ -83,6 +83,10 @@ angular.module('protonbiz_mobile.controllers', [])
       $location.path('/app/orders');
     };
 
+
+    $scope.goToSetings = function () {
+      $location.path('app.setings');
+    };
     $scope.logout = function () {
       console.log('log out bitch');
       window.localStorage.setItem("token", "");

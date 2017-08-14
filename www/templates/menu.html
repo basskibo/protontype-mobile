@@ -31,6 +31,8 @@
           </div>
           <div class="col">
           </div>
+
+
         </ion-item>
 
         <ion-item class="menuItem" menu-close href="#/app/orders">
@@ -51,14 +53,27 @@
           Graphs     <span class="badge badge-positive">Admin</span>
 
         </ion-item>
-        <ion-item menu-close href="#/app/settings" class="menuItem">
-          Settings
+
+
+        <ion-item  style="text-align: center;width: 50%;
+    float: left;    font-size: 25px;" menu-close  href="#/app/settings" class="menuItem">
+          <i class="ion-gear-b" style="    padding-left: 40px;"></i>
+        </ion-item>
+        <ion-item  style="text-align: center;width: 50%;
+    float: right;    font-size: 25px;" menu-close  ng-click="logout()" class="menuItem">
+          <i class="ion-log-out"></i>
         </ion-item>
 
-        <ion-item menu-close ng-click="logout()" class="menuItem">
-          Logout
-        </ion-item>
+        <!--<div class="bar bar-footer">-->
+
+
+          <!--<button menu-close ng-click="logout()" class="button  button-clear menuItem">-->
+            <!--<a class="button button-icon icon ion-log-out"></a>-->
+          <!--</button>-->
+        <!--</div>-->
+
       </ion-list>
+
     </ion-content>
   </ion-side-menu>
 </ion-side-menus>

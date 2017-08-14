@@ -3,14 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="cf0245e6-b7ba-4e37-a458-d1a055a9499d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/css/style.css" afterPath="$PROJECT_DIR$/www/css/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/controllers.js" afterPath="$PROJECT_DIR$/www/js/controllers.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/create_controllers.js" afterPath="$PROJECT_DIR$/www/js/create_controllers.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/loginCtrl.js" afterPath="$PROJECT_DIR$/www/js/loginCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/templates/customer_create.html" afterPath="$PROJECT_DIR$/www/templates/customer_create.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/templates/customers.html" afterPath="$PROJECT_DIR$/www/templates/customers.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/templates/orders.html" afterPath="$PROJECT_DIR$/www/templates/orders.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/templates/products.html" afterPath="$PROJECT_DIR$/www/templates/products.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/templates/customer.html" afterPath="$PROJECT_DIR$/www/templates/customer.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/templates/menu.html" afterPath="$PROJECT_DIR$/www/templates/menu.html" />
     </list>
     <ignored path="protonBiz.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,7 +28,7 @@
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-          <file leaf-file-name="create_controllers.js" pinned="false" current-in-tab="true">
+          <file leaf-file-name="create_controllers.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/www/js/create_controllers.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="268">
@@ -48,8 +43,8 @@
           <file leaf-file-name="orders.html" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/www/templates/orders.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="864">
-                  <caret line="48" column="45" lean-forward="false" selection-start-line="48" selection-start-column="45" selection-end-line="48" selection-end-column="45" />
+                <state relative-caret-position="72">
+                  <caret line="37" column="40" lean-forward="true" selection-start-line="37" selection-start-column="40" selection-end-line="37" selection-end-column="40" />
                   <folding>
                     <element signature="n#style#0;n#div#0;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#div#1;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
@@ -83,12 +78,16 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="menu.html" pinned="false" current-in-tab="false">
+          <file leaf-file-name="menu.html" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/www/templates/menu.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="282">
-                  <caret line="43" column="35" lean-forward="true" selection-start-line="43" selection-start-column="35" selection-end-line="43" selection-end-column="50" />
-                  <folding />
+                <state relative-caret-position="187">
+                  <caret line="51" column="54" lean-forward="true" selection-start-line="51" selection-start-column="54" selection-end-line="51" selection-end-column="54" />
+                  <folding>
+                    <element signature="n#style#0;n#ion-item#6;n#ion-list#0;n#ion-content#0;n#ion-side-menu#0;n#ion-side-menus#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#i#0;n#ion-item#6;n#ion-list#0;n#ion-content#0;n#ion-side-menu#0;n#ion-side-menus#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#ion-item#7;n#ion-list#0;n#ion-content#0;n#ion-side-menu#0;n#ion-side-menus#0;n#!!top" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -119,15 +118,32 @@
               </provider>
             </entry>
           </file>
+          <file leaf-file-name="customer.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/www/templates/customer.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="313">
+                  <caret line="41" column="46" lean-forward="false" selection-start-line="41" selection-start-column="46" selection-end-line="41" selection-end-column="46" />
+                  <folding>
+                    <element signature="n#style#0;n#a#0;n#ion-nav-buttons#0;n#ion-view#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#0;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#1;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#i#0;n#span#0;n#h5#0;n#div#5;n#div#2;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#i#0;n#span#1;n#h5#0;n#div#5;n#div#2;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
           <file leaf-file-name="controllers.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/www/js/controllers.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="288">
-                  <caret line="186" column="28" lean-forward="false" selection-start-line="186" selection-start-column="0" selection-end-line="187" selection-end-column="0" />
+                <state relative-caret-position="144">
+                  <caret line="81" column="37" lean-forward="true" selection-start-line="81" selection-start-column="37" selection-end-line="81" selection-end-column="37" />
                   <folding>
-                    <element signature="e#6114#6265#0" expanded="false" />
-                    <element signature="e#7048#7078#0" expanded="false" />
-                    <marker date="1502675009686" expanded="true" signature="5405:5853" ph="..." />
+                    <element signature="e#6198#6349#0" expanded="false" />
+                    <element signature="e#7132#7162#0" expanded="false" />
+                    <marker date="1502676908425" expanded="true" signature="5489:5937" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -186,7 +202,6 @@
       <find>Or</find>
       <find>[nav-bar-transition=&quot;android&quot;]</find>
       <find>window.cordova.plugins.Keyboard</find>
-      <find>logout</find>
       <find>starter</find>
       <find>use</find>
       <find>playlists</find>
@@ -208,6 +223,7 @@
       <find>$rootScope</find>
       <find>userName</find>
       <find>PUT</find>
+      <find>logout</find>
     </findStrings>
     <dirStrings>
       <dir>C:\Users\Bojan\Desktop\protontype_mobile_app\protontype-mobile</dir>
@@ -237,7 +253,6 @@
         <option value="$PROJECT_DIR$/bower.json" />
         <option value="$PROJECT_DIR$/www/templates/settings.html" />
         <option value="$PROJECT_DIR$/www/templates/playlists.html" />
-        <option value="$PROJECT_DIR$/www/templates/menu.html" />
         <option value="$PROJECT_DIR$/www/templates/profile.html" />
         <option value="$PROJECT_DIR$/www/js/OrderCtrl.js" />
         <option value="$PROJECT_DIR$/www/templates/product.html" />
@@ -245,7 +260,6 @@
         <option value="$PROJECT_DIR$/www/templates/login.html" />
         <option value="$PROJECT_DIR$/www/templates/order_create.html" />
         <option value="$PROJECT_DIR$/www/templates/order.html" />
-        <option value="$PROJECT_DIR$/www/templates/customer.html" />
         <option value="$PROJECT_DIR$/www/js/app.js" />
         <option value="$PROJECT_DIR$/www/templates/products.html" />
         <option value="$PROJECT_DIR$/www/css/style.css" />
@@ -253,8 +267,10 @@
         <option value="$PROJECT_DIR$/www/templates/orders.html" />
         <option value="$PROJECT_DIR$/www/templates/customer_create.html" />
         <option value="$PROJECT_DIR$/www/templates/customers.html" />
-        <option value="$PROJECT_DIR$/www/js/controllers.js" />
         <option value="$PROJECT_DIR$/www/js/create_controllers.js" />
+        <option value="$PROJECT_DIR$/www/templates/customer.html" />
+        <option value="$PROJECT_DIR$/www/js/controllers.js" />
+        <option value="$PROJECT_DIR$/www/templates/menu.html" />
       </list>
     </option>
   </component>
@@ -499,7 +515,7 @@
       <workItem from="1502308200163" duration="11731000" />
       <workItem from="1502533993592" duration="11200000" />
       <workItem from="1502637361927" duration="16941000" />
-      <workItem from="1502674461713" duration="956000" />
+      <workItem from="1502674461713" duration="3216000" />
     </task>
     <task id="LOCAL-00001" summary="1123">
       <created>1502506352608</created>
@@ -522,17 +538,24 @@
       <option name="project" value="LOCAL" />
       <updated>1502645351668</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="big update">
+      <created>1502675423031</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1502675423031</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="71315000" />
+    <option name="totallyTimeSpent" value="73575000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1727" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20422535" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20422535" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.625" sideWeight="0.50446165" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32847896" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -585,7 +608,8 @@
     <MESSAGE value="1123" />
     <MESSAGE value="big dpelot" />
     <MESSAGE value="mutd deploy" />
-    <option name="LAST_COMMIT_MESSAGE" value="mutd deploy" />
+    <MESSAGE value="big update" />
+    <option name="LAST_COMMIT_MESSAGE" value="big update" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -612,9 +636,9 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#6114#6265#0" expanded="false" />
-            <element signature="e#7048#7078#0" expanded="false" />
-            <marker date="1502675009686" expanded="true" signature="5405:5853" ph="..." />
+            <element signature="e#6198#6349#0" expanded="false" />
+            <element signature="e#7132#7162#0" expanded="false" />
+            <marker date="1502676908425" expanded="true" signature="5489:5937" ph="..." />
           </folding>
         </state>
       </provider>
@@ -778,6 +802,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -865,30 +890,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/customer.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="17" column="4" lean-forward="false" selection-start-line="17" selection-start-column="4" selection-end-line="26" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/login.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/orders.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="864">
-          <caret line="48" column="45" lean-forward="false" selection-start-line="48" selection-start-column="45" selection-end-line="48" selection-end-column="45" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#div#0;n#ion-list#0;n#div#2;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -925,26 +931,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/controllers.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="186" column="28" lean-forward="false" selection-start-line="186" selection-start-column="0" selection-end-line="187" selection-end-column="0" />
-          <folding>
-            <element signature="e#6114#6265#0" expanded="false" />
-            <element signature="e#7048#7078#0" expanded="false" />
-            <marker date="1502675009686" expanded="true" signature="5405:5853" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/menu.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="43" column="35" lean-forward="true" selection-start-line="43" selection-start-column="35" selection-end-line="43" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/products.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-83">
@@ -963,6 +949,57 @@
           <caret line="30" column="31" lean-forward="true" selection-start-line="30" selection-start-column="31" selection-end-line="30" selection-end-column="31" />
           <folding>
             <element signature="e#0#43#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/orders.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="37" column="40" lean-forward="true" selection-start-line="37" selection-start-column="40" selection-end-line="37" selection-end-column="40" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#div#0;n#ion-list#0;n#div#2;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/customer.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="41" column="46" lean-forward="false" selection-start-line="41" selection-start-column="46" selection-end-line="41" selection-end-column="46" />
+          <folding>
+            <element signature="n#style#0;n#a#0;n#ion-nav-buttons#0;n#ion-view#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#span#0;n#h5#0;n#div#5;n#div#2;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#span#1;n#h5#0;n#div#5;n#div#2;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/controllers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="81" column="37" lean-forward="true" selection-start-line="81" selection-start-column="37" selection-end-line="81" selection-end-column="37" />
+          <folding>
+            <element signature="e#6198#6349#0" expanded="false" />
+            <element signature="e#7132#7162#0" expanded="false" />
+            <marker date="1502676908425" expanded="true" signature="5489:5937" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/menu.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="51" column="54" lean-forward="true" selection-start-line="51" selection-start-column="54" selection-end-line="51" selection-end-column="54" />
+          <folding>
+            <element signature="n#style#0;n#ion-item#6;n#ion-list#0;n#ion-content#0;n#ion-side-menu#0;n#ion-side-menus#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#ion-item#6;n#ion-list#0;n#ion-content#0;n#ion-side-menu#0;n#ion-side-menus#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ion-item#7;n#ion-list#0;n#ion-content#0;n#ion-side-menu#0;n#ion-side-menus#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
