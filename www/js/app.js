@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('protonbiz_mobile', ['ionic', 'ngCordova','protonbiz_mobile.controllers','protonbiz_mobile.create_controllers','loginModule', 'ion-floating-menu', 'pascalprecht.translate'])
+angular.module('protonbiz_mobile', ['ionic', 'ngCordova','protonbiz_mobile.controllers','protonbiz_mobile.create_controllers','loginModule', 'ion-floating-menu', 'ionic-modal-select', 'ion-datetime-picker', 'pascalprecht.translate'])
 
 .run(function($ionicPlatform, $location) {
 
@@ -213,7 +213,85 @@ angular.module('protonbiz_mobile', ['ionic', 'ngCordova','protonbiz_mobile.contr
     listOfOrdersLabel: 'List of work orders',
     searchOrdersLabel: 'Search orders',
     searchOrders1Label: 'Search reports',
-    chooseLabel: 'Choose',
+    CHOOSE_LABEL: 'Select existing ',
+    CREATE_LABEL: 'Create new ',
+    PRODUCTS: 'Products ',
+    ADD_TO_INVOICE: 'Add to invoice',
+    TAXES: 'Taxes',
+    CHOOSEN_TAXES: 'Selected taxes',
+    CHANGE_LABEL: 'Select another',
+    CHOOSEN_PRODUCT: 'Selected product',
+    SHIPPING_INFO: 'Shipping info',
+    newReport: 'New field report',
+    regionLabel : 'Region',
+    plotLabel:'Plot',
+    activityLabel: 'Type of Activity',
+
+    timeLabel: 'Time',
+    notificationsLabel: 'Notifications',
+    showOnMapLabel:'Show on map',
+    nameLabel: 'Name',
+    enterNameLabel: 'Enter name',
+    descriptionLabel: 'Description',
+    enterDescriptionLabel: 'Enter description',
+    createLabel: 'Create',
+    cancelLabel:'Cancel',
+    needHelpLabel: 'Need help?',
+    addItemLabel: 'Add Item',
+    createItemLabel:'Create Item',
+    editingLabel: 'Editing',
+    newOrder:'New working order',
+    newReportLabel:'New report',
+    reportLabel: 'Reports',
+    reportAll: 'All Reports',
+    prognoza: "Weather forecast",
+    CHOOSE: "Choose",
+    CHOOSEN_CUSTOMER: "Choosen customer ",
+    NOTIFICATION_SETTINGS: "Notification settings",
+    CUSTOMER: "Customer",
+
+    lang : "Choose language",
+    favorit : "Favorites",
+    podesavanja:"Settings",
+    editOrder : "Edit Working Order",
+    en : "English",
+    rs : "Serbian",
+    ar: 'Arab',
+    de: 'German'
+
+
+  });
+
+  $translateProvider.translations('de',{
+    loginTitle : 'Login',
+    usernameLabel : 'Username',
+    organisationLabel:'Organisation',
+    passwordLabel: 'Password',
+    loginBtn : 'Login',
+    forgotpasswordLabel: 'Forgot your password?',
+    operationLabel: 'Operation',
+    inputLabel: 'Input',
+    cultureLabel: 'Culture',
+    priceLabel: 'Price',
+    dateLabel: 'Date',
+    datePocetkaLabel: 'Date ',
+    datePlaniranLabel: 'Date',
+    dateZavrsetkaLabel: 'Date',
+    tableLabel : 'Table',
+    prikljucnaLabel: 'Priključne mašine',
+    radniciLabel: 'Radnici',
+    saveLabel: 'Save',
+    orderLabel: 'Working orders',
+    orderAll: 'All Orders',
+    newOrderLabel: 'New work order',
+    settingsLabel: 'Settings',
+    settingsChangeLabel: 'Change settings',
+
+    logOutLabel: 'Log out',
+    listOfOrdersLabel: 'List of work orders',
+    searchOrdersLabel: 'Search orders',
+    searchOrders1Label: 'Search reports',
+    CHOOSE_LABEL: 'Choose',
 
     newReport: 'New field report',
     regionLabel : 'Region',
@@ -238,7 +316,11 @@ angular.module('protonbiz_mobile', ['ionic', 'ngCordova','protonbiz_mobile.contr
     reportLabel: 'Reports',
     reportAll: 'All Reports',
     prognoza: "Weather forecast",
-
+    CHOOSE: "Choose",
+    CHOOSEN_CUSTOMER: "Choosen customer ",
+    NOTIFICATION_SETTINGS: "Benachrichtigungseinstellungen",
+    CHOOSE_LABEL: 'Choose',
+    CUSTOMER: "Customer",
     katOpst: "Cadastral region",
     vrstaAktivnosti : "Type of activity",
     parcela : "Parcel",
@@ -247,7 +329,6 @@ angular.module('protonbiz_mobile', ['ionic', 'ngCordova','protonbiz_mobile.contr
     "sortby" : "Sort by",
     "vreme" : "Time",
     "naziv" : "Name",
-    "menu" : "AgroLife",
     "tipAktivnosti" : "Type of activity",
     "datumPosete" : "Date of visit",
     "en" : "English",
@@ -259,7 +340,8 @@ angular.module('protonbiz_mobile', ['ionic', 'ngCordova','protonbiz_mobile.contr
     "favorit" : "Favorites",
     "podesavanja":"Settings",
     "editOrder" : "Edit Working Order",
-    ar: 'Arab'
+    ar: 'Arab',
+    de: 'German'
 
 
   });
@@ -288,13 +370,16 @@ angular.module('protonbiz_mobile', ['ionic', 'ngCordova','protonbiz_mobile.contr
     prikljucnaLabel: 'Priključne mašine',
     radniciLabel: 'Radnici',
     podaciRNLabel : 'Podaci o radnom nalogu',
+    CUSTOMER: "Kupac",
+    CHOOSE: "Izaberi",
+    CHOOSEN_CUSTOMER: "Izabran kupac ",
 
-
+    NOTIFICATION_SETTINGS: "Podesavanje notifikacija",
 
     saveLabel: 'Sačuvaj',
     orderLabel: 'Radni Nalozi',
     orderAll: 'Svi nalozi',
-    chooseLabel: 'Izaberi',
+    CHOOSE_LABEL: 'Izaberi',
     materijalLabel : 'Izabrani materijal',
     newOrderLabel: 'Novi radni nalog',
     settingsLabel: 'Podešavanja',
@@ -329,7 +414,6 @@ angular.module('protonbiz_mobile', ['ionic', 'ngCordova','protonbiz_mobile.contr
     sortby : "Sortiraj po",
     vreme : "Vremenu",
     naziv : "Nazivu",
-    menu : "AgroLife",
     tipAktivnosti : "Tip aktivnosti",
     datumPosete : "Datum posete",
     en : "Engleski",
@@ -341,11 +425,8 @@ angular.module('protonbiz_mobile', ['ionic', 'ngCordova','protonbiz_mobile.contr
     "favorit" : "Favorit",
     "podesavanja" : "Podešavanja",
     "editOrder" : "Izmena radnog naloga",
-    ar: 'Arapski'
-
-
-
-
+    ar: 'Arapski',
+    de: 'Nemacki'
 
   });
 
@@ -362,7 +443,8 @@ angular.module('protonbiz_mobile', ['ionic', 'ngCordova','protonbiz_mobile.contr
     settingsLabel: 'إعدادات',
     logOutLabel:'خروج',
     notificationsLabel: 'الإشعارات',
-    lang: 'تسجيل الدخول'
+    lang: 'تسجيل الدخول',
+    de: 'ألمانية'
 
 
 

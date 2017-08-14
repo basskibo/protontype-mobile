@@ -1,39 +1,125 @@
 <ion-view view-title="Create Invoices">
-  <ion-nav-buttons side="right">
-    <button class="button button-clear " ng-disabled="invoiceForm.$invalid"> Done</button>
-
-  </ion-nav-buttons>
 
   <ion-content>
 
     <form name="invoiceForm" ng-submit="doLogin()">
 
-      <div class="list">
-        <label class="item item-input item-floating-label">
-          <span class="input-label">First Name</span>
-          <input type="text" placeholder="First Name">
-        </label>
-        <label class="item item-input item-floating-label">
-          <span class="input-label">Last Name</span>
-          <input type="text" placeholder="Last Name">
-        </label>
-        <label class="item item-input item-floating-label">
-          <span class="input-label">Email</span>
-          <input type="text" placeholder="Email">
-        </label>
-        <label class="item item-input item-floating-label">
-          <span class="input-label">Email</span>
-          <input type="text" placeholder="Email">
-        </label>
-        <label class="item item-input item-floating-label">
-          <span class="input-label">Email</span>
-          <input type="text" placeholder="Email">
-        </label>
-        <label class="item item-input item-floating-label">
-          <span class="input-label">Email</span>
-          <input type="text" placeholder="Email">
-        </label>
+      <!---------------------------CUSTOMER-------------------------->
+      <div>
+        <div class="item item-divider">
+          {{'CUSTOMER' | translate}}
+        </div>
+        <div class="item" style="color:#000" ng-show="order.customer">
+          {{'CHOOSEN_CUSTOMER' | translate }}: {{order.customer.firstName}} {{order.customer.lastName}}
+        </div>
+        <div class="item item-body">
+          <button class="button button-block button-positive" modal-select="" ng-model="order.customer"
+                  options="customers" modal-title="Choose Customer" header-footer-class="bar-positive" has-search="true"
+                  sub-header-class="bar-positive">
+            <span ng-show="!order.customer">{{'CHOOSE_LABEL' | translate}}</span>
+            <span ng-show="order.customer">{{'CHANGE_LABEL' | translate}}</span>
+            <div class="option">
+              {{option.firstName}} {{option.lastName}}
+
+            </div>
+          </button>
+
+          <div ng-hide="order.customer">
+            <div
+              style="width: 100%;    margin: 1em 0em; height: 10px; border-bottom: 1px solid #c5bebe; text-align: center">
+              <span style="font-size: 14px;  background-color: #fafafa;   padding: 0 10px;">
+              OR
+              </span>
+            </div>
+            <button class="button button-block button-positive">
+              {{'CREATE_LABEL' | translate}}
+            </button>
+
+          </div>
+        </div>
       </div>
+      <!---------------------------PRODUCTS-------------------------->
+      <div>
+        <div class="item item-divider">
+          {{'PRODUCTS' | translate}}
+        </div>
+        <div class="item" style="color:#000" ng-show="order.product">
+          {{'CHOOSEN_PRODUCT' | translate }}: {{order.product.name}}
+        </div>
+        <div class="item item-body">
+          <button class="button button-block button-positive" modal-select="" ng-model="order.product"
+                  options="products" modal-title="Choose Product" header-footer-class="bar-positive" has-search="true"
+                  sub-header-class="bar-positive">
+            <span ng-show="!order.product">{{'CHOOSE_LABEL' | translate}}</span>
+            <span ng-show="order.product">{{'CHANGE_LABEL' | translate}}</span>
+            <div class="option">
+              {{option.name}}
+
+            </div>
+          </button>
+          <div ng-show="!order.product">
+            <div
+              style="width: 100%;    margin: 1em 0em; height: 10px; border-bottom: 1px solid #c5bebe; text-align: center">
+              <span style="font-size: 14px;  background-color: #fafafa;   padding: 0 10px;">
+              OR
+              </span>
+            </div>
+            <button class="button button-block button-positive">
+              {{'CREATE_LABEL' | translate}}
+            </button>
+          </div>
+          <div ng-show="order.product">
+            <label class="item item-input item-floating-label">
+              <span class="input-label">Quantity</span>
+              <input type="number" ng-model="customer.quantity" placeholder="Quantity">
+            </label>
+
+            <button class="button button-block button-positive" ng-click="invoiceAdded()" ng-show="customer.quantity">
+              {{'ADD_TO_INVOICE' | translate}}
+            </button>
+          </div>
+        </div>
+      </div>
+      <!---------------------------TAXES   -------------------------->
+      <div>
+        <div class="item item-divider">
+          {{'TAXES' | translate}}
+        </div>
+        <div class="item" style="color:#000" ng-show="order.tax">
+          {{'CHOOSEN_TAXES' | translate }}: {{order.tax.name}} ({{order.tax.taxRate}}%)
+        </div>
+        <div class="item item-body">
+          <button class="button button-block button-positive" modal-select="" ng-model="order.tax"
+                  options="taxes" modal-title="Choose Taxes" header-footer-class="bar-positive" has-search="true"
+                  sub-header-class="bar-positive">
+            <span ng-show="!order.tax">{{'CHOOSE_LABEL' | translate}}</span>
+            <span ng-show="order.tax">{{'CHANGE_LABEL' | translate}}</span>
+            <div class="option">
+              {{option.name}} ({{option.taxRate}}%)
+
+            </div>
+          </button>
+        </div>
+
+      </div>
+      <!---------------------------SHIPPING-------------------------->
+      <div>
+        <div class="item item-divider">
+          {{'SHIPPING_INFO' | translate}}
+        </div>
+
+
+        <div class="item" ion-datetime-picker ng-model="datetimeValue" title="Deadline">
+          <label>Select deadline</label>
+          {{datetimeValue| date: "dd-MM-yyyy H:mm"}}
+        </div>
+      </div>
+
+      <button class="button button-full  protonBizRed">
+        {{'CREATE' | translate}}
+      </button>
+
+
     </form>
 
 

@@ -66,6 +66,9 @@ angular.module('protonbiz_mobile.controllers', [])
       });
     }
 
+
+
+
     var userParsed = JSON.parse(localStorage.getItem("user"));
     $rootScope.currentUser = userParsed;
 
@@ -341,7 +344,6 @@ angular.module('protonbiz_mobile.controllers', [])
         console.log(res);
         $scope.orders = res.data;
         $scope.dataLoaded = true;
-
       });
 
 
@@ -370,7 +372,6 @@ angular.module('protonbiz_mobile.controllers', [])
       console.log(res);
       $scope.order = res.data;
       $scope.dataLoaded = true;
-
     });
 
     $scope.show = function () {
@@ -470,9 +471,12 @@ angular.module('protonbiz_mobile.controllers', [])
         } else if (lng == 'en') {
           lng = "Language changed to English";
           title = 'Language';
-        } else {
+        } else if(lng == 'ar'){
           lng = "تغيير اللغة إلى العربية";
           title = 'لغة';
+        } else if(lng == 'de'){
+          lng = "Sprache geändert auf Deutsch";
+          title= "Sprache";
         }
         var alertPopup = $ionicPopup.alert({
           title: title,

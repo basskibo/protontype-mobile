@@ -5,7 +5,10 @@
   background: transparent; }
 
 
-
+.protonBizRed{
+  background: #CF061D;
+  color: #ffffff;
+}
 .subTitleItem{
   font-size:13px !important;
 }
