@@ -1,4 +1,4 @@
-<ion-view view-title="Customers">
+<ion-view view-title="{{customers.length}} Customers">
 
   <ion-floating-menu menu-color="#CF061C" menu-open-color="#CF061C"  backdrop="true">
     <ion-floating-item icon="ion-ios-personadd"  button-color="#262626" ng-click="createNewCustomer()"
@@ -37,14 +37,27 @@
 
       </div>
       <ion-list ng-repeat="c in customers">
-        <ion-item href="#/app/customers/{{c.id}}" on-hold="onHold()">
-          <p>Customer name: {{c.firstName}} {{c.lastName}} </p>
-          <p>Have debt:
-            <span ng-show="c.hasDebt"><i class="ion-checkmark-round" style="color:green; font-size: 15px;"></i> </span>
-            <span ng-show="!c.hasDebt"><i class="ion-close-round" style="color:red; font-size: 15px;"></i> </span>
-          </p>
-          <p ng-show="c.hasDebt">Total debt: {{c.debtAmount}} {{companyObj.currencySymbol}}</p>
-        </ion-item>
+        <div class="list">
+          <a class="item item-thumbnail-left" href="#/app/customers/{{c.id}}" on-hold="onHold(c)" style="margin: -3px;">
+            <div class="circleWithCred">{{c.cred}}
+            </div>
+            <h2 class="titleItem">{{c.firstName}} {{c.lastName}} </h2>
+            <p class="subTitleItem">
+              <span ng-class="c.hasDebt ? 'debtInList' : 'noDebtInList'">Debt: </span>
+              <span ng-show="c.hasDebt" class="haveDebtInList"><i class="ion-checkmark-round" style="font-size: 15px;"></i> </span>
+              <span ng-show="!c.hasDebt" class="dontHaveDebtInList"><i class="ion-close-round" style=" font-size: 15px;"></i> </span>
+            </p>
+            <p class="subTitleItem">
+              <i class="ion-ios-telephone"></i> {{c.telephone}}
+            </p>
+            <p class="subTitleItem">
+              <i class="ion-ios-email"></i> {{c.email}}
+            </p>
+            <!--<p class="subTitleItem">-->
+              <!--<i class="ion-ios-email"></i> {{c.email}}-->
+            <!--<p>-->
+          </a>
+        </div>
 
       </ion-list>
     </div>

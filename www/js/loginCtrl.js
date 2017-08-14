@@ -74,7 +74,7 @@ angular.module('loginModule', [])
           $rootScope.currentUser = user;
           $rootScope.userName = localStorage.getItem("user_name");
           $rootScope.company = localStorage.getItem("companyId");
-          $rootScope.$broadcast('fetch_orders', $rootScope.company);
+          // $rootScope.$broadcast('fetch_orders', $rootScope.company);
           $timeout(changeState,4000);
         });
 
@@ -91,7 +91,15 @@ angular.module('loginModule', [])
         }
       });
       login.error(function (res) {
-        $scope.error = res.err;
+          $scope.error = res.err;
+          var alertPopup = $ionicPopup.alert({
+            title: 'Login failed',
+            template: $scope.error
+          });
+
+          alertPopup.then(function(res) {
+            console.log('Thank you for not eating my delicious ice cream cone');
+          });
       });
     };
   });

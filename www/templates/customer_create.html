@@ -1,26 +1,21 @@
 <ion-view view-title="Create Customer">
-  <ion-nav-buttons side="right">
-    <button class="button button-clear" type="submit" ng-click="create(invoiceForm)" ng-disabled="invoiceForm.$invalid"> Done</button>
-
-  </ion-nav-buttons>
-
   <ion-content>
 
-    <form name="invoiceForm" ng-submit="create(customer)">
+    <form ng-submit="create(customer)">
 
-      <div class="list">
-        <div class="item item-divider">
-          Basic information
-        </div>
-        <label class="item item-input item-floating-label">
-          <span class="input-label">First Name</span>
-          <input type="text" placeholder="First Name" ng-model="customer.firstName">
-        </label>
-        <label class="item item-input item-floating-label">
-          <span class="input-label">Last Name</span>
-          <input type="text" placeholder="Last Name" ng-model="customer.lastName">
-        </label>
-        <span class="row" style="padding: 0">
+        <div class="list">
+          <div class="item item-divider">
+            Basic information
+          </div>
+          <label class="item item-input item-floating-label">
+            <span class="input-label">First Name</span>
+            <input type="text" ng-model="customer.firstName" placeholder="First Name">
+          </label>
+          <label class="item item-input item-floating-label">
+            <span class="input-label">Last Name</span>
+            <input type="text" placeholder="Last Name" ng-model="customer.lastName">
+          </label>
+          <span class="row" style="padding: 0">
             <label class="item item-input item-floating-label">
             <span class="input-label">Address</span>
             <input type="text" placeholder="Address" ng-model="customer.address">
@@ -32,28 +27,26 @@
           </label>
         </span>
 
-        <div class="item item-divider">
-          Contact information
+          <div class="item item-divider">
+            Contact information
+          </div>
+          <label class="item item-input item-floating-label">
+            <span class="input-label">Email</span>
+            <input type="email" placeholder="Email" ng-model="customer.email">
+          </label>
+          <label class="item item-input item-floating-label">
+            <span class="input-label">Telephone</span>
+            <input type="text" placeholder="Telephone (+{{companyObj.callingCodes}})" ng-model="customer.telephone">
+          </label>
+          <!--<label class="item item-input item-floating-label">-->
+          <!--<span class="input-label">Fax</span>-->
+          <!--<input type="text" placeholder="Fax">-->
+          <!--</label>-->
+          <button class="button button-block button-positive" type="submit">
+            Create
+          </button>
         </div>
-        <label class="item item-input item-floating-label">
-          <span class="input-label">Email</span>
-          <input type="email" placeholder="Email" ng-model="customer.email">
-        </label>
-        <label class="item item-input item-floating-label">
-          <span class="input-label">Telephone</span>
-          <input type="text" placeholder="Telephone (+{{companyObj.callingCodes}})" ng-model="customer.telephone">
-        </label>
-        <label class="item item-input item-floating-label">
-          <span class="input-label">Fax</span>
-          <input type="text" placeholder="Fax">
-        </label>
-
-        <!--<button class="button button-outline" style="border-color: red;">-->
-          <!--Create-->
-        <!--</button>-->
-      </div>
-    </form>
-
+      </form>
 
   </ion-content>
 </ion-view>

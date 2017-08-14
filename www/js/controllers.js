@@ -108,8 +108,10 @@ angular.module('protonbiz_mobile.controllers', [])
 
   })
 
-  .controller('CustomersCtrl', function ($scope, $http, $rootScope, $ionicActionSheet) {
+  .controller('CustomersCtrl', function ($scope, $http, $rootScope, $ionicActionSheet, $state) {
     $scope.dataLoaded = false;
+    console.log(' cusotmers Ctrl');
+
 
     fetchCustomers();
 
@@ -118,14 +120,16 @@ angular.module('protonbiz_mobile.controllers', [])
     };
 
     function fetchCustomers() {
+      console.log('fetching cusotmers');
       var config = {
         headers: {
           'Authorization': 'Bearer ' + localStorage.getItem("token"),
           'Accept': 'application/json;odata=verbose'
         }
       };
-      $http.get("https://protonbiz.herokuapp.com/customer?ownerId=" + $rootScope.company, config).then(function (res) {
+      $http.get("https://protonbiz.herokuapp.com/customer?isActive=true&ownerId="+ $rootScope.company, config).then(function (res) {
         console.log(res);
+        generateCredentialsImg(res.data);
         $scope.customers = res.data;
         $scope.dataLoaded = true;
 
@@ -133,13 +137,31 @@ angular.module('protonbiz_mobile.controllers', [])
         // Stop the ion-refresher from spinning
         $scope.$broadcast('scroll.refreshComplete');
       });
+
+
+      function generateCredentialsImg(customers) {
+        for(var i = 0; i < customers.length; i++){
+          var firstNameCred = customers[i].firstName.substring(0,1).toUpperCase();
+          var lastNameCred = customers[i].lastName.substring(0,1).toUpperCase();
+          customers[i].cred = firstNameCred + lastNameCred;
+        }
+      }
     }
 
-    $scope.onHold = function () {
-      console.log('holding....')
+    $scope.onHold = function (customer) {
+      console.log('holding....');
+      var config = {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem("token"),
+          'Accept': 'application/json;odata=verbose'
+        }
+      };
       // Show the action sheet
       var hideSheet = $ionicActionSheet.show({
         buttons: [
+          {text: 'Call'},
+          {text: 'Send SMS'},
+          {text: 'Send email'},
           {text: 'Edit'}
         ],
         destructiveText: 'Remove',
@@ -149,7 +171,25 @@ angular.module('protonbiz_mobile.controllers', [])
           // add cancel code..
         },
         buttonClicked: function (index) {
+          console.log(index);
           return true;
+        },
+        destructiveButtonClicked: function () {
+          customer.isActive =false;
+           $http({
+            method: 'PUT',
+            url: 'https://protonbiz.herokuapp.com/customer/' + customer.id,
+            data: customer,
+             headers: config.headers
+          }).then(function (response) {
+             console.log(response.data);
+             hideSheet();
+             $scope.dataLoaded = false;
+             fetchCustomers();
+           }).catch(function (error) {
+             console.log(error.data);
+          });
+          console.log('sada jeste',customer.id);
         }
       });
     };
@@ -262,6 +302,9 @@ angular.module('protonbiz_mobile.controllers', [])
         // Stop the ion-refresher from spinning
         $scope.$broadcast('scroll.refreshComplete');
       });
+
+
+
     };
 
     $scope.onHold = function () {
