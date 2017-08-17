@@ -2,7 +2,7 @@
 
   <ion-content>
 
-    <form name="invoiceForm" ng-submit="doLogin()">
+    <form name="invoiceForm">
 
       <!---------------------------CUSTOMER-------------------------->
       <div>
@@ -68,16 +68,43 @@
               {{'CREATE_LABEL' | translate}}
             </button>
           </div>
-          <div ng-show="order.product">
-            <label class="item item-input item-floating-label">
-              <span class="input-label">Quantity</span>
-              <input type="number" ng-model="customer.quantity" placeholder="Quantity">
-            </label>
 
-            <button class="button button-block button-positive" ng-click="invoiceAdded()" ng-show="customer.quantity">
+
+          <div ng-if="order.product" >
+            <!--<div ng-if="input1" class="list">-->
+            <div class="list">
+              <label class="item item-input item-floating-label">
+                <span class="input-label">Quantity</span>
+                <input type="number" ng-model="quantity"  placeholder="How much of {{order.product.name}} to add in invoice?">
+              </label>
+            </div>
+            <!--</div>-->
+            <button class="button button-block button-positive" ng-click="invoiceAdded(order.product, quantity)" ng-show="quantity">
               {{'ADD_TO_INVOICE' | translate}}
             </button>
+
+
+            <!--<div class="list" ng-if="input1">-->
+              <!--<p>Selected : {{quantity}}</p>-->
+              <!--<div class="item range range-positive">-->
+                <!--<i class="ion-minus-round minusBtn button" ng-click="decr()"></i>-->
+                <!--<span>0</span>-->
+                <!--<input type="range" name="volume" min="0" max="{{order.product.stockSize}}" value="0"-->
+                       <!--ng-model="quantity">-->
+                <!--<span>{{order.product.stockSize}}</span>-->
+                <!--<i class="ion-plus-round plusBtn button" ng-click="incr()"></i>-->
+              <!--</div>-->
+            <!--</div>-->
+
+
+            <!--<a ng-click="changeInput()">Easier to enter number?</a>-->
+
           </div>
+
+          <div class="list">
+
+          </div>
+
         </div>
       </div>
       <!---------------------------TAXES   -------------------------->
@@ -85,22 +112,26 @@
         <div class="item item-divider">
           {{'TAXES' | translate}}
         </div>
-        <div class="item" style="color:#000" ng-show="order.tax">
-          {{'CHOOSEN_TAXES' | translate }}: {{order.tax.name}} ({{order.tax.taxRate}}%)
-        </div>
-        <div class="item item-body">
-          <button class="button button-block button-positive" modal-select="" ng-model="order.tax"
-                  options="taxes" modal-title="Choose Taxes" header-footer-class="bar-positive" has-search="true"
-                  sub-header-class="bar-positive">
-            <span ng-show="!order.tax">{{'CHOOSE_LABEL' | translate}}</span>
-            <span ng-show="order.tax">{{'CHANGE_LABEL' | translate}}</span>
-            <div class="option">
-              {{option.name}} ({{option.taxRate}}%)
+        <ion-checkbox ng-model="order.withTax">With tax</ion-checkbox>
 
-            </div>
-          </button>
-        </div>
+        <div>
+          <div class="item" style="color:#000" ng-show="order.withTax && order.tax">
+            {{'CHOOSEN_TAXES' | translate }}: {{order.tax.name}} ({{order.tax.taxRate}}%)
+          </div>
+          <div class="item item-body" ng-show="order.withTax">
+            <button class="button button-block button-positive" modal-select="" ng-model="order.tax"
+                    options="taxes" modal-title="Choose Taxes" header-footer-class="bar-positive" has-search="true"
+                    sub-header-class="bar-positive">
+              <span ng-show="!order.tax">{{'CHOOSE_LABEL' | translate}}</span>
+              <span ng-show="order.tax">{{'CHANGE_LABEL' | translate}}</span>
+              <div class="option">
+                {{option.name}} ({{option.taxRate}}%)
 
+              </div>
+            </button>
+          </div>
+
+        </div>
       </div>
       <!---------------------------SHIPPING-------------------------->
       <div>
@@ -108,14 +139,24 @@
           {{'SHIPPING_INFO' | translate}}
         </div>
 
+        <ion-checkbox ng-model="delivery">Delivery</ion-checkbox>
+        <ion-checkbox ng-model="userCustomerInfo">Use customer information for delivery</ion-checkbox>
 
-        <div class="item" ion-datetime-picker ng-model="datetimeValue" title="Deadline">
-          <label>Select deadline</label>
+        <div class="item" ion-datetime-picker ng-model="order.deadline" title="Deadline">
+          <label>Select deadline: </label>
           {{datetimeValue| date: "dd-MM-yyyy H:mm"}}
         </div>
       </div>
+      <div>
+        <div class="item item-divider">
+          {{'Invoice info' | translate}}
+        </div>
 
-      <button class="button button-full  protonBizRed">
+        <ion-checkbox ng-model="order.recurring">Recurring</ion-checkbox>
+
+      </div>
+
+      <button class="button button-full  protonBizRed" type="submit" ng-click="createInvoice(order)">
         {{'CREATE' | translate}}
       </button>
 

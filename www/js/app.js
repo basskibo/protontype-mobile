@@ -11,7 +11,7 @@ angular.module('protonbiz_mobile', ['ionic', 'ngCordova','protonbiz_mobile.contr
 
   if(localStorage.getItem("token") !== null && localStorage.getItem("token") !== ""){
     console.log("User found");
-    $location.path('/app/orders');
+    $location.path('/app/orders/new');
     // location.reload();
 
   }else{

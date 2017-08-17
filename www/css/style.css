@@ -97,3 +97,17 @@
   background: gold;
   padding: 15px 0;
 }
+
+.minusBtn{
+  padding: 5px;
+  background: #CF061D;
+  color: #fff;
+  margin: 10px 10px 10px 0px;
+}
+
+.plusBtn{
+  padding: 5px;
+  background: green;
+  color: #fff;
+  margin: 10px 0px 10px 10px;
+}
