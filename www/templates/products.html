@@ -50,10 +50,9 @@
           <div>
             <img style="width: 70px;height: 70px; border-radius:50%;" ng-src="{{c.productImg}}">
           </div>
-          <h2 class="titleItem">{{c.customerName}}</h2>
-          <p class="subTitleItem">Created: {{c.createdAt | date:'dd/MM/yyyy'}}</p>
-          <p class="subTitleItem">Status: {{c.status}}</p>
-          <p class="subTitleItem ">Price: {{c.totalPrice}} {{companyObj.currencySymbol}}</p>
+          <h2 class="titleItem">{{c.name}}</h2>
+          <p class="subTitleItem">{{c.category}}</p>
+          <p class="subTitleItem ">{{c.pricePerUnit}} {{companyObj.currencySymbol}} / {{c.unit}}</p>
         </a>
       </div>
 
