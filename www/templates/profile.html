@@ -5,23 +5,25 @@
     <p >Your Profile </p>
   </ion-nav-title>
   <ion-nav-buttons side="right">
-    <a class="button button-icon icon ion-ios-settings" style="color:#fff;" ng-click="show()"></a>
+    <a class="button button-icon icon ion-ios-more-outline" style="color:#fff;" ng-click="show()"></a>
   </ion-nav-buttons>
-  <ion-content class="pregled" style="padding: 10px; margin:10px;">
+  <ion-content class="pregled" style="padding: 10px; ">
     <div class="row">
       <div class="col" style="margin:10px;" ></div>
       <img ng-src="{{currentUser.avatarImg}}"  style="width: 200px;height: 200px;  border-radius: 50%; border: 1px solid #d0cccc;"/>
       <div class="col"></div>
     </div>
 
-    <div class="row" style="margin:10px;">
-      <div class="col"></div>
-      <div class="operacija"><h5 class="col"><b>{{userName}}</b></h5></div>
-      <div class="col"></div>
-    </div>
+
 
     <div class="item item-divider">
       User info
+    </div>
+
+    <div class="row" style="margin:10px;">
+      <div class="col"></div>
+      <div class="operacija"><h4 class="col"><b>{{userName}}</b></h4></div>
+      <div class="col"></div>
     </div>
 
     <div class="row" style="margin:10px;">
@@ -42,19 +44,50 @@
       <div class="col"></div>
     </div>
 
-    <div class="item item-divider">
-      Company info
-    </div>
-
-    <div class="row" style="margin:10px;">
-      <div class="col"></div>
-      <div class="operacija"><h5 class="col"><b>{{companyObj.name}}</b></h5></div>
+   <div class="row" style="margin:10px;">
+      <!--<div class="col"></div>-->
+      <div class="operacija"><i class="ion-ios-calendar-outline" style="font-size: 20px;"></i> <span> {{currentUser.birthday | date:'dd/MM/yyyy'}}</span></div>
       <div class="col"></div>
     </div>
 
     <div class="row" style="margin:10px;">
       <!--<div class="col"></div>-->
-      <div class="operacija"><i class="ion-ios-location-outline" style="font-size: 20px;"></i> <span>{{companyObj.country}}, {{companyObj.location}}</span></div>
+      <div class="operacija"><i class="ion-ios-body-outline" style="font-size: 20px;"></i> <span> {{currentUser.gender}}</span></div>
+      <div class="col"></div>
+    </div>
+
+    <div class="item item-divider">
+      Company info
+    </div>
+
+    <div class="row">
+      <div class="col" style="margin:10px;" ></div>
+      <img ng-src="{{companyObj.logoUrl}}"  style="width: 200px;height: 200px;  border-radius: 50%; border: 1px solid #d0cccc;"/>
+      <div class="col"></div>
+    </div>
+
+    <div class="row" style="margin:10px;">
+      <div class="col"></div>
+      <div class="operacija"><h4 class="col"><b>{{companyObj.name}}</b></h4></div>
+      <div class="col"></div>
+    </div>
+
+    <div class="row" style="margin:10px;">
+      <!--<div class="col"></div>-->
+      <div class="operacija"><i class="ion-ios-briefcase-outline" style="font-size: 20px;"></i> <span>Position: {{currentUser.position}}</span></div>
+      <div class="col"></div>
+    </div>
+
+    <div class="row" style="margin:10px;">
+      <!--<div class="col"></div>-->
+      <div class="operacija"><i class="ion-ios-flag-outline" style="font-size: 20px;"></i> <span>{{companyObj.country}}</span>
+      </div>
+      <div class="col"></div>
+    </div>
+
+    <div class="row" style="margin:10px;">
+      <!--<div class="col"></div>-->
+      <div class="operacija"><i class="ion-ios-location-outline" style="font-size: 20px;"></i> <span>{{companyObj.location}}, {{companyObj.postalCode}}</span></div>
       <div class="col"></div>
     </div>
 
@@ -67,6 +100,12 @@
     <div class="row" style="margin:10px;">
       <!--<div class="col"></div>-->
       <div class="operacija"><i class="ion-ios-people-outline" style="font-size: 20px;"></i> <span> Number of employees :  {{companyObj.numberOfCompanyEmployes}}</span></div>
+      <div class="col"></div>
+    </div>
+
+    <div class="row" style="margin:10px;">
+      <!--<div class="col"></div>-->
+      <div class="operacija"><i class="ion-ios-albums-outline" style="font-size: 20px;"></i> <span> Licence expiration date:  {{companyObj.licenceExpiration | date:'dd/MM/yyyy'}}</span></div>
       <div class="col"></div>
     </div>
 

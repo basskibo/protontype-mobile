@@ -39,11 +39,12 @@
         <div class="list">
           <a class="item item-thumbnail-left-order" href="#/app/orders/{{c.id}}" on-hold="onHold()" style="margin: -3px;">
             <div class="circleWithCred"
-                 ng-class="{active:'activeColor', paid:'paidColor', completed:'completedColor'}[c.status]"
+                 ng-class="{active:'activeColor', paid:'paidColor', completed:'completedColor', notActive: 'notCompleted'}[c.status]"
             >
               <span ng-if="c.status == 'active'"><i class="ion-arrow-right-c"></i> </span>
               <span ng-if="c.status == 'paid'"><i class="ion-cash"></i> </span>
               <span ng-if="c.status == 'completed'"><i class="ion-checkmark"></i> </span>
+              <!--<span ng-if="c.status == 'not active'"><i class="ion-minus"></i> </span>-->
             </div>
             <h2 class="titleItem">{{c.customerName}}</h2>
             <p class="subTitleItem">Created: {{c.createdAt | date:'dd/MM/yyyy'}}</p>
@@ -51,14 +52,6 @@
             <p class="subTitleItem ">Price: {{c.totalPrice}} {{companyObj.currencySymbol}}</p>
           </a>
         </div>
-
-        <!--<ion-item href="#/app/orders/{{c.id}}" on-hold="onHold()">-->
-          <!--<p>Customer: {{c.customerName}} </p>-->
-          <!--<p>Status: {{c.status}}</p>-->
-          <!--<p>Total Price : {{c.totalPrice}} {{companyObj.currencySymbol}} </p>-->
-          <!--<p>Created at: {{c.createdAt | date:'dd/MM/yyyy'}} </p>-->
-          <!--<p>Deadline : {{c.deadline | date:'dd/MM/yyyy'}}</p>-->
-        <!--</ion-item>-->
 
       </ion-list>
     </div>

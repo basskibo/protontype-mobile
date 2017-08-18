@@ -144,13 +144,18 @@
 
         <div class="item" ion-datetime-picker ng-model="order.deadline" title="Deadline">
           <label>Select deadline: </label>
-          {{datetimeValue| date: "dd-MM-yyyy H:mm"}}
+          {{order.deadline | date: "dd-MM-yyyy H:mm"}}
         </div>
       </div>
       <div>
         <div class="item item-divider">
           {{'Invoice info' | translate}}
         </div>
+
+        <label class="item item-input item-floating-label">
+          <span class="input-label">Description</span>
+          <input type="text"  ng-model="order.description" placeholder="Description">
+        </label>
 
         <ion-checkbox ng-model="order.recurring">Recurring</ion-checkbox>
 

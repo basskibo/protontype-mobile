@@ -4,7 +4,7 @@
 angular.module('protonbiz_mobile.create_controllers', [])
 
 
-  .controller('OrderCreateCtrl', function ($scope, $http, $rootScope, $ionicActionSheet, $ionicPopup) {
+  .controller('OrderCreateCtrl', function ($scope, $http, $rootScope, $ionicActionSheet, $ionicPopup, $state) {
     $scope.dataLoaded = false;
     $scope.input1 = true;
 
@@ -69,6 +69,7 @@ angular.module('protonbiz_mobile.create_controllers', [])
           });
           $scope.products = [];
           $scope.products.push(product);
+          totalPrice += product.pricePerUnit * quantity;
         }else{
           var alertPopup = $ionicPopup.alert({
             title: 'Failed',
@@ -106,9 +107,14 @@ angular.module('protonbiz_mobile.create_controllers', [])
         order.taxRate = order.tax.taxRate;
       }
       order.status = 'active';
+      order.createdBy =$rootScope.userName;
       order.customerTelephone = order.customer.telephone;
       order.deliveryAddress = order.customer.address + " " + order.customer.addressStreetNumber;
       order.products = $scope.products;
+
+      order.price = 1000;
+      order.totalPrice = totalPrice;
+      order.customerName = order.customer.firstName + " " + order.customer.lastName;
       delete order.customer;
       delete order.product;
       delete order.tax;
