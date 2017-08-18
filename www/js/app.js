@@ -11,7 +11,7 @@ angular.module('protonbiz_mobile', ['ionic', 'ngCordova','protonbiz_mobile.contr
 
   if(localStorage.getItem("token") !== null && localStorage.getItem("token") !== ""){
     console.log("User found");
-    $location.path('/app/orders');
+    $location.path('/app/products/new');
     // location.reload();
 
   }else{
@@ -147,6 +147,15 @@ angular.module('protonbiz_mobile', ['ionic', 'ngCordova','protonbiz_mobile.contr
       }
     })
 
+    .state('app.product_new', {
+      url: '/products/new',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/product_create.html',
+          controller:'ProductCreateCtrl'
+        }
+      }
+    })
     .state('app.product', {
       url: '/products/:productId',
       views: {

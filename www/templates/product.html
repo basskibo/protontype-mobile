@@ -1,8 +1,8 @@
 
-<ion-view view-title="Product Details"  hide-back-button="false" >
+<ion-view view-title="{{order.name}}"  hide-back-button="false" >
 
   <ion-nav-title>
-    <p >Product Details </p>
+    <p >{{order.name}} </p>
   </ion-nav-title>
   <ion-nav-buttons side="right">
     <a class="button button-icon icon ion-ios-more-outline" style="color:#fff;" ng-click="show()"></a>
@@ -41,8 +41,8 @@
       <div class="operacija"><h5><b>Category : </b>{{order.category}}</h5></div>
 
       <div class="operacija"><h5 ><b>Price per unit: </b>  {{order.pricePerUnit | number:2}} {{companyObj.currencySymbol}}</h5></div>
-      <div class="operacija"><h5 ><b>Stock size: </b> {{order.stockSize}}</h5></div>
-      <div class="operacija"><h5 ><b>Unit: </b> {{order.unit}}</h5></div>
+      <div class="operacija"><h5 ><b>Stock size: </b> {{order.stockSize}} <b style="padding-left: 20px;">Unit: </b> {{order.unit}}</h5></div>
+      <!--<div class="operacija"><h5 ></h5></div>-->
       <div class="operacija"><h5><b>Is public : </b>
         <span ng-show="order.isPublic"><i class="ion-checkmark-round" style="color:green; font-size: 15px;"></i> </span>
         <span ng-show="!order.isPublic"><i class="ion-close-round" style="color:red; font-size: 15px;"></i> </span></h5>

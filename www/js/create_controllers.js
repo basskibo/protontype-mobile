@@ -59,21 +59,21 @@ angular.module('protonbiz_mobile.create_controllers', [])
         $scope.quantity--;
       };
 
-      $scope.invoiceAdded = function (product,quantity) {
+      $scope.invoiceAdded = function (product, quantity) {
         console.log(product, quantity);
 
-        if(product.stockSize >= quantity){
+        if (product.stockSize >= quantity) {
           var alertPopup = $ionicPopup.alert({
             title: 'Success',
-            template:  quantity +  " " +product.unit +" of " + product.name +' successfully added to invoice'
+            template: quantity + " " + product.unit + " of " + product.name + ' successfully added to invoice'
           });
           $scope.products = [];
           $scope.products.push(product);
           totalPrice += product.pricePerUnit * quantity;
-        }else{
+        } else {
           var alertPopup = $ionicPopup.alert({
             title: 'Failed',
-            template:  'Sorry, but there is not enough products in stock. You have ' + product.stockSize + ' '+ product.unit +  "'s left"
+            template: 'Sorry, but there is not enough products in stock. You have ' + product.stockSize + ' ' + product.unit + "'s left"
           });
         }
 
@@ -91,23 +91,22 @@ angular.module('protonbiz_mobile.create_controllers', [])
       };
       $http.get("https://protonbiz.herokuapp.com/tax?ownerId=" + $rootScope.company, config).then(function (res) {
         $scope.taxes = res.data;
-        console.log('taxeeeees: ' , res);
+        console.log('taxeeeees: ', res);
         $scope.dataLoaded = true;
       });
     }
-
 
 
     $scope.createInvoice = function (order) {
 
       order.ownerId = $rootScope.company;
       order.customerId = order.customer.id;
-      if(order.withTax){
+      if (order.withTax) {
         order.taxId = order.tax.id;
         order.taxRate = order.tax.taxRate;
       }
       order.status = 'active';
-      order.createdBy =$rootScope.userName;
+      order.createdBy = $rootScope.userName;
       order.customerTelephone = order.customer.telephone;
       order.deliveryAddress = order.customer.address + " " + order.customer.addressStreetNumber;
       order.products = $scope.products;
@@ -122,7 +121,6 @@ angular.module('protonbiz_mobile.create_controllers', [])
       console.log("sssssss", order);
 
 
-
       var config = {
         headers: {
           'Authorization': 'Bearer ' + localStorage.getItem("token"),
@@ -135,7 +133,7 @@ angular.module('protonbiz_mobile.create_controllers', [])
         data: order,
         headers: config.headers
       }).then(function (res) {
-        $state.go('app.orders', {reload:true},{abstract:false});
+        $state.go('app.orders', {reload: true}, {abstract: false});
       }).catch(function (err) {
         console.log(err);
       });
@@ -146,7 +144,7 @@ angular.module('protonbiz_mobile.create_controllers', [])
 
   })
 
-  .controller('CustomerCreateCtrl', function ($scope, $rootScope, $location, $stateParams,$ionicActionSheet, $http, $state) {
+  .controller('CustomerCreateCtrl', function ($scope, $rootScope, $location, $stateParams, $ionicActionSheet, $http, $state) {
 
     $scope.create = function (customer) {
       customer.ownerId = $rootScope.company;
@@ -164,11 +162,85 @@ angular.module('protonbiz_mobile.create_controllers', [])
         data: customer,
         headers: config.headers
       }).then(function (res) {
-        $state.go('app.customers', {reload:true},{abstract:false});
+        $state.go('app.customers', {reload: true}, {abstract: false});
       }).catch(function (err) {
         console.log(err);
       });
     };
+
+  })
+
+
+  .controller('ProductCreateCtrl', function ($scope, $rootScope, $location, $stateParams, $ionicActionSheet, $http, $state) {
+
+    $scope.units = [];
+    $scope.categories = [];
+    initUnitsAndCategories();
+    $scope.create = function (product) {
+      product.ownerId = $rootScope.company;
+      product.createdBy = $rootScope.userName;
+      var config = {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem("token"),
+          'Accept': 'application/json;odata=verbose'
+        }
+      };
+      $http({
+        method: 'POST',
+        url: "https://protonbiz.herokuapp.com/product",
+        data: product,
+        headers: config.headers
+      }).then(function (res) {
+        $state.go('app.products', {reload: true}, {abstract: false});
+      }).catch(function (err) {
+        console.log(err);
+      });
+    };
+
+
+    function initUnitsAndCategories() {
+      //UNITS
+      $scope.units.push('piece');
+      $scope.units.push('kg');
+      $scope.units.push('g');
+      $scope.units.push('l');
+      $scope.units.push('cm');
+      $scope.units.push('m');
+      $scope.units.push('m³');
+      $scope.units.push('dm³');
+      $scope.units.push('cm³');
+      $scope.units.push('oz');
+      $scope.units.push('lb');
+      $scope.units.push('yd');
+      $scope.units.push('gal');
+      //CATEGORIES
+      $scope.categories.push('Electronics Accessories');
+      $scope.categories.push('Food');
+      $scope.categories.push('Beverages');
+      $scope.categories.push('Clothing');
+      $scope.categories.push('Clothing Accessories');
+      $scope.categories.push('Jewelry & Watches');
+      $scope.categories.push('Video Games & Software');
+      $scope.categories.push('Books');
+      $scope.categories.push('Shoes');
+      $scope.categories.push('Hobbies & Creative Arts');
+      $scope.categories.push('Pet Supplies');
+      $scope.categories.push('Audio Equipment');
+      $scope.categories.push('Print, Copy, Scan & Fax');
+      $scope.categories.push('General Office Supplies');
+      $scope.categories.push('Outdoor Furniture');
+      $scope.categories.push('Power & Electrical Supplies');
+      $scope.categories.push('Tools');
+      $scope.categories.push('Toys');
+      $scope.categories.push('Vehicle Parts & Accessories');
+      $scope.categories.push('Science & Laboratory');
+      $scope.categories.push('Retail');
+      $scope.categories.push('Medical');
+      $scope.categories.push('Work Safety Protective Gear');
+      $scope.categories.push('Party & Celebration');
+
+    }
+
 
   });
 

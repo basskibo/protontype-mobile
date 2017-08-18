@@ -41,6 +41,11 @@ angular.module('protonbiz_mobile.controllers', [])
       $state.go('app.customer_new');
     };
 
+    $rootScope.createNewProduct = function () {
+      console.log('global go');
+      $state.go('app.product_new');
+    };
+
     $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
       viewData.enableBack = true;
     });
