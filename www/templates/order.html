@@ -14,7 +14,7 @@
     <a class="button button-icon icon ion-ios-more-outline" style="color:#fff;" ng-click="show()"></a>
   </ion-nav-buttons>
 
-  <ion-content class="pregled" style="padding: 10px; margin:10px;">
+  <ion-content class="pregled">
 
     <div class="row" style="margin:10px;" ng-show="!dataLoaded">
       <div class="col"></div>
@@ -28,28 +28,100 @@
     </div>
     <div ng-show="dataLoaded">
 
-      <div class="operacija"><h5><b>Id : </b>{{order.id}}</h5></div>
-      <div class="operacija"><h5><b>Created by : </b>{{order.createdBy}}</h5></div>
-      <div class="operacija"><h5><b>Customer name : </b> {{order.customerName}}</h5></div>
-      <div class="operacija"><h5><b>Invoice status : </b> {{order.status}}</h5></div>
-      <div class="operacija"><h5><b>Customer telephone : </b>{{order.customerName}}</h5></div>
-      <div class="operacija"><h5><b>Customer address : </b>{{order.deliveryAddress}}</h5></div>
-      <div class="operacija"><h5><b>Description : </b> {{order.description}}</h5></div>
-      <div class="operacija"><h5><b>Created at : </b> {{order.createdAt}}</h5></div>
-      <div class="operacija"><h5><b>Deadline : </b> {{order.deadline}}</h5></div>
-      <!-- radno vreme -->
-      <h5><b>Products in invoice : </b></h5>
 
-      <div class="operacija" ng-repeat="product in order.products">
-        <p style="padding-left: 20px;">* {{product.name}} x {{product.quantityInstance}} {{product.unit}}</p>
-      </div>
-      <div class="operacija"><h5><b>Price: </b> {{order.price| number:2}} {{companyObj.currencySymbol}}</h5></div>
+      <div class="list">
 
-      <!-- Datumi -->
-      <div class="operacija"><h5><b>With tax : </b> {{order.withTax}}</h5></div>
-      <div class="operacija" ng-show="order.withTax"><h5><b>Tax rate : </b> {{order.taxRate}}%</h5></div>
-      <div class="operacija"><h5><b>Total price : </b> {{order.totalPrice | number:2}}{{companyObj.currencySymbol}}</h5>
+        <div class="item item-divider">
+          Basic info
+        </div>
+
+        <a class="item">
+          <div class="operacija"><p><b>Id : </b>{{order.id}}</p></div>
+        </a>
+        <a class="item">
+          <div class="operacija"><p><b>Invoice status : </b> {{order.status}}
+          <i class="ion-ios-circle-filled"
+             ng-class="{active:'activeColorCircle', paid:'paidColorCircle', completed:'completedColorCircle', notActive: 'notCompletedCircle'}[order.status]"></i>
+          </p></div>
+        </a>
+        <a class="item">
+          <div class="operacija"><p><b>Created by : </b>{{order.createdBy}}</p></div>
+        </a>
+
+
+
+        <div class="item item-divider">
+          Customer info
+        </div>
+
+        <a class="item">
+          <div class="operacija"><p><b>Full name : </b> {{order.customerName}}</p></div>
+        </a>
+        <a class="item">
+          <div class="operacija"><p><b>Telephone : </b>(+{{companyObj.callingCodes}}) {{order.customerTelephone}}</p></div>
+        </a>
+        <a class="item">
+          <div class="operacija"><p><b>Address : </b>{{order.deliveryAddress}}</p></div>
+        </a>
+
+        <div class="item item-divider">
+          Pricing info
+        </div>
+        <a class="item">
+          <div class="operacija">        <p><b>Products in invoice : </b></p>
+            <div class="operacija" ng-repeat="product in order.products">
+            <p style="padding-left: 20px;"> {{product.name}} x {{product.quantityInstance}} {{product.unit}}</p>
+              </div>
+          </div>
+        </a>
+
+        <a class="item">
+          <div class="operacija"><p><b>Price: </b> {{order.price| number:2}} {{companyObj.currencySymbol}}</p></div>
+        </a>
+        <a class="item">
+          <div class="operacija"><p><b>With tax : </b>
+              <span ng-show="order.withTax"><i class="ion-checkmark-round" style="font-size: 15px;color:green;"></i> </span>
+              <span ng-show="!order.withTax"><i class="ion-close-round" style=" font-size: 15px; color:red;"></i> </span>
+          </p></div>
+        </a>
+        <a class="item" ng-show="order.withTax">
+          <div class="operacija" ><p><b>Tax rate : </b> {{order.taxRate}}%</p></div>
+        </a>
+        <a class="item">
+          <div class="operacija"><p><b>Total price : </b> {{order.totalPrice | number:2}}{{companyObj.currencySymbol}}</p></div>
+        </a>
+
+        <div class="item item-divider">
+          Invoice detail
+        </div>
+        <a class="item">
+          <div class="operacija"><p><b>Description : </b> {{order.description}}</p></div>
+        </a>
+        <a class="item">
+          <div class="operacija"><p><b>Created at : </b> {{order.createdAt | date:'dd/MM/yyyy'}}</p></div>
+        </a>
+        <a class="item">
+          <div class="operacija"><p><b>Deadline : </b> {{order.deadline | date:'dd/MM/yyyy'}}</p></div>
+        </a>
+
+
+
       </div>
+
+
+      <!--&lt;!&ndash; radno vreme &ndash;&gt;-->
+      <!--<h5><b>Products in invoice : </b></h5>-->
+
+      <!--<div class="operacija" ng-repeat="product in order.products">-->
+        <!--<p style="padding-left: 20px;">* {{product.name}} x {{product.quantityInstance}} {{product.unit}}</p>-->
+      <!--</div>-->
+      <!--<div class="operacija"><h5><b>Price: </b> {{order.price| number:2}} {{companyObj.currencySymbol}}</h5></div>-->
+
+      <!--&lt;!&ndash; Datumi &ndash;&gt;-->
+      <!--<div class="operacija"><h5><b>With tax : </b> {{order.withTax}}</h5></div>-->
+      <!--<div class="operacija" ng-show="order.withTax"><h5><b>Tax rate : </b> {{order.taxRate}}%</h5></div>-->
+      <!--<div class="operacija"><h5><b>Total price : </b> {{order.totalPrice | number:2}}{{companyObj.currencySymbol}}</h5>-->
+      <!--</div>-->
 
     </div>
 

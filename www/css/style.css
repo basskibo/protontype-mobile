@@ -115,7 +115,27 @@
 }
 
 .notCompleted{
-  background: red;
+  color: red;
+  padding: 20px 0;
+}
+
+.activeColorCircle{
+  color: #3778ff;
+  padding: 20px 0;
+}
+
+.completedColorCircle{
+  color: green;
+  padding: 20px 0;
+}
+
+.paidColorCircle{
+  color: gold;
+  padding: 20px 0;
+}
+
+.notCompletedCircle{
+  color: red;
   padding: 20px 0;
 }
 
@@ -131,4 +151,9 @@
   background: green;
   color: #fff;
   margin: 10px 0px 10px 10px;
+}
+
+.operacija{
+
+  padding: 1px;
 }
