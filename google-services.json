@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "77848784522",
+    "firebase_url": "https://protonbiz-170515.firebaseio.com",
+    "project_id": "protonbiz-170515",
+    "storage_bucket": "protonbiz-170515.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77848784522:android:710a5b9c94863569",
+        "android_client_info": {
+          "package_name": "com.protonbizmobile.com"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "77848784522-clrrq4jmakcqsk1j1oveqgb0pcdlrh5i.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "77848784522-247bf745b0t25fo9ra808fb2dou9t95i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATo7VzbXqbu3kCRvaHQuFm-wQGdkIzre4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
