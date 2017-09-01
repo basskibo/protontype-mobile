@@ -16,18 +16,18 @@
     <ion-header-bar class="bar-stable">
       <h1 class="title">Proton Biz</h1>
     </ion-header-bar>
-    <ion-content>
+    <ion-content class="sideMenu">
       <ion-list>
-        <ion-item class="user row " >
-          <div class="col" >
+        <ion-item class="user row ">
+          <div class="col">
             <img ng-src="{{currentUser.avatarImg}}" ng-click="goToProfile()" style="width: 60px;height: 60px;"/>
           </div>
           <div class="col" ng-click="goToProfile()">
-            <span style="margin-top:10px;" > <i class="ion-ios-person-outline"></i> {{userName}}</span>
+            <span style="margin-top:10px;"> <i class="ion-ios-person-outline"></i> {{userName}}</span>
             <br/>
-            <span style="margin-top:10px;" ><i class="ion-ios-briefcase-outline"></i>  {{companyObj.name}}</span>
+            <span style="margin-top:10px;"><i class="ion-ios-briefcase-outline"></i>  {{companyObj.name}}</span>
             <br/>
-            <span style="font-style: italic; font-size: 15px;" ><i class="ion-ios-paperplane-outline"></i>  {{currentUser.email}}</span>
+            <span style="font-style: italic; font-size: 15px;"><i class="ion-ios-paperplane-outline"></i>  {{currentUser.email}}</span>
           </div>
           <div class="col">
           </div>
@@ -35,10 +35,10 @@
 
         </ion-item>
 
-        <ion-item class="menuItem" menu-close href="#/app/orders">
+        <ion-item class="menuItem " menu-close href="#/app/orders">
           Invoices
         </ion-item>
-        <ion-item class="menuItem"  menu-close href="#/app/search">
+        <ion-item class="menuItem" menu-close href="#/app/search">
           User Menagment
           <span class="badge badge-positive">Admin</span>
         </ion-item>
@@ -49,27 +49,29 @@
         <ion-item menu-close href="#/app/products" class="menuItem">
           Products
         </ion-item>
-        <ion-item menu-close href="#/app/search" class="menuItem">
-          Graphs     <span class="badge badge-positive">Admin</span>
+        <ion-item menu-close href="#/app/help" class="menuItem">
+          Help <span class="badge badge-positive">Admin</span>
 
         </ion-item>
 
 
-        <ion-item  style="text-align: center;width: 50%;
-    float: left;    font-size: 25px;" menu-close  href="#/app/settings" class="menuItem">
-          <i class="ion-gear-b" style="    padding-left: 40px;"></i>
+        <div class="fixedToBottom">
+        <ion-item style="text-align: center;width: 51%;
+    float: left;    font-size: 25px;" menu-close href="#/app/settings" class="menuItem">
+          <i class="ion-gear-b" style="padding-left: 40px;font-size: 30px;"></i>
         </ion-item>
-        <ion-item  style="text-align: center;width: 50%;
-    float: right;    font-size: 25px;" menu-close  ng-click="logout()" class="menuItem">
-          <i class="ion-log-out"></i>
+        <ion-item style="text-align: center;width: 50%;
+    float: left;font-size: 25px;" menu-close ng-click="logout()"  href="" class="menuItem">
+          <i class="ion-log-out" style="    font-size: 30px;
+    padding-left: 40px;"></i>
         </ion-item>
-
+        </div>
         <!--<div class="bar bar-footer">-->
 
 
-          <!--<button menu-close ng-click="logout()" class="button  button-clear menuItem">-->
-            <!--<a class="button button-icon icon ion-log-out"></a>-->
-          <!--</button>-->
+        <!--<button menu-close ng-click="logout()" class="button  button-clear menuItem">-->
+        <!--<a class="button button-icon icon ion-log-out"></a>-->
+        <!--</button>-->
         <!--</div>-->
 
       </ion-list>

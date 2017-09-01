@@ -9,6 +9,11 @@ angular.module('protonbiz_mobile.controllers', [])
       $scope.isOnline = $cordovaNetwork.isOnline();
       // $scope.$apply();
 
+      $scope.$on('cloud:push:notification', function(event, data) {
+        var msg = data.message;
+        alert(msg.title + ': ' + msg.text);
+      });
+
 
       // listen for Online event
       $rootScope.$on('$cordovaNetwork:online', function (event, networkState) {
@@ -220,7 +225,7 @@ angular.module('protonbiz_mobile.controllers', [])
     };
     $http.get("https://protonbiz.herokuapp.com/customer/" + sv, config).then(function (res) {
       console.log(res);
-      $scope.order = res.data;
+      $scope.customer = res.data;
       $scope.dataLoaded = true;
 
     });

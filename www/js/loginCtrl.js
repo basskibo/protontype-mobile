@@ -66,7 +66,7 @@ angular.module('loginModule', [])
 
         $ionicLoading.show({
           template: "<ion-spinner name='bubbles'></ion-spinner>",
-          duration: 5000,
+          duration: 3500,
           name:'ios'
         }).then(function(){
           console.log('doneeeee');
@@ -75,7 +75,8 @@ angular.module('loginModule', [])
           $rootScope.userName = localStorage.getItem("user_name");
           $rootScope.company = localStorage.getItem("companyId");
           // $rootScope.$broadcast('fetch_orders', $rootScope.company);
-          $timeout(changeState,4000);
+          $timeout(changeState,3000);
+          // changeState();
         });
 
         function changeState() {

@@ -1,6 +1,6 @@
 {
   "name": "protonBiz",
-  "app_id": "",
+  "app_id": "6e8ab553",
   "proxies": [
     {
       "path": "/login",

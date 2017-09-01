@@ -154,6 +154,28 @@
 }
 
 .operacija{
-
   padding: 1px;
+}
+
+.sideMenu{
+  background: #262626;
+}
+
+.item-complex .item-content {
+  background: #262626 !important;
+  color: #eaeaea;
+}
+
+.user{
+  color: #eaeaea;
+}
+
+.fixedToBottom{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.sideMenu .scroll{
+  height: 100%;
 }

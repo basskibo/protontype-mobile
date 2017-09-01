@@ -4,9 +4,11 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('protonbiz_mobile', ['ionic', 'ngCordova','protonbiz_mobile.controllers','protonbiz_mobile.create_controllers','loginModule', 'ion-floating-menu', 'ionic-modal-select', 'ion-datetime-picker', 'pascalprecht.translate'])
+angular.module('protonbiz_mobile', ['ionic', 'ionic.cloud', 'ngCordova','protonbiz_mobile.controllers','protonbiz_mobile.create_controllers','loginModule', 'ion-floating-menu', 'ionic-modal-select', 'ion-datetime-picker', 'pascalprecht.translate'])
 
-.run(function($ionicPlatform, $location) {
+.run(function($ionicPlatform, $location, $ionicPush) {
+
+
 
 
   if(localStorage.getItem("token") !== null && localStorage.getItem("token") !== ""){
@@ -18,6 +20,12 @@ angular.module('protonbiz_mobile', ['ionic', 'ngCordova','protonbiz_mobile.contr
     console.log("No user");
     $location.path('/login');
   }//go ahead and authenticate them without getting a new token.}
+
+  $ionicPush.register().then(function(t) {
+    return $ionicPush.saveToken(t);
+  }).then(function(t) {
+    console.log('Token saved:', t.token);
+  });
 
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -34,10 +42,28 @@ angular.module('protonbiz_mobile', ['ionic', 'ngCordova','protonbiz_mobile.contr
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider, $translateProvider) {
+.config(function($stateProvider, $urlRouterProvider, $translateProvider, $ionicCloudProvider) {
+
+  $ionicCloudProvider.init({
+    "core": {
+      "app_id": "6e8ab553"
+    },
+    "push": {
+      "sender_id": "77848784522",
+      "pluginConfig": {
+        "ios": {
+          "badge": true,
+          "sound": true
+        },
+        "android": {
+          "iconColor": "#343434"
+        }
+      }
+    }
+  });
+
+
   $stateProvider
-
-
 //    .state('forgotpassword', {
 //        url: '/forgot-password',
 //        templateUrl: 'templates/forgot-password.html',
@@ -181,6 +207,22 @@ angular.module('protonbiz_mobile', ['ionic', 'ngCordova','protonbiz_mobile.contr
       'menuContent': {
         templateUrl: 'templates/profile.html',
         controller: 'SettingsCtrl'
+      }
+    }
+  })
+    .state('app.help_activities', {
+    url: '/help/activites',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/help/activities.html'
+      }
+    }
+  })
+    .state('app.help', {
+    url: '/help',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/help/help_menu.html'
       }
     }
   })
