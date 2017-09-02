@@ -39,12 +39,12 @@
         <div class="list">
           <a class="item item-thumbnail-left-order" href="#/app/orders/{{c.id}}" on-hold="onHold()" style="margin: -3px;">
             <div class="circleWithCred"
-                 ng-class="{active:'activeColor', paid:'paidColor', completed:'completedColor', notActive: 'notCompleted'}[c.status]"
+                 ng-class="{active:'activeColor', paid:'paidColor', completed:'completedColor' , cancelled: 'notCompleted'}[c.status]"
             >
               <span ng-if="c.status == 'active'"><i class="ion-arrow-right-c"></i> </span>
               <span ng-if="c.status == 'paid'"><i class="ion-cash"></i> </span>
               <span ng-if="c.status == 'completed'"><i class="ion-checkmark"></i> </span>
-              <!--<span ng-if="c.status == 'not active'"><i class="ion-minus"></i> </span>-->
+              <span ng-if="c.status == 'cancelled'"><i class="ion-minus"></i> </span>
             </div>
             <h2 class="titleItem">{{c.customerName}}</h2>
             <p class="subTitleItem">Created: {{c.createdAt | date:'dd/MM/yyyy'}}</p>

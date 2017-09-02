@@ -368,7 +368,7 @@ angular.module('protonbiz_mobile.controllers', [])
 
 
 
-  .controller('OrderCtrl', function ($scope, $stateParams, $http, $ionicActionSheet, $timeout) {
+  .controller('OrderCtrl', function ($scope, $stateParams, $http, $ionicActionSheet, $timeout, $location) {
     var sv = $stateParams.orderId;
     $scope.dataLoaded = false;
 
@@ -399,6 +399,15 @@ angular.module('protonbiz_mobile.controllers', [])
           // add cancel code..
         },
         buttonClicked: function (index) {
+          switch(index){
+            case 0:
+              console.log('satats');
+              break;
+            case 1:
+              $location.path('#/app/changeStatus');
+              console.log('oasjgsa',index);
+              break;
+          }
           return true;
         }
       });
@@ -498,6 +507,19 @@ angular.module('protonbiz_mobile.controllers', [])
 
     .controller('UsersCtrl', function ($scope, $stateParams, $http) {
 
+      var config = {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem("token"),
+          'Accept': 'application/json;odata=verbose'
+        }
+      };
+      $http.get("https://protonbiz.herokuapp.com/user", config).then(function (res) {
+        console.log(res);
+        $scope.users = res.data;
+      });
+
+    })
+  .controller('changeStatusCtrl', function ($scope, $stateParams, $http) {
       var config = {
         headers: {
           'Authorization': 'Bearer ' + localStorage.getItem("token"),
