@@ -7,11 +7,9 @@
   <ion-nav-buttons side="right">
     <a class="button button-icon icon ion-ios-more-outline" style="color:#fff;" ng-click="show()"></a>
   </ion-nav-buttons>
-  <ion-content class="pregled" style="padding: 10px; ">
-    <div class="row">
-      <div class="col" style="margin:10px;" ></div>
-      <img ng-src="{{currentUser.avatarImg}}"  style="width: 200px;height: 200px;  border-radius: 50%; border: 1px solid #d0cccc;"/>
-      <div class="col"></div>
+  <ion-content class="pregled" >
+    <div class="row" style="padding: 0px;">
+      <img ng-src="{{currentUser.avatarImg}}" class="img img-responsive" style="width: 100%;height: 100%;"/>
     </div>
 
 
@@ -60,10 +58,9 @@
       Company info
     </div>
 
-    <div class="row">
-      <div class="col" style="margin:10px;" ></div>
-      <img ng-src="{{companyObj.logoUrl}}"  style="width: 200px;height: 200px;  border-radius: 50%; border: 1px solid #d0cccc;"/>
-      <div class="col"></div>
+    <div class="row" style="padding: 0px;">
+      <img ng-src="{{companyObj.logoUrl}}" class="img img-responsive" style="width: 100%;height: 100%;"/>
+
     </div>
 
     <div class="row" style="margin:10px;">

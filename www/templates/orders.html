@@ -5,8 +5,14 @@
                        text="Create Invoice"></ion-floating-item>
     <ion-floating-item icon="ion-ios-infinite"  button-color="#262626" ng-click="createNewOrder()"
                        text="Create Recurring Invoice"></ion-floating-item>
-
   </ion-floating-menu>
+  <ion-nav-buttons side="right">
+    <a class="button button-icon " style="color:#fff;" ng-click="showSearch()">
+      <i ng-if="!searchActive" class="ion-ios-search icon"></i>
+      <i ng-if="searchActive" class="ion-ios-close-empty icon"></i>
+
+    </a>
+  </ion-nav-buttons>
   <ion-content>
     <ion-refresher
       pulling-text="Pull to refresh..."
@@ -25,17 +31,17 @@
     </div>
 
     <div ng-show="dataLoaded">
-      <div class="bar bar-header item-input-inset">
+      <div class="bar bar-header item-input-inset" ng-show="searchActive">
         <label class="item-input-wrapper">
           <i class="icon ion-ios-search placeholder-icon"></i>
-          <input type="search" placeholder="Search">
+          <input type="search" placeholder="Search"  ng-model="searchInput">
         </label>
-        <button class="button button-clear button-positive">
+        <button class="button button-clear button-positive" ng-click="searchInput = ''">
           Clear
         </button>
       </div>
 
-      <ion-list ng-repeat="c in orders">
+      <ion-list ng-repeat="c in orders | filter : searchInput">
         <div class="list">
           <a class="item item-thumbnail-left-order" href="#/app/orders/{{c.id}}" on-hold="onHold()" style="margin: -3px;">
             <div class="circleWithCred"
