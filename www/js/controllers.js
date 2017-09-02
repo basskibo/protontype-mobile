@@ -399,12 +399,9 @@ angular.module('protonbiz_mobile.controllers', [])
 
 
 
-  .controller('OrderCtrl', function ($scope, $location, $stateParams, $http, $ionicActionSheet, $timeout, $rootScope ) {
-    console.log($rootScope.host);
-
+  .controller('OrderCtrl', function ($scope, $stateParams, $http, $ionicActionSheet, $timeout, $location) {
     var sv = $stateParams.orderId;
     $scope.dataLoaded = false;
-
 
     var config = {
       headers: {
@@ -433,19 +430,13 @@ angular.module('protonbiz_mobile.controllers', [])
           // add cancel code..
         },
         buttonClicked: function (index) {
-          console.log('Button pressed ' + index);
-          switch (index) {
+          switch(index){
             case 0:
               $location.path('/app/customers/' + $scope.order.customerId);
               break;
             case 1:
-              $location.path('/app/customers/' + $scope.order.customerId);
-              break;
-            case 2:
-              $location.path('/app/customers/' + $scope.order.customerId);
-              break;
-            case 3:
-              $location.path('/app/customers/' + $scope.order.customerId);
+              $location.path('/app/changeStatus/'+ $scope.order.id);
+              console.log('oasjgsa',index);
               break;
           }
           return true;
@@ -560,6 +551,25 @@ angular.module('protonbiz_mobile.controllers', [])
       $http.get("https://protonbiz.herokuapp.com/user", config).then(function (res) {
         console.log(res);
         $scope.users = res.data;
+      });
+
+    })
+  .controller('changeStatusCtrl', function ($scope, $stateParams, $http) {
+    var orderId = $stateParams.orderId;
+    console.log(orderId);
+    var config = {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem("token"),
+          'Accept': 'application/json;odata=verbose'
+        }
+      };
+
+    $scope.change = function (status) {
+      console.log(status);
+    };
+      $http.get("https://protonbiz.herokuapp.com/orders/" + orderId, config).then(function (res) {
+        console.log('order' , res);
+        $scope.order = res.data;
       });
 
     });

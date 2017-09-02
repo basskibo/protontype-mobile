@@ -236,6 +236,16 @@ angular.module('protonbiz_mobile', ['ionic', 'ionic.cloud', 'ngCordova','protonb
       }
     }
   })
+    .state('app.changeStatus', {
+    url: '/changeStatus/:orderId',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/changeStatus.html',
+        controller: 'changeStatusCtrl'      }
+
+
+    }
+  })
     .state('logout', {
       url: '/logout',
       controller:'LogoutCtrl'

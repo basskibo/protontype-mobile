@@ -1,0 +1,39 @@
+<ion-view view-title="Change Invoice Status">
+
+  <ion-content>
+    <ion-list>
+      <div class="list">
+        <a class="item item-thumbnail-left-order" style="margin: -3px;" ng-class="{order.status == 'active ? 'selected'}">
+          <div class="circleWithCred activeColor">
+            <span><i class="ion-arrow-right-c"></i> </span>
+          </div>
+          <h2 class="titleItem" style="padding-top: 20px;">Active</h2>
+          <p class="subTitleItem">Invoice is active when bla bla bla</p>
+        </a>
+        <a class="item item-thumbnail-left-order" style="margin: -3px;">
+          <div class="circleWithCred completedColor">
+            <span><i class="ion-checkmark"></i> </span>
+          </div>
+          <h2 class="titleItem" style="padding-top: 20px;">Completed</h2>
+          <p class="subTitleItem">Invoice is completed when invoice is completed.</p>
+        </a>
+        <a class="item item-thumbnail-left-order" style="margin: -3px;">
+          <div class="circleWithCred paidColor">
+            <span><i class="ion-cash"></i> </span>
+          </div>
+          <h2 class="titleItem" style="padding-top: 20px;">Paid</h2>
+          <p class="subTitleItem">Invoice is paid when customer pay for it fully.</p>
+        </a>
+        <a class="item item-thumbnail-left-order" style="margin: -3px;">
+          <div class="circleWithCred notCompleted">
+            <span><i class="ion-minus"></i> </span>
+          </div>
+          <h2 class="titleItem" style="padding-top: 20px;">Cancelled</h2>
+          <p class="subTitleItem">When user dont want invoice anymore it is cancelled.</p>
+        </a>
+      </div>
+
+    </ion-list>
+
+  </ion-content>
+</ion-view>
