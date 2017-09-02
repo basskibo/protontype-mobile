@@ -531,6 +531,12 @@ angular.module('protonbiz_mobile.controllers', [])
 
     $scope.change = function (status) {
       console.log(status);
+      $scope.order.status = status;
+      $http.put("https://protonbiz.herokuapp.com/orders/" ,$scope.order, config).then(function (res) {
+        console.log('order' , res);
+        $scope.order = res.data;
+      });
+
     };
       $http.get("https://protonbiz.herokuapp.com/orders/" + orderId, config).then(function (res) {
         console.log('order' , res);
