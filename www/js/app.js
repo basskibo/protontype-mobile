@@ -227,10 +227,12 @@ angular.module('protonbiz_mobile', ['ionic', 'ionic.cloud', 'ngCordova','protonb
     }
   })
     .state('app.changeStatus', {
-    url: '/changeStatus',
+    url: '/changeStatus/:orderId',
     views: {
+      'menuContent': {
         templateUrl: 'templates/changeStatus.html',
-        controller: 'changeStatusCtrl'
+        controller: 'changeStatusCtrl'      }
+
 
     }
   })

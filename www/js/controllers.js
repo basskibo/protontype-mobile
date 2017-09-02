@@ -404,7 +404,7 @@ angular.module('protonbiz_mobile.controllers', [])
               console.log('satats');
               break;
             case 1:
-              $location.path('#/app/changeStatus');
+              $location.path('/app/changeStatus/'+ $scope.order.id);
               console.log('oasjgsa',index);
               break;
           }
@@ -520,15 +520,21 @@ angular.module('protonbiz_mobile.controllers', [])
 
     })
   .controller('changeStatusCtrl', function ($scope, $stateParams, $http) {
-      var config = {
+    var orderId = $stateParams.orderId;
+    console.log(orderId);
+    var config = {
         headers: {
           'Authorization': 'Bearer ' + localStorage.getItem("token"),
           'Accept': 'application/json;odata=verbose'
         }
       };
-      $http.get("https://protonbiz.herokuapp.com/user", config).then(function (res) {
-        console.log(res);
-        $scope.users = res.data;
+
+    $scope.change = function (status) {
+      console.log(status);
+    };
+      $http.get("https://protonbiz.herokuapp.com/orders/" + orderId, config).then(function (res) {
+        console.log('order' , res);
+        $scope.order = res.data;
       });
 
     });
