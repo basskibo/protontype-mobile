@@ -1,30 +1,43 @@
 <ion-view view-title="Change Invoice Status">
 
   <ion-content>
-    <ion-list>
+    <div class="row" style="margin:10px;" ng-show="!dataLoaded">
+      <div class="col"></div>
+      <ion-spinner name="dots"></ion-spinner>
+      <div class="col"></div>
+    </div>
+    <div class="row" style="margin:10px;" ng-show="!dataLoaded">
+      <div class="col"></div>
+      <h4 class="">Loading ...</h4>
+      <div class="col"></div>
+    </div>
+    <ion-list ng-show="dataLoaded">
       <div class="list">
-        <a class="item item-thumbnail-left-order" style="margin: -3px;" ng-class="{order.status == 'active ? 'selected'}" ng-click="change('active')">
+        <a class="item item-thumbnail-left-order" style="margin: -3px;" ng-class="order.status == 'active' ? 'selected' : 'notSel'" ng-click="change('active')">
           <div class="circleWithCred activeColor">
             <span><i class="ion-arrow-right-c"></i> </span>
           </div>
           <h2 class="titleItem" style="padding-top: 20px;">Active</h2>
           <p class="subTitleItem">Invoice is active when bla bla bla</p>
         </a>
-        <a class="item item-thumbnail-left-order" style="margin: -3px;" ng-click="change('completed')">
+        <a class="item item-thumbnail-left-order" style="margin: -3px;" ng-click="change('completed')"
+           ng-class="order.status == 'completed' ? 'selected' : 'notSel'" >
           <div class="circleWithCred completedColor">
             <span><i class="ion-checkmark"></i> </span>
           </div>
           <h2 class="titleItem" style="padding-top: 20px;">Completed</h2>
           <p class="subTitleItem">Invoice is completed when invoice is completed.</p>
         </a>
-        <a class="item item-thumbnail-left-order" style="margin: -3px;" ng-click="change('paid')">
+        <a class="item item-thumbnail-left-order" style="margin: -3px;" ng-click="change('paid')"
+           ng-class="order.status == 'paid' ? 'selected' : 'notSel'" >
           <div class="circleWithCred paidColor">
             <span><i class="ion-cash"></i> </span>
           </div>
           <h2 class="titleItem" style="padding-top: 20px;">Paid</h2>
           <p class="subTitleItem">Invoice is paid when customer pay for it fully.</p>
         </a>
-        <a class="item item-thumbnail-left-order" style="margin: -3px;" ng-click="change('cancelled')">
+        <a class="item item-thumbnail-left-order" style="margin: -3px;" ng-click="change('cancelled')"
+           ng-class="order.status == 'cancelled' ? 'selected' : 'notSel'" >
           <div class="circleWithCred notCompleted">
             <span><i class="ion-minus"></i> </span>
           </div>

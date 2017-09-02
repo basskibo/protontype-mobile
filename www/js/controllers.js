@@ -1,6 +1,6 @@
 angular.module('protonbiz_mobile.controllers', [])
 
-  .controller('AppCtrl', function ($scope, $location, $ionicModal, $cordovaNetwork,$ionicSideMenuDelegate,  $rootScope, $ionicPopup, $state, $ionicPlatform, $http) {
+  .controller('AppCtrl', function ($scope, $location, $ionicModal, $cordovaNetwork, $ionicSideMenuDelegate, $rootScope, $ionicPopup, $state, $ionicPlatform, $http) {
 
     $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
       viewData.enableBack = true;
@@ -12,7 +12,7 @@ angular.module('protonbiz_mobile.controllers', [])
       $scope.isOnline = $cordovaNetwork.isOnline();
       // $scope.$apply();
 
-      $scope.$on('cloud:push:notification', function(event, data) {
+      $scope.$on('cloud:push:notification', function (event, data) {
         var msg = data.message;
         alert(msg.title + ': ' + msg.text);
       });
@@ -38,7 +38,6 @@ angular.module('protonbiz_mobile.controllers', [])
     }, false);
 
 
-
     $rootScope.createNewOrder = function () {
       console.log('global go');
       $state.go('app.order_new');
@@ -58,7 +57,7 @@ angular.module('protonbiz_mobile.controllers', [])
       viewData.enableBack = true;
     });
 
-    $scope.goToProfile =  function () {
+    $scope.goToProfile = function () {
       $state.go('app.profile');
       $ionicSideMenuDelegate.toggleLeft();
 
@@ -78,8 +77,6 @@ angular.module('protonbiz_mobile.controllers', [])
 
       });
     }
-
-
 
 
     var userParsed = JSON.parse(localStorage.getItem("user"));
@@ -149,22 +146,22 @@ angular.module('protonbiz_mobile.controllers', [])
           'Accept': 'application/json;odata=verbose'
         }
       };
-      $http.get("https://protonbiz.herokuapp.com/customer?isActive=true&ownerId="+ $rootScope.company, config).then(function (res) {
+      $http.get("https://protonbiz.herokuapp.com/customer?isActive=true&ownerId=" + $rootScope.company, config).then(function (res) {
         console.log(res);
         generateCredentialsImg(res.data);
         $scope.customers = res.data;
         $scope.dataLoaded = true;
 
-      }).finally(function() {
+      }).finally(function () {
         // Stop the ion-refresher from spinning
         $scope.$broadcast('scroll.refreshComplete');
       });
 
 
       function generateCredentialsImg(customers) {
-        for(var i = 0; i < customers.length; i++){
-          var firstNameCred = customers[i].firstName.substring(0,1).toUpperCase();
-          var lastNameCred = customers[i].lastName.substring(0,1).toUpperCase();
+        for (var i = 0; i < customers.length; i++) {
+          var firstNameCred = customers[i].firstName.substring(0, 1).toUpperCase();
+          var lastNameCred = customers[i].lastName.substring(0, 1).toUpperCase();
           customers[i].cred = firstNameCred + lastNameCred;
         }
       }
@@ -197,28 +194,28 @@ angular.module('protonbiz_mobile.controllers', [])
           return true;
         },
         destructiveButtonClicked: function () {
-          customer.isActive =false;
-           $http({
+          customer.isActive = false;
+          $http({
             method: 'PUT',
             url: 'https://protonbiz.herokuapp.com/customer/' + customer.id,
             data: customer,
-             headers: config.headers
+            headers: config.headers
           }).then(function (response) {
-             console.log(response.data);
-             hideSheet();
-             $scope.dataLoaded = false;
-             fetchCustomers();
-           }).catch(function (error) {
-             console.log(error.data);
+            console.log(response.data);
+            hideSheet();
+            $scope.dataLoaded = false;
+            fetchCustomers();
+          }).catch(function (error) {
+            console.log(error.data);
           });
-          console.log('sada jeste',customer.id);
+          console.log('sada jeste', customer.id);
         }
       });
     };
 
   })
 
-  .controller('CustomerCtrl', function ($scope, $stateParams,$ionicActionSheet, $http) {
+  .controller('CustomerCtrl', function ($scope, $stateParams, $ionicActionSheet, $http) {
     $scope.dataLoaded = false;
 
     var sv = $stateParams.customerId;
@@ -262,12 +259,12 @@ angular.module('protonbiz_mobile.controllers', [])
 
       };
 
-      function onSuccess(result){
-        console.log("Success:"+result);
+      function onSuccess(result) {
+        console.log("Success:" + result);
       }
 
       function onError(result) {
-        console.log("Error:"+result);
+        console.log("Error:" + result);
       }
 
       // For example's sake, hide the sheet after two seconds
@@ -303,19 +300,18 @@ angular.module('protonbiz_mobile.controllers', [])
         console.log(res);
         $scope.products = res.data;
         $scope.dataLoaded = true;
-      }).finally(function() {
+      }).finally(function () {
         // Stop the ion-refresher from spinning
         $scope.$broadcast('scroll.refreshComplete');
       });
     }
 
 
-
   })
 
 
   .controller('OrdersCtrl', function ($scope, $stateParams, $http, $rootScope, $state, $ionicActionSheet) {
-    $scope.$on('cloud:push:notification', function(event, data) {
+    $scope.$on('cloud:push:notification', function (event, data) {
       var msg = data.message;
       console.log('##########################', msg);
       alert(msg.title + ': ' + msg.text);
@@ -346,32 +342,31 @@ angular.module('protonbiz_mobile.controllers', [])
         $scope.orders = res.data;
         $scope.dataLoaded = true;
       })
-    .finally(function() {
-        // Stop the ion-refresher from spinning
-        $scope.$broadcast('scroll.refreshComplete');
-      });
-
+        .finally(function () {
+          // Stop the ion-refresher from spinning
+          $scope.$broadcast('scroll.refreshComplete');
+        });
 
 
     };
 
     $scope.onHold = function () {
       console.log('holding....')
-        // Show the action sheet
-        var hideSheet = $ionicActionSheet.show({
-          buttons: [
-            {text: 'Edit'}
-          ],
-          destructiveText: 'Remove',
-          titleText: 'Invoice action',
-          cancelText: 'Cancel',
-          cancel: function () {
-            // add cancel code..
-          },
-          buttonClicked: function (index) {
-            return true;
-          }
-        });
+      // Show the action sheet
+      var hideSheet = $ionicActionSheet.show({
+        buttons: [
+          {text: 'Edit'}
+        ],
+        destructiveText: 'Remove',
+        titleText: 'Invoice action',
+        cancelText: 'Cancel',
+        cancel: function () {
+          // add cancel code..
+        },
+        buttonClicked: function (index) {
+          return true;
+        }
+      });
     };
 
     function fetchOrders(companyId) {
@@ -396,7 +391,6 @@ angular.module('protonbiz_mobile.controllers', [])
       })
     }
   })
-
 
 
   .controller('OrderCtrl', function ($scope, $stateParams, $http, $ionicActionSheet, $timeout, $location) {
@@ -430,19 +424,18 @@ angular.module('protonbiz_mobile.controllers', [])
           // add cancel code..
         },
         buttonClicked: function (index) {
-          switch(index){
+          switch (index) {
             case 0:
-              $location.path('/app/customers/' + $scope.order.customerId);
+              $location.path('/app/changeStatus/' + $scope.order.id);
               break;
             case 1:
-              $location.path('/app/changeStatus/'+ $scope.order.id);
-              console.log('oasjgsa',index);
+              $location.path('/app/customers/' + $scope.order.customerId);
               break;
           }
           return true;
         }
         ,
-        destructiveButtonClicked : function(index){
+        destructiveButtonClicked: function (index) {
           console.log("DESTROY BUTTON !");
         }
       });
@@ -453,7 +446,7 @@ angular.module('protonbiz_mobile.controllers', [])
       }, 20000);
 
     };
-    })
+  })
 
   .controller('ProductCtrl', function ($scope, $stateParams, $http, $ionicActionSheet, $timeout) {
     var sv = $stateParams.productId;
@@ -495,87 +488,125 @@ angular.module('protonbiz_mobile.controllers', [])
       }, 20000);
 
     };
-    })
+  })
 
 
+  .controller('SettingsCtrl', function ($scope, $stateParams, $ionicPopup, $translate) {
+    $scope.changeLanguage = function (langKey, $translateProvider) {
+
+      $translate.use(langKey);
+      if (langKey == 'rs') {
+        text = 'Jezik promenjen na srpski';
+      }
 
 
+      var lng = $translate.use();
+      var title;
+      console.log(lng);
+      console.log($scope.user);
 
-
-
-
-
-    .controller('SettingsCtrl', function ($scope, $stateParams, $ionicPopup, $translate) {
-      $scope.changeLanguage = function (langKey, $translateProvider) {
-
-        $translate.use(langKey);
-        if (langKey == 'rs') {
-          text = 'Jezik promenjen na srpski';
-        }
-
-
-        var lng = $translate.use();
-        var title;
-        console.log(lng);
-        console.log($scope.user);
-
-        if (lng == 'rs') {
-          lng = "Jezik promenjen na Srpski";
-          title = "Jezik";
-        } else if (lng == 'en') {
-          lng = "Language changed to English";
-          title = 'Language';
-        } else if(lng == 'ar'){
-          lng = "تغيير اللغة إلى العربية";
-          title = 'لغة';
-        } else if(lng == 'de'){
-          lng = "Sprache geändert auf Deutsch";
-          title= "Sprache";
-        }
-        var alertPopup = $ionicPopup.alert({
-          title: title,
-          template: lng
-        });
-      };
-
-    })
-
-    .controller('UsersCtrl', function ($scope, $stateParams, $http) {
-
-      var config = {
-        headers: {
-          'Authorization': 'Bearer ' + localStorage.getItem("token"),
-          'Accept': 'application/json;odata=verbose'
-        }
-      };
-      $http.get("https://protonbiz.herokuapp.com/user", config).then(function (res) {
-        console.log(res);
-        $scope.users = res.data;
+      if (lng == 'rs') {
+        lng = "Jezik promenjen na Srpski";
+        title = "Jezik";
+      } else if (lng == 'en') {
+        lng = "Language changed to English";
+        title = 'Language';
+      } else if (lng == 'ar') {
+        lng = "تغيير اللغة إلى العربية";
+        title = 'لغة';
+      } else if (lng == 'de') {
+        lng = "Sprache geändert auf Deutsch";
+        title = "Sprache";
+      }
+      var alertPopup = $ionicPopup.alert({
+        title: title,
+        template: lng
       });
+    };
 
-    })
+  })
+
+  .controller('UsersCtrl', function ($scope, $stateParams, $http) {
+
+    var config = {
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("token"),
+        'Accept': 'application/json;odata=verbose'
+      }
+    };
+    $http.get("https://protonbiz.herokuapp.com/user", config).then(function (res) {
+      console.log(res);
+      $scope.users = res.data;
+    });
+
+  })
   .controller('changeStatusCtrl', function ($scope, $stateParams, $http) {
     var orderId = $stateParams.orderId;
     console.log(orderId);
     var config = {
-        headers: {
-          'Authorization': 'Bearer ' + localStorage.getItem("token"),
-          'Accept': 'application/json;odata=verbose'
-        }
-      };
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("token"),
+        'Accept': 'application/json;odata=verbose'
+      }
+    };
 
     $scope.change = function (status) {
       console.log(status);
       $scope.order.status = status;
-      $http.put("https://protonbiz.herokuapp.com/orders/" ,$scope.order, config).then(function (res) {
-        console.log('order' , res);
+      $http.put("https://protonbiz.herokuapp.com/orders/", $scope.order, config).then(function (res) {
+        console.log('order', res);
         $scope.order = res.data;
       });
 
     };
-      $http.get("https://protonbiz.herokuapp.com/orders/" + orderId, config).then(function (res) {
-        console.log('order' , res);
-        $scope.order = res.data;
-      });
-
+    $http.get("https://protonbiz.herokuapp.com/orders/" + orderId, config).then(function (res) {
+      console.log('order', res);
+      $scope.order = res.data;
+      $scope.dataLoaded = true;
     });
+
+  })
+  .controller('MapCtrl', function($scope, $state, $cordovaGeolocation) {
+    console.log('google maps');
+    var options = {timeout: 10000, enableHighAccuracy: true};
+
+    $cordovaGeolocation.getCurrentPosition(options).then(function(position){
+
+      var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+      function initMap() {
+        var uluru = {lat: -25.363, lng: 131.044};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
+      // initMap();
+      var mapOptions = {
+        center: latLng,
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+
+      $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+    }, function(error){
+      console.log("Could not get location");
+    });
+
+    // google.maps.event.addListenerOnce($scope.map, 'idle', function(){
+    //
+    //   var marker = new google.maps.Marker({
+    //     map: $scope.map,
+    //     animation: google.maps.Animation.DROP,
+    //     position: latLng
+    //   });
+    //
+    // });
+
+
+  });
+
