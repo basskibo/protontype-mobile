@@ -9,7 +9,16 @@ angular.module('protonbiz_mobile', ['ionic', 'ionic.cloud', 'ngCordova','protonb
 .run(function($ionicPlatform, $location, $ionicPush) {
 
 
-
+  $ionicPlatform.ready(function() {
+    // var push = new Ionic.Push({
+    //   "debug": true
+    // });
+    //
+    // push.register(function(token) {
+    //   console.log("My Device token:",token.token);
+    //   push.saveToken(token);  // persist the token in the Ionic Platform
+    // });
+  });
 
   if(localStorage.getItem("token") !== null && localStorage.getItem("token") !== ""){
     console.log("User found");
@@ -44,12 +53,13 @@ angular.module('protonbiz_mobile', ['ionic', 'ionic.cloud', 'ngCordova','protonb
 
 .config(function($stateProvider, $urlRouterProvider, $translateProvider, $ionicCloudProvider) {
 
+
   $ionicCloudProvider.init({
     "core": {
       "app_id": "6e8ab553"
     },
     "push": {
-      "sender_id": "77848784522",
+      "sender_id": "701779140717",
       "pluginConfig": {
         "ios": {
           "badge": true,

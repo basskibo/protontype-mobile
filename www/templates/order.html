@@ -1,4 +1,4 @@
-<ion-view view-title="Invoice Details">
+<ion-view view-title="Invoice Details" hide-back-button="false" >
 
   <ion-floating-menu menu-color="#CF061C" menu-open-color="#CF061C"  backdrop="true">
     <ion-floating-item icon="ion-ios-paper"  button-color="#262626" ng-click="createNewOrder()"
@@ -104,25 +104,7 @@
         <a class="item">
           <div class="operacija"><p><b>Deadline : </b> {{order.deadline | date:'dd/MM/yyyy'}}</p></div>
         </a>
-
-
-
       </div>
-
-
-      <!--&lt;!&ndash; radno vreme &ndash;&gt;-->
-      <!--<h5><b>Products in invoice : </b></h5>-->
-
-      <!--<div class="operacija" ng-repeat="product in order.products">-->
-        <!--<p style="padding-left: 20px;">* {{product.name}} x {{product.quantityInstance}} {{product.unit}}</p>-->
-      <!--</div>-->
-      <!--<div class="operacija"><h5><b>Price: </b> {{order.price| number:2}} {{companyObj.currencySymbol}}</h5></div>-->
-
-      <!--&lt;!&ndash; Datumi &ndash;&gt;-->
-      <!--<div class="operacija"><h5><b>With tax : </b> {{order.withTax}}</h5></div>-->
-      <!--<div class="operacija" ng-show="order.withTax"><h5><b>Tax rate : </b> {{order.taxRate}}%</h5></div>-->
-      <!--<div class="operacija"><h5><b>Total price : </b> {{order.totalPrice | number:2}}{{companyObj.currencySymbol}}</h5>-->
-      <!--</div>-->
 
     </div>
 

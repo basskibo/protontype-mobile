@@ -2,6 +2,9 @@ angular.module('protonbiz_mobile.controllers', [])
 
   .controller('AppCtrl', function ($scope, $location, $ionicModal, $cordovaNetwork,$ionicSideMenuDelegate,  $rootScope, $ionicPopup, $state, $ionicPlatform, $http) {
 
+    $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
+      viewData.enableBack = true;
+    });
 
     document.addEventListener("deviceready", function () {
 
@@ -128,7 +131,9 @@ angular.module('protonbiz_mobile.controllers', [])
   .controller('CustomersCtrl', function ($scope, $http, $rootScope, $ionicActionSheet, $state) {
     $scope.dataLoaded = false;
     console.log(' cusotmers Ctrl');
-
+    $scope.showSearch = function () {
+      $scope.searchActive = !$scope.searchActive;
+    };
 
     fetchCustomers();
 
@@ -223,6 +228,7 @@ angular.module('protonbiz_mobile.controllers', [])
         'Accept': 'application/json;odata=verbose'
       }
     };
+
     $http.get("https://protonbiz.herokuapp.com/customer/" + sv, config).then(function (res) {
       console.log(res);
       $scope.customer = res.data;
@@ -245,9 +251,24 @@ angular.module('protonbiz_mobile.controllers', [])
           // add cancel code..
         },
         buttonClicked: function (index) {
+          console.log('Button pressed ' + index);
           return true;
         }
       });
+
+      $scope.callNumber = function (num) {
+        console.log("1244444444444444444444444444444444444444444444444444444444444444444444");
+        window.plugins.CallNumber.callNumber(onSuccess, onError, num, true);
+
+      };
+
+      function onSuccess(result){
+        console.log("Success:"+result);
+      }
+
+      function onError(result) {
+        console.log("Error:"+result);
+      }
 
       // For example's sake, hide the sheet after two seconds
       $timeout(function () {
@@ -262,6 +283,10 @@ angular.module('protonbiz_mobile.controllers', [])
     $scope.dataLoaded = false;
 
     fetchProducts();
+
+    $scope.showSearch = function () {
+      $scope.searchActive = !$scope.searchActive;
+    };
 
     $scope.doRefresh = function () {
       fetchProducts();
@@ -290,17 +315,23 @@ angular.module('protonbiz_mobile.controllers', [])
 
 
   .controller('OrdersCtrl', function ($scope, $stateParams, $http, $rootScope, $state, $ionicActionSheet) {
-
+    $scope.$on('cloud:push:notification', function(event, data) {
+      var msg = data.message;
+      console.log('##########################', msg);
+      alert(msg.title + ': ' + msg.text);
+    });
     $scope.dataLoaded = false;
 
     fetchOrders($rootScope.company);
 
 
-
-
     $scope.goToOrder = function (id) {
       $state.go('app.order', {orderId: id});
+    };
 
+
+    $scope.showSearch = function () {
+      $scope.searchActive = !$scope.searchActive;
     };
 
     $scope.doRefresh = function () {
@@ -388,8 +419,8 @@ angular.module('protonbiz_mobile.controllers', [])
       // Show the action sheet
       var hideSheet = $ionicActionSheet.show({
         buttons: [
+          {text: 'Change Invoice status'},
           {text: 'See clients profile'},
-          {text: 'Remind client'},
           {text: 'Edit'}
         ],
         destructiveText: 'Remove',
@@ -401,7 +432,7 @@ angular.module('protonbiz_mobile.controllers', [])
         buttonClicked: function (index) {
           switch(index){
             case 0:
-              console.log('satats');
+              $location.path('/app/customers/' + $scope.order.customerId);
               break;
             case 1:
               $location.path('/app/changeStatus/'+ $scope.order.id);
@@ -409,6 +440,10 @@ angular.module('protonbiz_mobile.controllers', [])
               break;
           }
           return true;
+        }
+        ,
+        destructiveButtonClicked : function(index){
+          console.log("DESTROY BUTTON !");
         }
       });
 

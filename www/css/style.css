@@ -194,3 +194,31 @@
 .selected{
   background: #f6f1f1;
 }
+
+.menuIcon{
+  padding-right: 10px;
+  font-size: 20px;
+}
+
+.platform-android .action-sheet .action-sheet-title {
+  font-size: 18px;
+  padding: 16px;
+  color: #d86a6a;
+}
+
+.platform-android .action-sheet .button {
+  text-align: left;
+  border-color: transparent;
+  font-size: 13px;
+  color: inherit;
+  padding-left: 15px;
+}
+
+.callAndMsgButton{
+  width: 49%;
+  background: #CF061D;
+  color: #fff;
+  border: 1px solid #262626;
+}
+
+

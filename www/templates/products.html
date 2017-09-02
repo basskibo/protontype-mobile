@@ -2,6 +2,12 @@
   <ion-floating-menu menu-color="#CF061C" menu-open-color="#CF061C" backdrop="true">
     <ion-floating-item icon="ion-ios-pricetags" click="createNewProduct()" button-color="#262626" text="New Product"></ion-floating-item>
   </ion-floating-menu>
+  <ion-nav-buttons side="right">
+    <a class="button button-icon " style="color:#fff;" ng-click="showSearch()">
+      <i ng-if="!searchActive" class="ion-ios-search icon"></i>
+      <i ng-if="searchActive" class="ion-ios-close-empty icon"></i>
+    </a>
+  </ion-nav-buttons>
   <ion-content>
     <div class="row" style="margin:10px;" ng-show="!dataLoaded">
       <div class="col"></div>
@@ -18,7 +24,7 @@
       on-refresh="doRefresh()">
     </ion-refresher>
 
-    <div class="bar bar-header item-input-inset" ng-show="dataLoaded">
+    <div class="bar bar-header item-input-inset" ng-show="searchActive">
       <label class="item-input-wrapper">
         <i class="icon ion-ios-search placeholder-icon"></i>
         <input type="search" placeholder="Search">

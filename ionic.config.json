@@ -15,5 +15,6 @@
   "type": "ionic1",
   "integrations": {
     "cordova": {}
-  }
+  },
+  "dev_push": true
 }

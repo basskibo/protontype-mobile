@@ -8,13 +8,13 @@
 
   </ion-floating-menu>
   <ion-nav-title>
-    <p >{{customer.firstName}}{{customer.lastName}}</p>
+    <p >{{customer.firstName}} {{customer.lastName}}</p>
   </ion-nav-title>
   <ion-nav-buttons side="right">
     <a class="button button-icon icon ion-ios-more-outline" style="color:#fff;" ng-click="show()"></a>
 
   </ion-nav-buttons>
-  <ion-content class="pregled" style="padding: 10px; margin:10px;">
+  <ion-content class="pregled">
     <div class="row" style="margin:10px;" ng-show="!dataLoaded">
       <div class="col"></div>
       <ion-spinner name="dots"></ion-spinner>
@@ -25,24 +25,68 @@
       <h4 class="">Loading customer's details...</h4>
       <div class="col"></div>
     </div>
+
+
     <div ng-show="dataLoaded">
-    <div class="operacija"><h5 ><b>Id : </b>{{customer.id}}</h5></div>
-    <div class="operacija"><h5 ><b>Full name : </b> {{customer.firstName}} {{customer.lastName}}</h5></div>
-    <div class="operacija"><h5><b>Email : </b>{{customer.email}}</h5></div>
-    <div class="operacija" ng-href="tel:+{{companyObj.callingCodes}}{{customer.telephone}}"><h5><b>Telephone : </b>{{customer.telephone}}</h5></div>
-    <div class="operacija"><h5><b>Address : </b>{{customer.address}} {{customer.addressStreetNumber}}</h5></div>
-    <div class="operacija"><h5><b>Have debt : </b>
-      <span ng-show="order.hasDebt"><i class="ion-checkmark-round" style="color:green; font-size: 15px;"></i> </span>
-      <span ng-show="!order.hasDebt"><i class="ion-close-round" style="color:red; font-size: 15px;"></i> </span></h5>
-    </div>
-    <div class="operacija"><h5 ><b>Total debt: </b>  {{customer.debtAmount | number:2}} {{customer.currencySymbol}}</h5></div>
-    <div class="operacija"><h5 ><b>Created at : </b> {{customer.createdAt  | date:'dd/MM/yyyy'}}</h5></div>
-    </div>
-    <div ng-show="dataLoaded">
-      <a class="button icon-right ion-ios-telephone button-calm">Call</a>
-      <a class="button icon-right ion-ios-email button-calm">Send SMS</a>
+
+
+      <div class="list">
+
+        <div class="item item-divider">
+          Basic info
+        </div>
+
+        <a class="item">
+          <div class="operacija"><p><b>Id : </b>{{customer.id}}</p></div>
+        </a>
+        <a class="item">
+          <div class="operacija"><p><b>Full name : </b> {{customer.firstName}} {{customer.lastName}} </p></div>
+        </a>
+        <a class="item">
+          <div class="operacija"><p><b>Have debt : </b>
+            <span ng-show="customer.hasDebt"><i class="ion-checkmark-round" style="color:green; font-size: 15px;"></i> </span>
+            <span ng-show="!customer.hasDebt"><i class="ion-close-round" style="color:red; font-size: 15px;"></i> </span> </p></div>
+        </a>
+
+        <a class="item" ng-if="customer.hasDebt">
+          <div class="operacija"><p><b>Debt amount: </b>  {{customer.debtAmount | number:2}} {{companyObj.currencySymbol}}</p></div>
+        </a>
+        <a class="item">
+          <div class="operacija"><p><b>Created by : </b>{{customer.createdBy}}</p></div>
+        </a>
+        <a class="item">
+          <div class="operacija"><p><b>Created at : </b> {{customer.createdAt  | date:'dd/MM/yyyy'}}</p></div>
+        </a>
+
+
+
+        <div class="item item-divider">
+          Contact info
+        </div>
+
+        <a class="item">
+          <div class="operacija"><p><b>Email : </b>{{customer.email}}</p></div>
+        </a>
+        <a class="item">
+          <div class="operacija" ng-href="tel:+{{companyObj.callingCodes}}{{customer.telephone}}"><p><b>Telephone : </b>(+{{companyObj.callingCodes}}) {{customer.telephone}}</p></div>
+        </a>
+        <a class="item">
+          <div class="operacija"><p><b>Address : </b>{{customer.address}} {{customer.addressStreetNumber}}</p></div>
+        </a>
+
+        <span class="item">
+               <a  ng-click="callNumber({{customer.telephone}})" class="button icon-right ion-ios-telephone callAndMsgButton">Call </a>
+               <a class="button icon-right ion-ios-email callAndMsgButton">Send SMS</a>
+        </span>
+
+
+      </div>
 
     </div>
+
+
+    <!--<a class="button icon-right ion-ios-telephone callAndMsgButton" ng-href="tel:+381695755659">Call this number</a>-->
+
 
   </ion-content>
 </ion-view>
