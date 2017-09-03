@@ -128,7 +128,10 @@ angular.module('protonbiz_mobile', ['ionic', 'ionic.cloud', 'ngCordova', 'proton
         views: {
           'menuContent': {
             templateUrl: 'templates/order_create.html',
-            controller: 'OrderCreateCtrl'
+            controller: 'OrderCreateCtrl',
+            params:{
+              obj: null
+            }
           }
         }
       })
@@ -138,7 +141,10 @@ angular.module('protonbiz_mobile', ['ionic', 'ionic.cloud', 'ngCordova', 'proton
         views: {
           'menuContent': {
             templateUrl: 'templates/customer_create.html',
-            controller: 'CustomerCreateCtrl'
+            controller: 'CustomerCreateCtrl',
+            params:{
+              obj: null
+            }
           }
         }
       })

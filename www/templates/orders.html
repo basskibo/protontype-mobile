@@ -1,4 +1,4 @@
-<ion-view view-title="Invoices">
+<ion-view view-title="Invoices ">
 
   <ion-floating-menu menu-color="#CF061C" menu-open-color="#CF061C"  backdrop="true">
     <ion-floating-item icon="ion-ios-paper"  button-color="#262626" ng-click="createNewOrder()"
@@ -12,6 +12,8 @@
       <i ng-if="searchActive" class="ion-ios-close-empty icon"></i>
 
     </a>
+    <a class="button button-icon icon ion-ios-world-outline" style="color:#fff;" href="#/app/map"></a>
+
   </ion-nav-buttons>
   <ion-content>
     <ion-refresher
@@ -43,7 +45,7 @@
 
       <ion-list ng-repeat="c in orders | filter : searchInput">
         <div class="list">
-          <a class="item item-thumbnail-left-order" href="#/app/orders/{{c.id}}" on-hold="onHold()" style="margin: -3px;">
+          <a class="item item-thumbnail-left-order" href="#/app/orders/{{c.id}}" on-hold="onHold(c)" style="margin: -3px;">
             <div class="circleWithCred"
                  ng-class="{active:'activeColor', paid:'paidColor', completed:'completedColor' , cancelled: 'notCompleted'}[c.status]"
             >

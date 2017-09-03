@@ -42,8 +42,11 @@
           <!--<span class="input-label">Fax</span>-->
           <!--<input type="text" placeholder="Fax">-->
           <!--</label>-->
-          <button class="button button-block button-positive" type="submit">
+          <button ng-if="!isEdit" class="button button-block button-positive" type="submit">
             Create
+          </button>
+          <button ng-if="isEdit" class="button button-block button-positive" type="submit">
+            Update
           </button>
         </div>
       </form>

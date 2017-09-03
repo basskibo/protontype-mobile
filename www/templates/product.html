@@ -1,22 +1,18 @@
 
-<ion-view view-title="{{order.name}}"  hide-back-button="false" >
+<ion-view view-title="{{product.name}}"  hide-back-button="false" >
 
   <ion-nav-title>
-    <p >{{order.name}} </p>
+    <p >{{product.name}} </p>
   </ion-nav-title>
   <ion-nav-buttons side="right">
-    <a class="button button-icon icon ion-ios-more-outline" style="color:#fff;" ng-click="show()"></a>
+    <a class="button button-icon icon ion-android-more-vertical" style="color:#fff;" ng-click="show()"></a>
 
   </ion-nav-buttons>
   <ion-floating-menu menu-color="#CF061C" menu-open-color="#CF061C" backdrop="true">
-    <ion-floating-item icon="ion-ios-paper" click="goToOrders()" button-color="#262626" href="/app/playlists"
-                       text="New Invoice"></ion-floating-item>
-    <ion-floating-item icon="ion-ios-person" click="goToCustomers()" button-color="#262626"
-                       text="New Customer"></ion-floating-item>
     <ion-floating-item icon="ion-ios-pricetags" click="goToProducts()" button-color="#262626"
                        text="New Product"></ion-floating-item>
   </ion-floating-menu>
-  <ion-content class="pregled" style="padding: 10px; margin:10px;">
+  <ion-content class="pregled">
 
     <div class="row" style="margin:10px;" ng-show="!dataLoaded">
       <div class="col"></div>
@@ -30,23 +26,68 @@
     </div>
     <div ng-show="dataLoaded">
       <div class="row">
-        <div class="col" style="margin:10px;" ></div>
-        <img ng-src="{{order.productImg}}" ng-click="goToProfile()" style="width: 200px;height: 200px;  border-radius: 50%; border: 1px solid #d0cccc;"/>
-        <div class="col"></div>
+        <img ng-src="{{product.productImg}}"  class="img img-responsive" style="width: 100%;height: 250px; border: 1px solid #d0cccc;"/>
       </div>
 
-      <div class="operacija"><h5 ><b>Id : </b>{{order.id}}</h5></div>
-      <div class="operacija"><h5 ><b>Name : </b> {{order.name}}</h5></div>
-      <div class="operacija"><h5><b>Type of product : </b>{{order.typeOfProduct}}</h5></div>
-      <div class="operacija"><h5><b>Category : </b>{{order.category}}</h5></div>
+      <div class="list">
 
-      <div class="operacija"><h5 ><b>Price per unit: </b>  {{order.pricePerUnit | number:2}} {{companyObj.currencySymbol}}</h5></div>
-      <div class="operacija"><h5 ><b>Stock size: </b> {{order.stockSize}} <b style="padding-left: 20px;">Unit: </b> {{order.unit}}</h5></div>
-      <!--<div class="operacija"><h5 ></h5></div>-->
-      <div class="operacija"><h5><b>Is public : </b>
-        <span ng-show="order.isPublic"><i class="ion-checkmark-round" style="color:green; font-size: 15px;"></i> </span>
-        <span ng-show="!order.isPublic"><i class="ion-close-round" style="color:red; font-size: 15px;"></i> </span></h5>
+
+        <div class="item item-divider">
+          Product info
+        </div>
+
+        <a class="item">
+          <div class="operacija"><p><b>Full name : </b> {{product.name}} </p></div>
+        </a>
+        <a class="item">
+          <div class="operacija"><p><b>Type : </b> {{product.typeOfProduct}} </p></div>
+        </a>
+        <a class="item">
+          <div class="operacija"><p><b>Unit : </b> {{product.unit}} </p></div>
+        </a>
+        <a class="item" >
+          <div class="operacija"><p><b>Price per unit: </b>  {{product.pricePerUnit | number:2}} {{companyObj.currencySymbol}}</p></div>
+        </a>
+        <a class="item">
+          <div class="operacija"><p><b>Stock Size : </b> {{product.stockSize}} </p></div>
+        </a>
+
+
+        <div class="item item-divider">
+          Basic info
+        </div>
+        <a class="item">
+          <div class="operacija"><p><b>Id : </b>{{product.id}}</p></div>
+        </a>
+        <a class="item">
+          <div class="operacija"><p><b>Created by : </b>{{product.createdBy}}</p></div>
+        </a>
+        <a class="item">
+          <div class="operacija"><p><b>Created at : </b> {{product.createdAt  | date:'dd/MM/yyyy'}}</p></div>
+        </a>
+
+        <a class="item">
+          <div class="operacija"><p><b>Is public : </b>
+            <span ng-show="product.isPublic"><i class="ion-checkmark-round" style="color:green; font-size: 15px;"></i> </span>
+            <span ng-show="!product.isPublic"><i class="ion-close-round" style="color:red; font-size: 15px;"></i> </span> </p>
+          </div>
+        </a>
+
       </div>
+
+
+      <!--<div class="operacija"><h5 ><b>Id : </b>{{order.id}}</h5></div>-->
+      <!--<div class="operacija"><h5 ><b>Name : </b> {{order.name}}</h5></div>-->
+      <!--<div class="operacija"><h5><b>Type of product : </b>{{order.typeOfProduct}}</h5></div>-->
+      <!--<div class="operacija"><h5><b>Category : </b>{{order.category}}</h5></div>-->
+
+      <!--<div class="operacija"><h5 ><b>Price per unit: </b>  {{order.pricePerUnit | number:2}} {{companyObj.currencySymbol}}</h5></div>-->
+      <!--<div class="operacija"><h5 ><b>Stock size: </b> {{order.stockSize}} <b style="padding-left: 20px;">Unit: </b> {{order.unit}}</h5></div>-->
+      <!--&lt;!&ndash;<div class="operacija"><h5 ></h5></div>&ndash;&gt;-->
+      <!--<div class="operacija"><h5><b>Is public : </b>-->
+        <!--<span ng-show="order.isPublic"><i class="ion-checkmark-round" style="color:green; font-size: 15px;"></i> </span>-->
+        <!--<span ng-show="!order.isPublic"><i class="ion-close-round" style="color:red; font-size: 15px;"></i> </span></h5>-->
+      <!--</div>-->
     </div>
 
   </ion-content>

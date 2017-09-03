@@ -4,13 +4,14 @@
 angular.module('protonbiz_mobile.create_controllers', [])
 
 
-  .controller('OrderCreateCtrl', function ($scope, $http, $rootScope, $ionicActionSheet, $ionicPopup, $state) {
+  .controller('OrderCreateCtrl', function ($scope, $http, $rootScope, $stateParams, $ionicActionSheet, $ionicPopup, $state) {
     $scope.dataLoaded = false;
     $scope.input1 = true;
 
+
     var totalPrice = 0;
     // $scope.quantity = 0;
-    console.log('order_create ctrl');
+    console.log('order_create ctrl', $stateParams.obj);
     fetchCustomers();
     fetchProducts();
     fetchTaxes();
@@ -145,29 +146,63 @@ angular.module('protonbiz_mobile.create_controllers', [])
   })
 
   .controller('CustomerCreateCtrl', function ($scope, $rootScope, $location, $stateParams, $ionicActionSheet, $http, $state) {
+    $scope.isEdit = false;
 
+    if($rootScope.customerEdit !== null && $rootScope.customerEdit !== undefined){
+      $scope.customer = $rootScope.customerEdit;
+      $scope.customer.addressStreetNumber = parseInt($scope.customer.addressStreetNumber);
+      $scope.isEdit = true;
+    }
     $scope.create = function (customer) {
-      customer.ownerId = $rootScope.company;
-      customer.createdBy = $rootScope.userName;
-      customer.hasDebt = false;
       var config = {
         headers: {
           'Authorization': 'Bearer ' + localStorage.getItem("token"),
           'Accept': 'application/json;odata=verbose'
         }
       };
-      $http({
-        method: 'POST',
-        url: "https://protonbiz.herokuapp.com/customer",
-        data: customer,
-        headers: config.headers
-      }).then(function (res) {
-        $state.go('app.customers', {reload: true}, {abstract: false});
-      }).catch(function (err) {
-        console.log(err);
-      });
+
+      if(!$scope.isEdit){
+        customer.ownerId = $rootScope.company;
+        customer.createdBy = $rootScope.userName;
+        customer.hasDebt = false;
+        $http({
+          method: 'POST',
+          url: "https://protonbiz.herokuapp.com/customer",
+          data: customer,
+          headers: config.headers
+        }).then(function (res) {
+          $state.go('app.customers', {reload: true}, {abstract: false});
+        }).catch(function (err) {
+          console.log(err);
+        });
+      }else{
+        $http({
+          method: 'PUT',
+          url: "https://protonbiz.herokuapp.com/customer/"  + $scope.customer.id,
+          data: customer,
+          headers: config.headers
+        }).then(function (res) {
+          // $state.go('app.customers', {reload: true}, {abstract: false});
+          $scope.$emit('fetchCustomer');
+          // $scope.isEdit = false;
+          // $rootScope.customerEdit = null;
+          // $scope.customer = null;
+          // // $state.go('app.customers');
+          $location.path('/app/customers');
+
+        }).catch(function (err) {
+          console.log(err);
+        });
+      }
+
     };
 
+    $scope.$on('$destroy', function () {
+      // console.log('destroingggg');
+      // $scope.isEdit = false;
+      // $rootScope.customerEdit = null;
+      // $scope.customer = null;
+    });
   })
 
 

@@ -38,6 +38,29 @@ angular.module('protonbiz_mobile.controllers', [])
     }, false);
 
 
+    $rootScope.$on('fetchCustomer', function (args,ve) {
+      $scope.customers = null;
+      console.log("fetching. . .... . ... . . . . .");
+      var config = {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem("token"),
+          'Accept': 'application/json;odata=verbose'
+        }
+      };
+      $http.get("https://protonbiz.herokuapp.com/customer?isActive=true&ownerId=" + $rootScope.company, config).then(function (res) {
+        console.log('customers' ,$scope.customers);
+        console.log('Fetched' ,res);
+        // generateCredentialsImg(res.data);
+        $scope.$emit('refreshCustomers',res.data);
+        $scope.customers = res.data;
+        $scope.dataLoaded = true;
+
+      }).finally(function () {
+        // Stop the ion-refresher from spinning
+        $scope.$broadcast('scroll.refreshComplete');
+      });
+    });
+
     $rootScope.createNewOrder = function () {
       console.log('global go');
       $state.go('app.order_new');
@@ -132,6 +155,12 @@ angular.module('protonbiz_mobile.controllers', [])
       $scope.searchActive = !$scope.searchActive;
     };
 
+    $rootScope.$on('refreshCustomers', function (args,ev) {
+      generateCredentialsImg(ev);
+      $scope.customers = ev;
+      console.log("customers list refreshed");
+    });
+
     fetchCustomers();
 
     $scope.doRefresh = function () {
@@ -157,13 +186,13 @@ angular.module('protonbiz_mobile.controllers', [])
         $scope.$broadcast('scroll.refreshComplete');
       });
 
+    }
 
-      function generateCredentialsImg(customers) {
-        for (var i = 0; i < customers.length; i++) {
-          var firstNameCred = customers[i].firstName.substring(0, 1).toUpperCase();
-          var lastNameCred = customers[i].lastName.substring(0, 1).toUpperCase();
-          customers[i].cred = firstNameCred + lastNameCred;
-        }
+    function generateCredentialsImg(customers) {
+      for (var i = 0; i < customers.length; i++) {
+        var firstNameCred = customers[i].firstName.substring(0, 1).toUpperCase();
+        var lastNameCred = customers[i].lastName.substring(0, 1).toUpperCase();
+        customers[i].cred = firstNameCred + lastNameCred;
       }
     }
 
@@ -215,7 +244,7 @@ angular.module('protonbiz_mobile.controllers', [])
 
   })
 
-  .controller('CustomerCtrl', function ($scope, $stateParams, $ionicActionSheet, $http) {
+  .controller('CustomerCtrl', function ($scope, $stateParams, $ionicActionSheet, $rootScope, $http, $timeout , $state, $location ) {
     $scope.dataLoaded = false;
 
     var sv = $stateParams.customerId;
@@ -237,8 +266,8 @@ angular.module('protonbiz_mobile.controllers', [])
       // Show the action sheet
       var hideSheet = $ionicActionSheet.show({
         buttons: [
-          {text: 'See clients profile'},
-          {text: 'Remind client'},
+          {text: 'Call'},
+          {text: 'Send SMS'},
           {text: 'Edit'}
         ],
         destructiveText: 'Remove',
@@ -249,6 +278,17 @@ angular.module('protonbiz_mobile.controllers', [])
         },
         buttonClicked: function (index) {
           console.log('Button pressed ' + index);
+          switch (index){
+            case 0:
+              break;
+            case 1:
+              break;
+            case 2:
+              $rootScope.customerEdit = null;
+              $rootScope.customerEdit = $scope.customer;
+              $location.path('/app/customers/new');
+              break;
+          }
           return true;
         }
       });
@@ -273,6 +313,7 @@ angular.module('protonbiz_mobile.controllers', [])
       }, 20000);
 
     };
+
 
   })
 
@@ -311,6 +352,7 @@ angular.module('protonbiz_mobile.controllers', [])
 
 
   .controller('OrdersCtrl', function ($scope, $stateParams, $http, $rootScope, $state, $ionicActionSheet) {
+    console.log('OrdersCtrl init >>>>>>>>');
     $scope.$on('cloud:push:notification', function (event, data) {
       var msg = data.message;
       console.log('##########################', msg);
@@ -330,14 +372,17 @@ angular.module('protonbiz_mobile.controllers', [])
       $scope.searchActive = !$scope.searchActive;
     };
 
+
+
     $scope.doRefresh = function () {
+
       var config = {
         headers: {
           'Authorization': 'Bearer ' + localStorage.getItem("token"),
           'Accept': 'application/json;odata=verbose'
         }
       };
-      $http.get("https://protonbiz.herokuapp.com/orders?ownerId=" + $rootScope.company, config).then(function (res) {
+      $http.get("https://protonbiz.herokuapp.com/orders?isActive=true&ownerId=" + $rootScope.company, config).then(function (res) {
         console.log(res);
         $scope.orders = res.data;
         $scope.dataLoaded = true;
@@ -350,7 +395,7 @@ angular.module('protonbiz_mobile.controllers', [])
 
     };
 
-    $scope.onHold = function () {
+    $scope.onHold = function (selectedOrder) {
       console.log('holding....')
       // Show the action sheet
       var hideSheet = $ionicActionSheet.show({
@@ -364,7 +409,23 @@ angular.module('protonbiz_mobile.controllers', [])
           // add cancel code..
         },
         buttonClicked: function (index) {
+          if(index === 0){
+            $state.go('app.order_new',{obj: selectedOrder});
+          }
           return true;
+        },
+        destructiveButtonClicked: function () {
+          var config = {
+            headers: {
+              'Authorization': 'Bearer ' + localStorage.getItem("token"),
+              'Accept': 'application/json;odata=verbose'
+            }
+          };
+          selectedOrder.isActive = false;
+          $http.put("https://protonbiz.herokuapp.com/orders/" + selectedOrder.id, selectedOrder, config).then(function (res) {
+            $scope.doRefresh();
+            $state.go('app.orders', {}, {reload:true});
+          });
         }
       });
     };
@@ -376,7 +437,7 @@ angular.module('protonbiz_mobile.controllers', [])
           'Accept': 'application/json;odata=verbose'
         }
       };
-      $http.get("https://protonbiz.herokuapp.com/orders?ownerId=" + companyId, config).then(function (res) {
+      $http.get("https://protonbiz.herokuapp.com/orders?isActive=true&ownerId=" + companyId, config).then(function (res) {
         console.log(res);
         $scope.orders = res.data;
         $scope.dataLoaded = true;
@@ -393,7 +454,7 @@ angular.module('protonbiz_mobile.controllers', [])
   })
 
 
-  .controller('OrderCtrl', function ($scope, $stateParams, $http, $ionicActionSheet, $timeout, $location) {
+  .controller('OrderCtrl', function ($scope, $stateParams,$state,  $http, $ionicActionSheet, $timeout, $location) {
     var sv = $stateParams.orderId;
     $scope.dataLoaded = false;
 
@@ -408,6 +469,7 @@ angular.module('protonbiz_mobile.controllers', [])
       $scope.order = res.data;
       $scope.dataLoaded = true;
     });
+
 
     $scope.show = function () {
       // Show the action sheet
@@ -431,12 +493,26 @@ angular.module('protonbiz_mobile.controllers', [])
             case 1:
               $location.path('/app/customers/' + $scope.order.customerId);
               break;
+            case 2:
+              $state.go('app.order_new',{obj: $scope.order});
+              break;
           }
           return true;
         }
         ,
-        destructiveButtonClicked: function (index) {
+        destructiveButtonClicked: function () {
           console.log("DESTROY BUTTON !");
+          var config = {
+            headers: {
+              'Authorization': 'Bearer ' + localStorage.getItem("token"),
+              'Accept': 'application/json;odata=verbose'
+            }
+          };
+          $scope.order.isActive = false;
+          $http.put("https://protonbiz.herokuapp.com/orders/" + $scope.order.id, $scope.order, config).then(function (res) {
+            // $state.go('app.orders', {}, {reload:true});
+            $location.path('/app/orders');
+          });
         }
       });
 
@@ -460,7 +536,7 @@ angular.module('protonbiz_mobile.controllers', [])
     };
     $http.get("https://protonbiz.herokuapp.com/product/" + sv, config).then(function (res) {
       console.log(res);
-      $scope.order = res.data;
+      $scope.product = res.data;
       $scope.dataLoaded = true;
 
     });
@@ -491,7 +567,47 @@ angular.module('protonbiz_mobile.controllers', [])
   })
 
 
-  .controller('SettingsCtrl', function ($scope, $stateParams, $ionicPopup, $translate) {
+  .controller('SettingsCtrl', function ($scope, $stateParams, $ionicPopup, $ionicActionSheet, $translate, $timeout) {
+
+
+    $scope.show = function () {
+      // Show the action sheet
+      var hideSheet = $ionicActionSheet.show({
+        buttons: [
+          {text: 'Edit Profile'}
+        ],
+        titleText: 'Profile action',
+        cancelText: 'Cancel',
+        cancel: function () {
+          // add cancel code..
+        },
+        buttonClicked: function (index) {
+          console.log('Button pressed ' + index);
+          return true;
+        }
+      });
+
+      $scope.callNumber = function (num) {
+        console.log("1244444444444444444444444444444444444444444444444444444444444444444444");
+        window.plugins.CallNumber.callNumber(onSuccess, onError, num, true);
+
+      };
+
+      function onSuccess(result) {
+        console.log("Success:" + result);
+      }
+
+      function onError(result) {
+        console.log("Error:" + result);
+      }
+
+      // For example's sake, hide the sheet after two seconds
+      $timeout(function () {
+        hideSheet();
+      }, 20000);
+
+    };
+
     $scope.changeLanguage = function (langKey, $translateProvider) {
 
       $translate.use(langKey);
@@ -522,7 +638,12 @@ angular.module('protonbiz_mobile.controllers', [])
         title: title,
         template: lng
       });
+
+
+
     };
+
+
 
   })
 
@@ -540,7 +661,7 @@ angular.module('protonbiz_mobile.controllers', [])
     });
 
   })
-  .controller('changeStatusCtrl', function ($scope, $stateParams, $http) {
+  .controller('changeStatusCtrl', function ($scope, $stateParams, $http, $location, $state) {
     var orderId = $stateParams.orderId;
     console.log(orderId);
     var config = {
@@ -553,9 +674,9 @@ angular.module('protonbiz_mobile.controllers', [])
     $scope.change = function (status) {
       console.log(status);
       $scope.order.status = status;
-      $http.put("https://protonbiz.herokuapp.com/orders/", $scope.order, config).then(function (res) {
-        console.log('order', res);
+      $http.put("https://protonbiz.herokuapp.com/orders/" + $scope.order.id, $scope.order, config).then(function (res) {
         $scope.order = res.data;
+        $state.go('app.order', {orderId: res.data.id, newStatus: status});
       });
 
     };
@@ -569,41 +690,101 @@ angular.module('protonbiz_mobile.controllers', [])
   .controller('MapCtrl', function($scope, $state, $cordovaGeolocation) {
     console.log('google maps');
     var options = {timeout: 10000, enableHighAccuracy: true};
+    var map;
 
     $cordovaGeolocation.getCurrentPosition(options).then(function(position){
-
       var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-      function initMap() {
-        var uluru = {lat: -25.363, lng: 131.044};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
-          center: uluru
-        });
-        var marker = new google.maps.Marker({
-          position: uluru,
-          map: map
-        });
-      }
-      // initMap();
+      yourLatLng = latLng;
+
+
       var mapOptions = {
         center: latLng,
-        zoom: 15,
+        zoom: 14,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       };
 
       $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+      var myLatLng = {lat: 45.264795, lng: 19.814562};
+      var myLatLng2 = {lat: 45.254176, lng: 19.828402};
+      var myLatLng3 = {lat: 45.241381, lng: 19.837103};
+      var myLatLng4 = {lat: 45.237047, lng: 19.722905};
+      map = $scope.map ;
+
+      var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        title: 'Hello Home!'
+      });
+
+      var marker2 = new google.maps.Marker({
+        position: myLatLng2,
+        map: map,
+        title: 'Lovely street!'
+      });
+      var marker3 = new google.maps.Marker({
+        position: myLatLng3,
+        map: map,
+        title: 'Hello World!'
+      });
+
+      var marker4 = new google.maps.Marker({
+        position: myLatLng4,
+        map: map,
+        title: 'Hello World!'
+      });
+
+
+      marker.addListener('click', function() {
+        map.setZoom(14);
+        map.setCenter(marker.getPosition());
+      });
+
+      marker2.addListener('click', function() {
+        map.setZoom(14);
+        map.setCenter(marker2.getPosition());
+      });
+      marker3.addListener('click', function() {
+        map.setZoom(14);
+        map.setCenter(marker3.getPosition());
+      });
+
+
+      var infowindow = new google.maps.InfoWindow({
+        content: 'Invoice for Mr. Bojan Jagetic'
+      });
+
+      var infowindow2 = new google.maps.InfoWindow({
+        content: 'Invoice for Mrs. Teodora Lepojevic'
+      });
+
+      var infowindow3 = new google.maps.InfoWindow({
+        content: 'Invoice for Mr. Darth Vader'
+      });
+
+      marker.addListener('click', function() {
+        infowindow.open(marker.get('map'), marker);
+      });
+      marker2.addListener('click', function() {
+        infowindow2.open(marker2.get('map'), marker2);
+      });
+      marker3.addListener('click', function() {
+        infowindow3.open(marker3.get('map'), marker3);
+      });
+
 
     }, function(error){
-      console.log("Could not get location");
+      console.log("Get here to get work done");
     });
 
-    // google.maps.event.addListenerOnce($scope.map, 'idle', function(){
+
+    // google.maps.event.addListener($scope.map, 'idle', function(){
     //
-    //   var marker = new google.maps.Marker({
-    //     map: $scope.map,
-    //     animation: google.maps.Animation.DROP,
-    //     position: latLng
-    //   });
+    //
+    //   // var marker = new google.maps.Marker({
+    //   //   map: $scope.map,
+    //   //   animation: google.maps.Animation.DROP,
+    //   //   position: latLng
+    //   // });
     //
     // });
 

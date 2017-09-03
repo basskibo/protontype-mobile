@@ -11,7 +11,7 @@
     <p >{{customer.firstName}} {{customer.lastName}}</p>
   </ion-nav-title>
   <ion-nav-buttons side="right">
-    <a class="button button-icon icon ion-ios-more-outline" style="color:#fff;" ng-click="show()"></a>
+    <a class="button button-icon icon ion-android-more-vertical" style="color:#fff;" ng-click="show()"></a>
 
   </ion-nav-buttons>
   <ion-content class="pregled">
@@ -32,13 +32,11 @@
 
       <div class="list">
 
+
         <div class="item item-divider">
-          Basic info
+          Customer info
         </div>
 
-        <a class="item">
-          <div class="operacija"><p><b>Id : </b>{{customer.id}}</p></div>
-        </a>
         <a class="item">
           <div class="operacija"><p><b>Full name : </b> {{customer.firstName}} {{customer.lastName}} </p></div>
         </a>
@@ -51,19 +49,10 @@
         <a class="item" ng-if="customer.hasDebt">
           <div class="operacija"><p><b>Debt amount: </b>  {{customer.debtAmount | number:2}} {{companyObj.currencySymbol}}</p></div>
         </a>
-        <a class="item">
-          <div class="operacija"><p><b>Created by : </b>{{customer.createdBy}}</p></div>
-        </a>
-        <a class="item">
-          <div class="operacija"><p><b>Created at : </b> {{customer.createdAt  | date:'dd/MM/yyyy'}}</p></div>
-        </a>
-
-
 
         <div class="item item-divider">
           Contact info
         </div>
-
         <a class="item">
           <div class="operacija"><p><b>Email : </b>{{customer.email}}</p></div>
         </a>
@@ -74,11 +63,23 @@
           <div class="operacija"><p><b>Address : </b>{{customer.address}} {{customer.addressStreetNumber}}</p></div>
         </a>
 
-        <span class="item">
-               <a  ng-click="callNumber({{customer.telephone}})" class="button icon-right ion-ios-telephone callAndMsgButton">Call </a>
-               <a class="button icon-right ion-ios-email callAndMsgButton">Send SMS</a>
-        </span>
+        <!--<span class="item">-->
+               <!--<a  ng-click="callNumber({{customer.telephone}})" class="button icon-right ion-ios-telephone callAndMsgButton">Call </a>-->
+               <!--<a class="button icon-right ion-ios-email callAndMsgButton">Send SMS</a>-->
+        <!--</span>-->
 
+        <div class="item item-divider">
+          Basic info
+        </div>
+        <a class="item">
+          <div class="operacija"><p><b>Id : </b>{{customer.id}}</p></div>
+        </a>
+        <a class="item">
+          <div class="operacija"><p><b>Created by : </b>{{customer.createdBy}}</p></div>
+        </a>
+        <a class="item">
+          <div class="operacija"><p><b>Created at : </b> {{customer.createdAt  | date:'dd/MM/yyyy'}}</p></div>
+        </a>
 
       </div>
 
